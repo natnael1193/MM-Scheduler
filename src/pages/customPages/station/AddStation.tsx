@@ -16,7 +16,6 @@ const AddStation = () => {
 
   // Submit The Data
   const onSubmit = (data: any) => {
-    console.log(data)
     addStation(data);
     navigate('/dashboard/station/list');
   }

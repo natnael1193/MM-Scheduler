@@ -24,17 +24,6 @@ const StationList = () => {
     </Grid>
   )
 
-  // if (isFetching ) return (
-  //   <Grid
-  //     container
-  //     direction="row"
-  //     justifyContent="center"
-  //     alignItems="center"
-  //   >
-  //     <CircularProgress />
-  //   </Grid>
-  // )
-
   stationData = data
 
   return (<div>

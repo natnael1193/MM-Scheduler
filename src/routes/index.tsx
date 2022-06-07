@@ -49,6 +49,16 @@ export default function Router() {
             { path: '/dashboard/station/detail/:stationId', element: <StationDetail /> },
           ],
         },
+        {
+          path: '/dashboard/price-category',
+          children: [
+            { element: <Navigate to="/dashboard/price-category/list" replace />, index: true },
+            { path: '/dashboard/price-category/list', element: <PriceCategoryList /> },
+            { path: '/dashboard/price-category/add', element: <AddPriceCategory /> },
+            { path: '/dashboard/price-category/edit/:priceCategoryId', element: <EditPriceCategory /> },
+            // { path: '/dashboard/price-category/detail/:priceCategoryId', element: <PriceCategoryDetail /> },
+          ],
+        },
       ],
     },
     {
@@ -78,3 +88,10 @@ const StationList = Loadable(lazy(() => import('../pages/customPages/station/Sta
 const AddStation = Loadable(lazy(() => import('../pages/customPages/station/AddStation')));
 const EditStation = Loadable(lazy(() => import('../pages/customPages/station/EditStation')));
 const StationDetail = Loadable(lazy(() => import('../pages/customPages/station/StationDetail')));
+
+
+//Price Category
+const PriceCategoryList = Loadable(lazy(() => import('../pages/customPages/prices/priceCategory/PriceCategoryList')));
+const AddPriceCategory = Loadable(lazy(() => import('../pages/customPages/prices/priceCategory/AddPriceCategory')));
+const EditPriceCategory = Loadable(lazy(() => import('../pages/customPages/prices/priceCategory/EditPriceCategory')));
+// const PriceCategoryDetail = Loadable(lazy(() => import('../pages/customPages/prices/priceCategory/PriceCategoryDetail')));

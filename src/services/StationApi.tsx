@@ -3,27 +3,25 @@ import { Station } from "../interfaces/Station.interface"
 
 const baseURL = `${process.env.REACT_APP_API_SERVER}`
 
-console.log(baseURL)
-
 export const stationApi = createApi({
   reducerPath: "stationApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8181"
+    baseUrl: `${baseURL}`
   }),
   tagTypes: ["Station"],
   endpoints: (builder) => ({
     stations: builder.query<Station[], void>({
-      query: () => `${baseURL}/get_all_stations`,
+      query: () => `/get_all_stations`,
       providesTags: ["Station"]
     }),
     station: builder.query<Station, string>({
-      query: (id) => `${baseURL}/get_station_by_id/${id}`,
+      query: (id) => `/get_station_by_id/${id}`,
       // providesTags: ["Station"]
-      providesTags: (result, error, id) => [{ type: 'Station', id }],
+      providesTags: ["Station"]
     }),
     addStation: builder.mutation<void, Station>({
       query: (station) => ({
-        url: `${baseURL}/create_station`,
+        url: `/create_station`,
         method: "POST",
         body: station
       }),
@@ -31,7 +29,7 @@ export const stationApi = createApi({
     }),
     updateStation: builder.mutation<void, Station>({
       query: ({ id, ...rest }) => ({
-        url: `${baseURL}/update_station/${id}`,
+        url: `/update_station/${id}`,
         method: "PUT",
         body: rest
       }),
@@ -39,7 +37,7 @@ export const stationApi = createApi({
     }),
     deleteStation: builder.mutation<void, string>({
       query: (id) => ({
-        url: `${baseURL}/remove_station/${id}`,
+        url: `/remove_station/${id}`,
         method: "PUT"
       }),
       invalidatesTags: ["Station"]

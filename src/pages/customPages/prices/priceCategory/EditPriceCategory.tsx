@@ -1,22 +1,21 @@
 import { Grid, CircularProgress, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { useStationQuery, useUpdateStationMutation } from 'src/services/StationApi';
-import StationForm from '../../../components/customComponents/station/StationForm';
 import { toast } from 'react-toastify';
+import { usePriceCategoryQuery, useUpdatePriceCategoryMutation } from 'src/services/PriceCategoryApi';
+import PriceCategoryForm from 'src/components/customComponents/prices/priceCategory/PriceCategoryForm';
 
-const EditStation = () => {
+const EditPriceCategory = () => {
 
   const params = useParams();
-  const paramsId: any = params.stationId;
+  const paramsId: any = params.priceCategoryId
   var defaultValues: any = {};
 
+  //Get Price Category by id
+  const { data: priceCategoryData, error, isLoading } = usePriceCategoryQuery(paramsId)
 
-  //Get Station By Id
-  const { data: stationData, error, isLoading } = useStationQuery(paramsId)
-
-  //Update the data
-  const [updateStation, result] = useUpdateStationMutation();
+  // Update the data 
+  const [updatePriceCategory, result] = useUpdatePriceCategoryMutation();
 
   //Check the data status
   const response: any = result
@@ -28,7 +27,8 @@ const EditStation = () => {
   }, [response]);
 
 
-  // Loading state to get the data
+  //Loading State
+
   if (isLoading) return (
     <Grid
       container
@@ -46,20 +46,17 @@ const EditStation = () => {
   )
 
   //Assign the data to a variable
-  defaultValues = stationData;
+  defaultValues = priceCategoryData;
 
 
   //Submit the new data
   const onSubmit = (data: any) => {
-    updateStation(data)
+    updatePriceCategory(data)
   }
 
   return (
-    <div> <StationForm formTitle={"Edit Station"} defaultValues={defaultValues.responseBody} onFormSubmit={onSubmit} /></div>
-  );
+    <div><PriceCategoryForm defaultValues={defaultValues.responseBody} onFormSubmit={onSubmit} formTitle={"Edit Price Category"} /></div>
+  )
 }
 
-
-
-
-export default EditStation;
+export default EditPriceCategory

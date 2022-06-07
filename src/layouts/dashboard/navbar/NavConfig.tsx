@@ -47,7 +47,17 @@ const navConfig = [
         icon: ICONS.user,
         children: [
           { title: 'Stations List', path: '/dashboard/station/list' },
-          { title: 'Station Add', path: '/dashboard/station/add' },
+          { title: 'Add Station', path: '/dashboard/station/add' },
+          // { title: 'Six', path: '/dashboard/station/six' },
+        ],
+      },
+      {
+        title: 'price category',
+        path: '/dashboard/price-category',
+        icon: ICONS.user,
+        children: [
+          { title: 'Price Category List', path: '/dashboard/price-category/list' },
+          { title: 'Add Price Category', path: '/dashboard/price-category/add' },
           // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },
