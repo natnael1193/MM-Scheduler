@@ -50,6 +50,16 @@ export default function Router() {
           ],
         },
         {
+          path: '/dashboard/program',
+          children: [
+            { element: <Navigate to="/dashboard/program/list" replace />, index: true },
+            { path: '/dashboard/program/list', element: <ProgramList /> },
+            { path: '/dashboard/program/add', element: <AddProgram /> },
+            { path: '/dashboard/program/edit/:programId', element: <EditProgram /> },
+            // { path: '/dashboard/station/detail/:stationId', element: <StationDetail /> },
+          ],
+        },
+        {
           path: '/dashboard/price-classification',
           children: [
             { element: <Navigate to="/dashboard/price-classification/list" replace />, index: true },
@@ -111,3 +121,8 @@ const EditPriceCategory = Loadable(lazy(() => import('../pages/customPages/price
 const PriceClassificationList = Loadable(lazy(() => import('../pages/customPages/prices/priceClassification/PriceClassificationList')));
 const AddPriceClassification = Loadable(lazy(() => import('../pages/customPages/prices/priceClassification/AddPriceClassification')));
 const EditPriceClassification = Loadable(lazy(() => import('../pages/customPages/prices/priceClassification/EditPriceClassification')));
+
+//Program
+const ProgramList = Loadable(lazy(() => import('../pages/customPages/program/ProgramList')));
+const AddProgram = Loadable(lazy(() => import('../pages/customPages/program/AddProgram')));
+const EditProgram = Loadable(lazy(() => import('../pages/customPages/program/EditProgram')));
