@@ -10,8 +10,6 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
     // Delete Price Category
     const [deletePriceCategory] = useDeletePriceCategoryMutation();
 
-
-
     //Data Grid Header
     const columns: GridColumns = [
         {

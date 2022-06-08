@@ -61,6 +61,16 @@ const navConfig = [
           // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },
+      {
+        title: 'price classification',
+        path: '/dashboard/price-classification',
+        icon: ICONS.user,
+        children: [
+          { title: 'Price Classification List', path: '/dashboard/price-classification/list' },
+          { title: 'Add Price Classification', path: '/dashboard/price-classification/add' },
+          // { title: 'Six', path: '/dashboard/station/six' },
+        ],
+      },
     ],
   },
 ];

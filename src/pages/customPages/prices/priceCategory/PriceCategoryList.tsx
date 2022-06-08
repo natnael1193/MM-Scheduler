@@ -1,5 +1,4 @@
 import { Grid, CircularProgress, Typography } from '@mui/material'
-import React from 'react'
 import PriceCategoryListComponent from 'src/components/customComponents/prices/priceCategory/PriceCategoryListComponent'
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi'
 

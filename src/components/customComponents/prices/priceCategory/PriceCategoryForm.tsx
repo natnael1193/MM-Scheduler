@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
 
-    const { register, handleSubmit } = useForm({
+    const { register, formState: { errors }, handleSubmit } = useForm({
         defaultValues
     })
 
@@ -18,7 +18,8 @@ console.log(defaultValues)
                         <Typography variant='h4' sx={{ m:3 }}>{formTitle}</Typography>
                         <Grid container sx={{ m: 1 }} spacing={2}>
                             <Grid item lg={10} md={10} sm={12} xs={12}>
-                                <TextField {...register('name')} label="Price Category Name" fullWidth />
+                                <TextField {...register('name', { required: true })} label="Price Category Name" fullWidth />
+                                <Typography variant='inherit' color="error">{errors.name && "This is required"}</Typography>
                             </Grid>
                             <Grid item lg={8} md={10} sm={12} xs={12} sx={{ mb: 3 }}>
                                 <Button variant='contained' type="submit">Submit</Button>

@@ -17,18 +17,19 @@ const EditPriceCategory = () => {
   // Update the data 
   const [updatePriceCategory, result] = useUpdatePriceCategoryMutation();
 
-  //Check the data status
-  const response: any = result
-  useEffect(() => {
-    if (response.isSuccess) {
-      console.log(response)
-      toast.success(response.data.status)
-    }
-  }, [response]);
+    //Check the status
+    const response: any = result
+    useEffect(() => {
+      if (response.isSuccess) {
+        toast.success(response.data.status)
+      }
+      if (response.isError) {
+        toast.error(response.error.data.error)
+      }
+    }, [response]);
 
 
   //Loading State
-
   if (isLoading) return (
     <Grid
       container

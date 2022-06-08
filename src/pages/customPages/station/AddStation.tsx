@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import StationForm from '../../../components/customComponents/station/StationForm'
 import { useAddStationMutation } from '../../../services/StationApi'
 
@@ -12,8 +13,19 @@ const AddStation = () => {
   const navigate = useNavigate();
 
   //Add New Data
-  const [addStation] = useAddStationMutation();
+  const [addStation, result] = useAddStationMutation();
 
+   //Check the status
+   const response: any = result
+   useEffect(() => {
+     if (response.isSuccess) {
+       toast.success(response.data.status)
+     }
+     if (response.isError) {
+       toast.error(response.error.data.error)
+     }
+   }, [response, navigate]);
+   
   // Submit The Data
   const onSubmit = (data: any) => {
     addStation(data);
