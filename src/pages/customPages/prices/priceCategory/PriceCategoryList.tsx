@@ -30,7 +30,7 @@ const PriceCategoryList = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Typography variant='h3'>Something Wnet Wrong</Typography>
+      <Typography variant='h3'>Something Went Wrong</Typography>
     </Grid>
   )
 

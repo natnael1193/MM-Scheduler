@@ -24,6 +24,17 @@ const StationList = () => {
     </Grid>
   )
 
+  if (error) return (
+    <Grid
+      container
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Typography variant='h3'>Something Went Wrong</Typography>
+    </Grid>
+  )
+
   stationData = data
 
   return (<div>
@@ -36,7 +47,6 @@ const StationList = () => {
             :
             ''
         }
-        {(error) && <Typography variant="h3" sx={{ mt: 2 }}>Something Went Wrong</Typography>}
         {
           (isSuccess) && stationData && stationData.responseBody.map((station: any) => (
             <StationListComponent key={station.id} id={station.id} name={station.name} programs={station.programs} />
