@@ -67,8 +67,8 @@ const navConfig = [
         icon: ICONS.user,
         children: [
           { title: 'schedules List', path: '/dashboard/schedule/list' },
+          { title: 'Schedule Timeline', path: '/dashboard/schedule/timeline' },
           { title: 'Add schedule', path: '/dashboard/schedule/add' },
-          // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },
       {

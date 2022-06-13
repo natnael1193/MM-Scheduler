@@ -12,7 +12,7 @@ export const scheduleApi = createApi({
     tagTypes: ["Schedule", "Program"],
     endpoints: (builder) => ({
         schedules: builder.query<Schedule[], void>({
-            query: () => `/get_all_schedules`,
+            query: () => `/get_all_schedule`,
             providesTags: ["Schedule", "Program"]
         }),
         schedule: builder.query<Schedule, string>({
@@ -45,7 +45,8 @@ export const scheduleApi = createApi({
                 method: 'PUT'
             }),
             invalidatesTags: ["Schedule"]
-        })
+        }),
+
     })
 })
 
