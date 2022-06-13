@@ -8,17 +8,22 @@ export const stationApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${baseURL}`
   }),
-  tagTypes: ["Station"],
+  tagTypes: ["Station", "Program"],
   endpoints: (builder) => ({
     stations: builder.query<Station[], void>({
       query: () => `/get_all_stations`,
       providesTags: ["Station"]
     }),
     station: builder.query<Station, string>({
-      query: (id) => `/get_station_by_id/${id}`,
+      query: (id) => `/get_schedule_by_program/${id}`,
       // providesTags: ["Station"]
       providesTags: ["Station"]
     }),
+    // programByStation: builder.query<Station, string>({
+    //   query: (id) => `/get_programs_by_station/${id}`,
+    //   // providesTags: ["Station"]
+    //   providesTags: ["Station"]
+    // }),
     addStation: builder.mutation<void, Station>({
       query: (station) => ({
         url: `/create_station`,
@@ -40,13 +45,14 @@ export const stationApi = createApi({
         url: `/remove_station/${id}`,
         method: "PUT"
       }),
-      invalidatesTags: ["Station"]
+      invalidatesTags: ["Station", "Program"]
     })
   })
 })
 export const {
   useStationsQuery,
   useStationQuery,
+  // useProgramByStationQuery,
   useAddStationMutation,
   useDeleteStationMutation,
   useUpdateStationMutation

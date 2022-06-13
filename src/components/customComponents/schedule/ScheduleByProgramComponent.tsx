@@ -1,0 +1,98 @@
+import React from 'react'
+import { DataGrid, GridColumns, GridToolbar } from '@mui/x-data-grid';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import PreviewIcon from '@mui/icons-material/Preview';
+import moment from 'moment';
+import { useDeleteScheduleMutation } from 'src/services/ScheduleApi';
+
+const ScheduleByProgramComponent = ({ scheduleData }: any) => {
+
+  // Delete Schedule
+  const [deleteSchedule, result] = useDeleteScheduleMutation();
+
+console.log(result)
+  var newScheduleData: any = [];
+  newScheduleData =
+    scheduleData &&
+    scheduleData.map(function (schedule: any) {
+      return {
+        id: schedule.id,
+        day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
+        startTime: moment(schedule.startTime).format('LT'),
+        endTime: moment(schedule.endTime).format('LT'),
+        priceClassification: schedule.priceClassification.name,
+      };
+    });
+
+  //Data Grid Header
+  const columns: GridColumns = [
+    {
+      field: 'day',
+      headerName: 'Day',
+      width: 300,
+    },
+    {
+      field: 'startTime',
+      headerName: 'Start Time',
+      width: 300,
+    },
+    {
+      field: 'endTime',
+      headerName: 'End Time',
+      width: 300,
+    },
+    {
+      field: 'priceClassification',
+      headerName: 'Price Classification',
+      width: 300,
+    },
+    {
+      field: '',
+      // headerName: '',
+      type: 'number',
+      width: 250,
+      renderCell: (cellValues: any) => (
+        <>
+          <Link to={`/dashboard/schedule/edit/${cellValues.id}`} style={{ textDecoration: 'none' }}>
+            <Button sx={{ mr: 2 }} color="info">
+              <PreviewIcon />
+            </Button>
+          </Link>
+          <Link to={`/dashboard/schedule/edit/${cellValues.id}`} style={{ textDecoration: 'none' }}>
+            <Button sx={{ mr: 2 }}>
+              <EditIcon />
+            </Button>
+          </Link>
+          <Button color="error"
+            onClick={() => deleteSchedule(cellValues.id)}
+          >
+            <DeleteIcon />
+          </Button>
+        </>
+      )
+    },
+  ];
+
+  return (
+    <div style={{ height: '400px', width: '100%' }}>
+      <DataGrid
+        rows={newScheduleData}
+        columns={columns}
+        components={{
+          Toolbar: GridToolbar,
+        }}
+        componentsProps={{
+          toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 500 },
+          },
+        }}
+        style={{ height: '80vh' }} />
+    </div>
+  )
+}
+
+export default ScheduleByProgramComponent

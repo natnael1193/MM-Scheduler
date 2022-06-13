@@ -18,6 +18,10 @@ export const programApi = createApi({
             query: (id) => `get_program_by_id/${id}`,
             providesTags: ["Program"]
         }),
+        programByStation: builder.query<Program, string>({
+            query: (id) => `/get_programs_by_station/${id}`,
+            providesTags: ["Program"]
+        }),
         addProgram: builder.mutation<void, Program>({
             query: (program) => ({
                 url: '/create_program',
@@ -47,6 +51,7 @@ export const programApi = createApi({
 export const {
     useProgramsQuery,
     useProgramQuery,
+    useProgramByStationQuery,
     useAddProgramMutation,
     useUpdateProgramMutation,
     useDeleteProgramMutation

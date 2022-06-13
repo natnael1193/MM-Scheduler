@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import {
   Button,
   CircularProgress,
@@ -19,9 +18,11 @@ import { toast } from 'react-toastify';
 import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
 import { useAddScheduleMutation } from 'src/services/ScheduleApi';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 const ScheduleDays = ({ scheduleData }: any) => {
   let priceClassificationData: any = [];
+  var programDataId: string = ''
 
   const navigate = useNavigate();
 
@@ -49,17 +50,19 @@ const ScheduleDays = ({ scheduleData }: any) => {
   //Add Schedules
   const [addSchedules, result] = useAddScheduleMutation();
 
-     //Check the status
-     const response: any = result
-     useEffect(() => {
-       if (response.isSuccess) {
-         toast.success(response.data.status)
-         navigate('/dashboard/schedule/list')
-       }
-       if (response.isError) {
-         toast.error(response.error.data.error)
-       }
-     }, [response, navigate]);
+  programDataId = scheduleData.programId;
+  console.log(programDataId)
+  //Check the status
+  const response: any = result
+  React.useEffect(() => {
+    if (response.isSuccess) {
+      toast.success(response.data.status)
+      navigate(`/dashboard/program/detail/${programDataId}`)
+    }
+    if (response.isError) {
+      toast.error(response.error.data.error)
+    }
+  }, [response, navigate, programDataId]);
 
   const {
     register,
@@ -115,7 +118,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
     addSchedules(newData)
   };
 
-  
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -196,7 +199,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 defaultValue=""
                 required
                 disabled={state.monday ? false : true}
-                // placeholder="Select Price Classification"
+              // placeholder="Select Price Classification"
               >
                 {priceClassificationData.responseBody.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -223,7 +226,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                   keepSubmitCount: false,
                 });
               }}
-              // {...register('monday')}
+            // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -286,7 +289,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 defaultValue=""
                 disabled={state.tuesday ? false : true}
                 required
-                // placeholder="Select Price Classification"
+              // placeholder="Select Price Classification"
               >
                 {priceClassificationData.responseBody.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -313,7 +316,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Wendsday"
-              // {...register('monday')}
+            // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -376,7 +379,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 defaultValue=""
                 disabled={state.wendsday ? false : true}
                 required
-                // placeholder="Select Price Classification"
+              // placeholder="Select Price Classification"
               >
                 {priceClassificationData.responseBody.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -403,7 +406,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Thursday"
-              // {...register('monday')}
+            // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -466,7 +469,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 defaultValue=""
                 disabled={state.thursday ? false : true}
                 required
-                // placeholder="Select Price Classification"
+              // placeholder="Select Price Classification"
               >
                 {priceClassificationData.responseBody.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -493,7 +496,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Friday"
-              // {...register('monday')}
+            // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -556,7 +559,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 defaultValue=""
                 disabled={state.friday ? false : true}
                 required
-                // placeholder="Select Price Classification"
+              // placeholder="Select Price Classification"
               >
                 {priceClassificationData.responseBody.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -583,7 +586,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Saturday"
-              // {...register('monday')}
+            // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -646,7 +649,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 defaultValue=""
                 disabled={state.saturday ? false : true}
                 required
-                // placeholder="Select Price Classification"
+              // placeholder="Select Price Classification"
               >
                 {priceClassificationData.responseBody.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -673,7 +676,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Sunday"
-              // {...register('monday')}
+            // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -748,7 +751,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
 
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ m: 2 }}>
             <Stack direction="row" spacing={2}>
-              <Button variant="contained" type="submit" disabled={ (scheduleData.programId === undefined || scheduleData.programId === '' ) || (scheduleData.startDate === undefined || scheduleData.startDate === '' )|| (scheduleData.endDate === undefined || scheduleData.endDate === '') ? true : false }>
+              <Button variant="contained" type="submit" disabled={(scheduleData.programId === undefined || scheduleData.programId === '') || (scheduleData.startDate === undefined || scheduleData.startDate === '') || (scheduleData.endDate === undefined || scheduleData.endDate === '') ? true : false}>
                 Submit
               </Button>
             </Stack>

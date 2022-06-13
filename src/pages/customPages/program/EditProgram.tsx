@@ -48,11 +48,7 @@ const EditProgram = () => {
   //Assign the data to a variable
   defaultValues = programData;
 
-  // const newDefaultValue: any = {
-  // defaultValues = programData;
-  // id: defaultValues.id,
-  // stationId:
-  // }
+
 
   const onSubmit = (data: any) => {
     console.log(data)

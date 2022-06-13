@@ -1,22 +1,27 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Schedule } from '../interfaces/Schedule.interface';
 
+
 const baseURL = `${process.env.REACT_APP_API_SERVER}`
 
-export const programApi = createApi({
-    reducerPath: "programApi",
+export const scheduleApi = createApi({
+    reducerPath: "scheduleApi",
     baseQuery: fetchBaseQuery({
         baseUrl: `${baseURL}`
     }),
-    tagTypes: ["Schedule"],
+    tagTypes: ["Schedule", "Program"],
     endpoints: (builder) => ({
         schedules: builder.query<Schedule[], void>({
             query: () => `/get_all_schedules`,
-            providesTags: ["Schedule"]
+            providesTags: ["Schedule", "Program"]
         }),
         schedule: builder.query<Schedule, string>({
-            query: (id) => `get_schedule_by_id/${id}`,
-            providesTags: ["Schedule"]
+            query: (id) => `/get_schedule_by_id/${id}`,
+            providesTags: ["Schedule", "Program"]
+        }),
+        scheduleByProgam: builder.query<Schedule, string>({
+            query: (id) => `/get_schedule_by_program/${id}`,
+            providesTags: ["Schedule", "Program"]
         }),
         addSchedule: builder.mutation<void, Schedule>({
             query: (program) => ({
@@ -24,7 +29,7 @@ export const programApi = createApi({
                 method: "POST",
                 body: program
             }),
-            invalidatesTags: ["Schedule"]
+            invalidatesTags: ["Schedule", "Program"]
         }),
         updateSchedule: builder.mutation<void, Schedule>({
             query: ({ id, ...rest }) => ({
@@ -32,7 +37,7 @@ export const programApi = createApi({
                 method: "PUT",
                 body: rest
             }),
-            invalidatesTags: ["Schedule"]
+            invalidatesTags: ["Schedule", "Program"]
         }),
         deleteSchedule: builder.mutation<void, string>({
             query: (id) => ({
@@ -47,8 +52,9 @@ export const programApi = createApi({
 export const {
     useSchedulesQuery,
     useScheduleQuery,
+    useScheduleByProgamQuery,
     useAddScheduleMutation,
     useUpdateScheduleMutation,
     useDeleteScheduleMutation
 
-} = programApi
+} = scheduleApi

@@ -4,4 +4,5 @@ export interface Schedule {
   startDate: string;
   endDate: string;
   schedules: [id: any, day: string, startTime: string, endTime: string, priceClassificationId: any];
+  priceClassification : object
 }

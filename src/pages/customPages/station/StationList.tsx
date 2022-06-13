@@ -1,8 +1,10 @@
 import React from 'react';
-import { Box, Grid, Skeleton, Typography, CircularProgress } from '@mui/material';
+import { Box, Grid, Skeleton } from '@mui/material';
 // import { Link } from 'react-router-dom';
 import { useStationsQuery } from "../../../services/StationApi";
 import StationListComponent from "../../../components/customComponents/station/StationListComponent"
+import LoadingComponent from '../../../components/customComponents/shared/LoadingComponent';
+import ErrorComponent from 'src/components/customComponents/shared/ErrorComponent';
 
 
 
@@ -11,28 +13,14 @@ const StationList = () => {
 
   // Get All Stations
   const { data, error, isLoading, isSuccess } = useStationsQuery();
-  
+
 
   if (isLoading) return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <CircularProgress />
-    </Grid>
+    <LoadingComponent />
   )
 
   if (error) return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Typography variant='h3'>Something Went Wrong</Typography>
-    </Grid>
+    <ErrorComponent />
   )
 
   stationData = data
