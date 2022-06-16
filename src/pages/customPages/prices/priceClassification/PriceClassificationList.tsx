@@ -38,7 +38,11 @@ const PriceClassificationList = () => {
   console.log(priceClassificationData)
 
   return (
-    <div><PriceClassificationListComponent priceClassificationData={priceClassificationData.responseBody} /></div>
+    <div>
+        <Grid container>
+        <Typography variant='h3'>Price Classification</Typography>
+      </Grid>
+      <PriceClassificationListComponent priceClassificationData={priceClassificationData.responseBody} /></div>
   )
 }
 

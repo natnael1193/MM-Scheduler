@@ -1,7 +1,9 @@
-import { CircularProgress, Grid, Typography } from '@mui/material';
-import React from 'react'
+import { Button, CircularProgress, Grid, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { useProgramsQuery } from 'src/services/ProgramApi';
 import ProgramListComponent from '../../../components/customComponents/program/ProgramListComponent';
+import { Link } from 'react-router-dom';
+
 
 const ProgramList = () => {
   let programData: any = [];
@@ -38,7 +40,20 @@ const ProgramList = () => {
   console.log(programData)
 
   return (
-    <div><ProgramListComponent programData={programData.responseBody} /></div>
+    <div>
+
+      <Grid container sx={{ mb: 1 }} direction="row" >
+        <Grid item lg={10} md={8} sm={6} xs={6} >
+          <Typography variant="h3">Programs</Typography>
+        </Grid>
+        <Grid item lg={2} md={4} sm={6} xs={6} >
+          <Link to='/dashboard/program/add' style={{ textDecoration: 'none' }}> <Button variant='contained'><AddIcon/> Add Program </Button></Link>
+        </Grid>
+        {/* <Grid item lg={6} md={6} sm={6} xs={6}>
+          <Link to='/dashboard/program/add' style={{ textDecoration: 'none' }}><Button variant='contained'>Add New Program</Button></Link>
+        </Grid> */}
+      </Grid>
+      <ProgramListComponent programData={programData.responseBody} /></div>
   )
 }
 

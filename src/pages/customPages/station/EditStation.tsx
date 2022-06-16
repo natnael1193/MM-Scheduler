@@ -13,7 +13,7 @@ const EditStation = () => {
 
 
   //Get Station By Id
-  const { data: stationData, error, isLoading } = useStationQuery(paramsId)
+  const { data: stationData, error, isLoading, isFetching } = useStationQuery(paramsId)
 
   //Update the data
   const [updateStation, result] = useUpdateStationMutation();
@@ -29,7 +29,7 @@ const EditStation = () => {
 
 
   // Loading state to get the data
-  if (isLoading) return (
+  if (isLoading || isFetching) return (
     <Grid
       container
       direction="row"
@@ -53,6 +53,8 @@ const EditStation = () => {
   const onSubmit = (data: any) => {
     updateStation(data)
   }
+
+  console.log(stationData)
 
   return (
     <div> <StationForm formTitle={"Edit Station"} defaultValues={defaultValues.responseBody} onFormSubmit={onSubmit} /></div>

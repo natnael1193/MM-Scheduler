@@ -15,7 +15,7 @@ export const stationApi = createApi({
       providesTags: ["Station"]
     }),
     station: builder.query<Station, string>({
-      query: (id) => `/get_schedule_by_program/${id}`,
+      query: (id) => `/get_station_by_id/${id}`,
       // providesTags: ["Station"]
       providesTags: ["Station"]
     }),

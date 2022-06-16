@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { DataGrid, GridColumns, GridToolbar } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -8,12 +8,12 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import moment from 'moment';
 import { useDeleteScheduleMutation } from 'src/services/ScheduleApi';
 
-const ScheduleByProgramComponent = ({ scheduleData }: any) => {
+const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
 
   // Delete Schedule
-  const [deleteSchedule, result] = useDeleteScheduleMutation();
+  const [deleteSchedule] = useDeleteScheduleMutation();
 
-console.log(result)
+  console.log(futureSchedule);
   var newScheduleData: any = [];
   newScheduleData =
     scheduleData &&
@@ -26,6 +26,15 @@ console.log(result)
         priceClassification: schedule.priceClassification.name,
       };
     });
+
+  //Filter Future Schedules
+  const futureScheduleData: any = newScheduleData.filter(function (date: any) {
+    return date.day > moment(new Date()).format('dddd Do MMMM YYYY');
+  })
+
+  // function checkDate(date: any) {
+  //   return date.startTime > new Date();
+  // }
 
   //Data Grid Header
   const columns: GridColumns = [
@@ -66,20 +75,21 @@ console.log(result)
               <EditIcon />
             </Button>
           </Link>
-          <Button color="error"
-            onClick={() => deleteSchedule(cellValues.id)}
-          >
+          <Button color="error" onClick={() => deleteSchedule(cellValues.id)}>
             <DeleteIcon />
           </Button>
         </>
-      )
+      ),
     },
   ];
+
+  console.log(futureSchedule === true ? futureScheduleData : newScheduleData)
+  console.log(new Date())
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <DataGrid
-        rows={newScheduleData}
+        rows={futureSchedule === true ? futureScheduleData : newScheduleData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,
@@ -90,9 +100,10 @@ console.log(result)
             quickFilterProps: { debounceMs: 500 },
           },
         }}
-        style={{ height: '80vh' }} />
+        style={{ height: '80vh' }}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default ScheduleByProgramComponent
+export default ScheduleByProgramComponent;

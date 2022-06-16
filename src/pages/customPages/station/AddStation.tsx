@@ -20,6 +20,7 @@ const AddStation = () => {
    useEffect(() => {
      if (response.isSuccess) {
        toast.success(response.data.status)
+       navigate('/dashboard/station/list');
      }
      if (response.isError) {
        toast.error(response.error.data.error)
@@ -29,7 +30,6 @@ const AddStation = () => {
   // Submit The Data
   const onSubmit = (data: any) => {
     addStation(data);
-    navigate('/dashboard/station/list');
   }
 
   return (

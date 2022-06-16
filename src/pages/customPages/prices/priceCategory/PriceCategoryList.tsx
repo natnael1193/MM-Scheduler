@@ -37,6 +37,9 @@ const PriceCategoryList = () => {
  
   return (
     <div>
+      <Grid container>
+        <Typography variant='h3'>Price Category</Typography>
+      </Grid>
       <PriceCategoryListComponent priceCategoryData={priceCategoryData.responseBody} />
     </div>
   )

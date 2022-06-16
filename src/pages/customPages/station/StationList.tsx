@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Skeleton } from '@mui/material';
+import { Box, Grid, Skeleton, Typography } from '@mui/material';
 // import { Link } from 'react-router-dom';
 import { useStationsQuery } from "../../../services/StationApi";
 import StationListComponent from "../../../components/customComponents/station/StationListComponent"
@@ -27,7 +27,9 @@ const StationList = () => {
 
   return (<div>
     <Box>
-
+<Grid container direction="row" sx={{ m: 2 }}>
+<Typography variant="h3">Stations</Typography>
+</Grid>
       <Grid container direction="row">
         {
           isLoading ?

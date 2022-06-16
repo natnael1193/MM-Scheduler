@@ -1,4 +1,4 @@
-import React from 'react'
+import { enableRipple } from '@syncfusion/ej2-base';
 import {
     TimelineViews,
     TimelineMonth,
@@ -17,11 +17,12 @@ import {
     DragAndDrop,
     Agenda,
     ExcelExport,
-    PopupOpenEventArgs,
+    // PopupOpenEventArgs,
 } from '@syncfusion/ej2-react-schedule';
 import moment from 'moment';
 
 const TimelineComponent = ({ scheduleData, programData }: any) => {
+    enableRipple(true);
 
     const newScheduleData =
         scheduleData &&
@@ -64,12 +65,18 @@ const TimelineComponent = ({ scheduleData, programData }: any) => {
                     resources: ['Stations', 'Categories'],
                     // enableCompactView: false
                 }}
-                popupOpen={(args: PopupOpenEventArgs) => {
-                    args.cancel = true;
+                popupOpen={(args: any) => {
+                    // args.cancel = true;
                     // let isEmptyCell =  args.target.classList.contains('e-work-cells') || args.target.classList.contains('e-header-cells'); // checking whether the cell is empty or not
                     // if ((args.type === 'QuickInfo' || args.type === 'Editor') ) {
                     //   args.cancel = true;
                     // }
+                    let isEmptyCell =
+                    args.target.classList.contains('e-work-cells') ||
+                    args.target.classList.contains('e-header-cells'); // checking whether the cell is empty or not
+                  if ((args.type === 'QuickInfo' || args.type === 'Editor') && isEmptyCell) {
+                    args.cancel = true;
+                  }
                 }}
             //    currentView="TimelineDay"
             >
