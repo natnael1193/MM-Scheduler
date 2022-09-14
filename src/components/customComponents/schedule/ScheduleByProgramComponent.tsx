@@ -28,9 +28,23 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
     });
 
   //Filter Future Schedules
-  const futureScheduleData: any = newScheduleData.filter(function (date: any) {
-    return date.day > moment(new Date()).format('dddd Do MMMM YYYY');
+  const futureScheduleData: any = scheduleData.filter(function (date: any) {
+    console.log(moment(date.startTime).format('d-MM-YYYY'))
+    return moment(date.startTime).format() > moment(new Date()).format();
   })
+
+  var newfutureScheduleData: any = [];
+  newfutureScheduleData =
+    futureScheduleData &&
+    futureScheduleData.map(function (schedule: any) {
+      return {
+        id: schedule.id,
+        day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
+        startTime: moment(schedule.startTime).format('LT'),
+        endTime: moment(schedule.endTime).format('LT'),
+        priceClassification: schedule.priceClassification.name,
+      };
+    });
 
   // function checkDate(date: any) {
   //   return date.startTime > new Date();
@@ -84,12 +98,13 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
   ];
 
   console.log(futureSchedule === true ? futureScheduleData : newScheduleData)
-  console.log(new Date())
+  console.log(newfutureScheduleData)
+  console.log(moment(new Date()).format('D-MM-YYYY'))
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <DataGrid
-        rows={futureSchedule === true ? futureScheduleData : newScheduleData}
+        rows={futureSchedule === true ? newfutureScheduleData : newScheduleData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,

@@ -3,14 +3,19 @@ import { DataGrid, GridColumns, GridToolbar } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useDeletePriceCategoryMutation } from 'src/services/PriceCategoryApi';
+import { useDeleteOrganizationTypeMutation } from 'src/services/OrganizationTypeApi';
 
-const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
-  // Delete Price Category
-  const [deletePriceCategory] = useDeletePriceCategoryMutation();
+const OrganizationTypeListComponent = ({ organizationTypeData }: any) => {
+  //Delete Organization Type
+  const [deleteOrganizationType] = useDeleteOrganizationTypeMutation();
 
   //Data Grid Header
   const columns: GridColumns = [
+    {
+      field: 'key',
+      headerName: 'Key',
+      width: 300,
+    },
     {
       field: 'name',
       headerName: 'Name',
@@ -24,14 +29,14 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
       renderCell: (cellValues: any) => (
         <>
           <Link
-            to={`/dashboard/price-category/edit/${cellValues.id}`}
+            to={`/dashboard/organization-type/edit/${cellValues.id}`}
             style={{ textDecoration: 'none' }}
           >
             <Button sx={{ mr: 2 }}>
               <EditIcon />
             </Button>
           </Link>
-          <Button color="error" onClick={() => deletePriceCategory(cellValues.id)}>
+          <Button color="error" onClick={() => deleteOrganizationType(cellValues.id)}>
             <DeleteIcon />
           </Button>
         </>
@@ -39,10 +44,13 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
     },
   ];
 
+  // console.log(organizationTypeData)
+
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div>
       <DataGrid
-        rows={priceCategoryData}
+        rows={organizationTypeData.data}
+        // rows={[]}
         columns={columns}
         components={{
           Toolbar: GridToolbar,
@@ -59,4 +67,4 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
   );
 };
 
-export default PriceCategoryListComponent;
+export default OrganizationTypeListComponent;

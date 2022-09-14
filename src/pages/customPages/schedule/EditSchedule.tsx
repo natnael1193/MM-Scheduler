@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useScheduleQuery, useUpdateScheduleMutation } from 'src/services/ScheduleApi';
 import ScheduleEditForm from '../../../components/customComponents/schedule/ScheduleEditForm';
+import BreadCrumb from '../breadCrumb/BreadCrumb';
 
 const EditSchedule = () => {
   let defaultValues: any = {};
@@ -16,18 +17,18 @@ const EditSchedule = () => {
   const { data: scheduleData, error, isLoading } = useScheduleQuery(paramsId)
 
   //Update the data 
-  const [ updateSchedule, result ] = useUpdateScheduleMutation();
+  const [updateSchedule, result] = useUpdateScheduleMutation();
 
-   //Check the status
-   const response: any = result
-   useEffect(() => {
-     if (response.isSuccess) {
-       toast.success(response.data.status)
-     }
-     if (response.isError) {
-       toast.error(response.error.data.error)
-     }
-   }, [response]);
+  //Check the status
+  const response: any = result
+  useEffect(() => {
+    if (response.isSuccess) {
+      toast.success(response.data.status)
+    }
+    if (response.isError) {
+      toast.error(response.error.data.error)
+    }
+  }, [response]);
 
   //Loading State
   if (isLoading) return (
@@ -53,12 +54,12 @@ const EditSchedule = () => {
     startTime: moment.utc(defaultValues.responseBody.startTime).format('hh:mm:ss'),
     endTime: moment.utc(defaultValues.responseBody.endTime).format('hh:mm:ss'),
     priceClassificationId: defaultValues.responseBody.priceClassification.id
-}
+  }
 
-const startDate : any = moment(defaultValues.responseBody.startTime).format('YYYY-MM-DD')
-const endDate : any = moment(defaultValues.responseBody.endTime).format('YYYY-MM-DD')
+  const startDate: any = moment(defaultValues.responseBody.startTime).format('YYYY-MM-DD')
+  const endDate: any = moment(defaultValues.responseBody.endTime).format('YYYY-MM-DD')
 
-  const onSubmit = (data: any) => { 
+  const onSubmit = (data: any) => {
     console.log(data)
     const newData: any = {
       id: data.id,
@@ -74,7 +75,15 @@ const endDate : any = moment(defaultValues.responseBody.endTime).format('YYYY-MM
   console.log(startDate)
 
   return (
-    <div><ScheduleEditForm defaultValues={scheduleDefaultValue} onFormSubmit={onSubmit} formTitle={"Edit Schedule"} startDate={startDate} endDate={endDate}/></div>
+    <div>
+      <BreadCrumb
+        main={'Dashboard'}
+        parent={'Schedule'}
+        child={'Edit'}
+        parentLink={'/dashboard/schedule/timeline'}
+      />
+      <ScheduleEditForm defaultValues={scheduleDefaultValue} onFormSubmit={onSubmit} formTitle={"Edit Schedule"} startDate={startDate} endDate={endDate} />
+    </div>
   )
 }
 

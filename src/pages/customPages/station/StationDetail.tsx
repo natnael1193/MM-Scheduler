@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useStationQuery } from '../../../services/StationApi'
 import ProgramByStationComponent from 'src/components/customComponents/program/ProgramByStationComponent';
 import { useProgramByStationQuery } from 'src/services/ProgramApi';
+import BreadCrumb from '../breadCrumb/BreadCrumb';
 
 
 const StationDetail = () => {
@@ -23,6 +24,12 @@ const StationDetail = () => {
   console.log(stationData)
   return (
     <Box>
+         <BreadCrumb
+        main={'Dashboard'}
+        parent={'Station'}
+        child={'Detail'}
+        parentLink={'/dashboard/station/list'}
+      />
       <Grid container>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Typography variant="h3">{isLoading ? <Skeleton width="50%" /> : stationData && stationData.responseBody.name}</Typography>

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { usePriceClassificationQuery, useUpdatePriceClassificationMutation } from 'src/services/PriceClassificationApi';
 import PriceClassificationForm from '../../../../components/customComponents/prices/priceClassification/PriceClassificationForm';
+import BreadCrumb from '../../breadCrumb/BreadCrumb';
 
 const EditPriceClassification = () => {
 
@@ -79,7 +80,15 @@ const EditPriceClassification = () => {
   }
 
   return (
-    <div><PriceClassificationForm defaultValues={newDefaultValue} onFormSubmit={onSubmit} formTitle={"Edit Price Category"} /></div>
+    <div>
+               <BreadCrumb
+        main={'Dashboard'}
+        parent={'Price Classification'}
+        child={'Edit'}
+        parentLink={'/dashboard/price-classification/list'}
+      />
+      <PriceClassificationForm defaultValues={newDefaultValue} onFormSubmit={onSubmit} formTitle={"Edit Price Category"} />
+      </div>
   )
 }
 

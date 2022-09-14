@@ -1,21 +1,22 @@
 import { Grid, CircularProgress, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useStationQuery, useUpdateStationMutation } from 'src/services/StationApi';
-import StationForm from '../../../components/customComponents/station/StationForm';
+import OrganizationForm from 'src/components/customComponents/organization/OrganizationForm';
 import { toast } from 'react-toastify';
 import BreadCrumb from '../breadCrumb/BreadCrumb';
+import { useOrganizationQuery, useUpdateOrganizationMutation } from 'src/services/OrganizationApi';
 
-const EditStation = () => {
+
+const EditOrganization = () => {
   const params = useParams();
-  const paramsId: any = params.stationId;
+  const paramsId: any = params.organizationId;
   var defaultValues: any = {};
 
   //Get Station By Id
-  const { data: stationData, error, isLoading, isFetching } = useStationQuery(paramsId);
+  const { data: organizationData, error, isLoading, isFetching }: any = useOrganizationQuery(paramsId);
 
   //Update the data
-  const [updateStation, result] = useUpdateStationMutation();
+  const [updateOrganization, result] = useUpdateOrganizationMutation();
 
   //Check the data status
   const response: any = result;
@@ -38,31 +39,29 @@ const EditStation = () => {
   if (error) return <Typography variant="h3">Something Went Wrong</Typography>;
 
   //Assign the data to a variable
-  defaultValues = stationData;
+  defaultValues = organizationData.data;
 
   //Submit the new data
   const onSubmit = (data: any) => {
-    updateStation(data);
+    updateOrganization(data);
   };
 
-  console.log(stationData);
+  console.log(organizationData);
+
+
 
   return (
     <div>
-      {' '}
+            {' '}
       <BreadCrumb
         main={'Dashboard'}
-        parent={'Station'}
+        parent={'Organization'}
         child={'Edit'}
-        parentLink={'/dashboard/station/list'}
+        parentLink={'/dashboard/organization/list'}
       />{' '}
-      <StationForm
-        formTitle={'Edit Station'}
-        defaultValues={defaultValues.responseBody}
-        onFormSubmit={onSubmit}
-      />
+      <OrganizationForm formTitle={"Edit Organization"} defaultValues={defaultValues}  onFormSubmit={onSubmit}/>
     </div>
   );
-};
+}
 
-export default EditStation;
+export default EditOrganization

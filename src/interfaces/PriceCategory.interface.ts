@@ -1,4 +1,4 @@
-export interface PriceCategory{
-    "id": any,
-    "name": string,
+export interface PriceCategory {
+  id: any;
+  name: string;
 }

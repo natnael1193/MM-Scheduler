@@ -1,7 +1,9 @@
-import { Grid, CircularProgress, Typography } from '@mui/material';
-import React from 'react'
+import { Grid, CircularProgress, Typography, Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { Link } from 'react-router-dom';
 import PriceClassificationListComponent from 'src/components/customComponents/prices/priceClassification/PriceClassificationListComponent';
 import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
+import BreadCrumb from '../../breadCrumb/BreadCrumb';
 
 const PriceClassificationList = () => {
   let priceClassificationData: any = [];
@@ -39,8 +41,20 @@ const PriceClassificationList = () => {
 
   return (
     <div>
-        <Grid container>
-        <Typography variant='h3'>Price Classification</Typography>
+      <BreadCrumb
+        main={'Dashboard'}
+        parent={'Price Classification'}
+        child={'List'}
+        parentLink={'/dashboard/price-classification/list'}
+      />
+      <Grid container>
+        <Grid item lg={10} md={8} sm={12} xs={12}>
+          <Typography variant='h3'>Price Classification</Typography>
+        </Grid>
+        <Grid item lg={2} md={4} sm={12} xs={12}>
+          <Link to="/dashboard/price-classification/add" style={{ textDecoration: 'none' }}><Button variant="contained"><AddIcon />Add Price Classification</Button></Link>
+        </Grid>
+
       </Grid>
       <PriceClassificationListComponent priceClassificationData={priceClassificationData.responseBody} /></div>
   )

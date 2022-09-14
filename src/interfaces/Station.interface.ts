@@ -1,5 +1,5 @@
-export interface Station{
-    "id": any,
-    "name": string,
-    "description": string
+export interface Station {
+  id: any;
+  name: string;
+  description: string;
 }

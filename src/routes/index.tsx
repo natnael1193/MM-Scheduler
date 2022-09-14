@@ -25,8 +25,8 @@ export default function Router() {
       path: '/',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/one" replace />, index: true },
-        { path: '/dashboard', element: <Navigate to="/dashboard/one" replace />, index: true },
+        { element: <Navigate to="/dashboard" replace />, index: true },
+        { path: '/dashboard', element: <Dashboard /> },
         { path: '/dashboard/one', element: <PageOne /> },
         { path: '/dashboard/two', element: <PageTwo /> },
         { path: '/dashboard/three', element: <PageThree /> },
@@ -37,6 +37,25 @@ export default function Router() {
             { path: '/dashboard/user/four', element: <PageFour /> },
             { path: '/dashboard/user/five', element: <PageFive /> },
             { path: '/dashboard/user/six', element: <PageSix /> },
+          ],
+        },
+        {
+          path: '/dashboard/organization-type',
+          children: [
+            { element: <Navigate to="/dashboard/organizationType/list" replace />, index: true },
+            { path: '/dashboard/organization-type/list', element: <OrganizationTypeList /> },
+            { path: '/dashboard/organization-type/add', element: <AddOrganizationType /> },
+            { path: '/dashboard/organization-type/edit/:organizationTypeId', element: <EditOrganizationType /> },
+          ],
+        },
+        {
+          path: '/dashboard/organization',
+          children: [
+            { element: <Navigate to="/dashboard/organization/list" replace />, index: true },
+            { path: '/dashboard/organization/list', element: <OrganizationList /> },
+            { path: '/dashboard/organization/add', element: <AddOrganization /> },
+            { path: '/dashboard/organization/edit/:organizationId', element: <EditOrganization /> },
+            { path: '/dashboard/organization/detail/:organizationId', element: <OrganizationDetail /> },
           ],
         },
         {
@@ -105,6 +124,7 @@ export default function Router() {
 }
 
 // Dashboard
+const Dashboard = Loadable(lazy(() => import('../pages/customPages/dashboard/Dashboard')));
 const PageOne = Loadable(lazy(() => import('../pages/PageOne')));
 const PageTwo = Loadable(lazy(() => import('../pages/PageTwo')));
 const PageThree = Loadable(lazy(() => import('../pages/PageThree')));
@@ -113,6 +133,18 @@ const PageFive = Loadable(lazy(() => import('../pages/PageFive')));
 const PageSix = Loadable(lazy(() => import('../pages/PageSix')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 
+
+//Organization
+const OrganizationTypeList = Loadable(lazy(() => import('../pages/customPages/organization/organizationType/OrganizationTypeList')));
+const AddOrganizationType = Loadable(lazy(() => import('../pages/customPages/organization/organizationType/AddOrganizationType')));
+const EditOrganizationType = Loadable(lazy(() => import('../pages/customPages/organization/organizationType/EditOrganizationType')));
+
+
+//Organization
+const OrganizationList = Loadable(lazy(() => import('../pages/customPages/organization/OrganizationList')));
+const AddOrganization = Loadable(lazy(() => import('../pages/customPages/organization/AddOrganization')));
+const EditOrganization = Loadable(lazy(() => import('../pages/customPages/organization/EditOrganization')));
+const OrganizationDetail = Loadable(lazy(() => import('../pages/customPages/organization/OrganizationDetail')));
 
 //Station
 const StationList = Loadable(lazy(() => import('../pages/customPages/station/StationList')));

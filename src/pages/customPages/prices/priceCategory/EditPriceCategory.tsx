@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { usePriceCategoryQuery, useUpdatePriceCategoryMutation } from 'src/services/PriceCategoryApi';
 import PriceCategoryForm from 'src/components/customComponents/prices/priceCategory/PriceCategoryForm';
+import BreadCrumb from '../../breadCrumb/BreadCrumb';
 
 const EditPriceCategory = () => {
 
@@ -17,16 +18,16 @@ const EditPriceCategory = () => {
   // Update the data 
   const [updatePriceCategory, result] = useUpdatePriceCategoryMutation();
 
-    //Check the status
-    const response: any = result
-    useEffect(() => {
-      if (response.isSuccess) {
-        toast.success(response.data.status)
-      }
-      if (response.isError) {
-        toast.error(response.error.data.error)
-      }
-    }, [response]);
+  //Check the status
+  const response: any = result
+  useEffect(() => {
+    if (response.isSuccess) {
+      toast.success(response.data.status)
+    }
+    if (response.isError) {
+      toast.error(response.error.data.error)
+    }
+  }, [response]);
 
 
   //Loading State
@@ -56,7 +57,14 @@ const EditPriceCategory = () => {
   }
 
   return (
-    <div><PriceCategoryForm defaultValues={defaultValues.responseBody} onFormSubmit={onSubmit} formTitle={"Edit Price Category"} /></div>
+    <div>
+      <BreadCrumb
+        main={'Dashboard'}
+        parent={'Price Category'}
+        child={'Edit'}
+        parentLink={'/dashboard/price-category/list'}
+      />
+      <PriceCategoryForm defaultValues={defaultValues.responseBody} onFormSubmit={onSubmit} formTitle={"Edit Price Category"} /></div>
   )
 }
 

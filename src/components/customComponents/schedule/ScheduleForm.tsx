@@ -52,32 +52,33 @@ const ScheduleForm = () => {
     <div>
       <Box>
         <Card sx={{ p: 4 }}>
+          <Typography variant="h3">Add Schedule</Typography>
           <Grid container spacing={2} sx={{ mt: 3 }}>
             <Grid item lg={4} md={4} sm={12} xs={12}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Programs</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Programs"
-                fullWidth
-                displayEmpty
-                defaultValue=""
-                {...register('programId')}
-              >
-                {programData.responseBody.map((program: any) => (
-                  <MenuItem key={program.id} value={program.id.toString()}>
-                    {program.name}
-                  </MenuItem>
-                ))}
-              </Select>
-              {scheduleData.programId === undefined || scheduleData.programId === '' ? (
-                <Typography variant="inherit" color="error">
-                  This is required
-                </Typography>
-              ) : (
-                ''
-              )}
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Programs</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Programs"
+                  fullWidth
+                  displayEmpty
+                  defaultValue=""
+                  {...register('programId')}
+                >
+                  {programData.responseBody.map((program: any) => (
+                    <MenuItem key={program.id} value={program.id.toString()}>
+                      {program.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {scheduleData.programId === undefined || scheduleData.programId === '' ? (
+                  <Typography variant="inherit" color="error">
+                    This is required
+                  </Typography>
+                ) : (
+                  ''
+                )}
               </FormControl>
             </Grid>
             <Grid item lg={4} md={4} sm={12} xs={12}>

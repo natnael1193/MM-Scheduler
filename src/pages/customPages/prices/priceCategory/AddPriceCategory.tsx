@@ -3,6 +3,7 @@ import PriceCategoryForm from 'src/components/customComponents/prices/priceCateg
 import { useAddPriceCategoryMutation } from 'src/services/PriceCategoryApi'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import BreadCrumb from '../../breadCrumb/BreadCrumb';
 
 const AddPriceCategory = () => {
 
@@ -10,23 +11,23 @@ const AddPriceCategory = () => {
 
   //Initial State 
   const initialState: any = {
-     name: ''
+    name: ''
   }
 
   //Add New Data
-  const [addPriceCategory, result ] = useAddPriceCategoryMutation();
+  const [addPriceCategory, result] = useAddPriceCategoryMutation();
 
-      //Check the status
-      const response: any = result
-      useEffect(() => {
-        if (response.isSuccess) {
-          toast.success(response.data.status)
-          navigate('/dashboard/price-category/list');
-        }
-        if (response.isError) {
-          toast.error(response.error.data.error)
-        }
-      }, [response, navigate]);
+  //Check the status
+  const response: any = result
+  useEffect(() => {
+    if (response.isSuccess) {
+      toast.success(response.data.status)
+      navigate('/dashboard/price-category/list');
+    }
+    if (response.isError) {
+      toast.error(response.error.data.error)
+    }
+  }, [response, navigate]);
 
   //Submit Data
   const onSubmit = (data: any) => {
@@ -34,6 +35,12 @@ const AddPriceCategory = () => {
   }
   return (
     <div>
+      <BreadCrumb
+        main={'Dashboard'}
+        parent={'Price Category'}
+        child={'Add'}
+        parentLink={'/dashboard/price-category/list'}
+      />
       <PriceCategoryForm formTitle={"Add New Price Category"} defaultValues={initialState} onFormSubmit={onSubmit} />
     </div>
   )

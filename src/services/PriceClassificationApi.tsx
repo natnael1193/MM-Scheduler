@@ -20,7 +20,7 @@ export const priceClassificationApi = createApi({
         }),
         addPriceClassification: builder.mutation<void, PriceClassification>({
             query: (priceClassification) => ({
-                url: '/create_price_classification',
+                url: '/create_price_classification_config_and_property',
                 method: "POST",
                 body: priceClassification
             }),
