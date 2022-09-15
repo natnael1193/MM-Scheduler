@@ -18,12 +18,12 @@ const PriceClassificationListComponent = ( { priceClassificationData }: any ) =>
       width: 300,
     },
     {
-      field: 'priceCategory',
+      field: 'priceCategoryId',
       headerName: 'Price Category',
       width: 300,
     },
       {
-      field: 'priceConfig',
+      field: 'priceConfigId',
       headerName: 'Price Config',
       width: 300,
     },
@@ -48,24 +48,24 @@ const PriceClassificationListComponent = ( { priceClassificationData }: any ) =>
   ];
 
 
-  var newPriceClassificationData: any = [];
+  // var newPriceClassificationData: any = [];
 
-  newPriceClassificationData =
-    priceClassificationData &&
-    priceClassificationData.map(function (item: any) {
-      return {
-        id: item.id,
-        name: item.name,
-        priceCategory: item.priceCategory.name,
-        priceConfig: item.priceConfig.name,
-      };
-    });
+  // newPriceClassificationData =
+  //   priceClassificationData &&
+  //   priceClassificationData.map(function (item: any) {
+  //     return {
+  //       id: item.id,
+  //       name: item.name,
+  //       priceCategory: item.priceCategoryId,
+  //       priceConfig: item.priceConfigId,
+  //     };
+  //   });
 
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <DataGrid
-        rows={newPriceClassificationData}
+        rows={priceClassificationData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,

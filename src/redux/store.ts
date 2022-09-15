@@ -6,12 +6,14 @@ import { programApi } from '../services/ProgramApi';
 import { scheduleApi } from '../services/ScheduleApi';
 import { organizationApi } from '../services/OrganizationApi';
 import { organizationTypeApi } from '../services/OrganizationTypeApi';
+import { priceConfigApi } from '../services/PriceConfigApi';
 
 
 export const store = configureStore({
   reducer: {
     [stationApi.reducerPath]: stationApi.reducer,
     [priceCategoryApi.reducerPath]: priceCategoryApi.reducer,
+    [priceConfigApi.reducerPath]: priceConfigApi.reducer,
     [priceClassificationApi.reducerPath]: priceClassificationApi.reducer,
     [programApi.reducerPath]: programApi.reducer,
     [scheduleApi.reducerPath]: scheduleApi.reducer,
@@ -22,6 +24,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       stationApi.middleware,
       priceCategoryApi.middleware,
+      priceConfigApi.middleware,
       priceClassificationApi.middleware,
       programApi.middleware,
       scheduleApi.middleware,

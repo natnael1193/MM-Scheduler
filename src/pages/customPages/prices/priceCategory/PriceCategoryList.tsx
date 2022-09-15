@@ -51,7 +51,7 @@ const PriceCategoryList = () => {
           </Link>
         </Grid>
       </Grid>
-      <PriceCategoryListComponent priceCategoryData={priceCategoryData.responseBody} />
+      <PriceCategoryListComponent priceCategoryData={priceCategoryData.data} />
     </div>
   );
 };

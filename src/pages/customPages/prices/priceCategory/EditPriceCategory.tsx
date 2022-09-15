@@ -64,7 +64,7 @@ const EditPriceCategory = () => {
         child={'Edit'}
         parentLink={'/dashboard/price-category/list'}
       />
-      <PriceCategoryForm defaultValues={defaultValues.responseBody} onFormSubmit={onSubmit} formTitle={"Edit Price Category"} /></div>
+      <PriceCategoryForm defaultValues={defaultValues.data} onFormSubmit={onSubmit} formTitle={"Edit Price Category"} /></div>
   )
 }
 

@@ -43,7 +43,7 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
       </Grid>
     );
 
-// console.log(defaultValues.organizationType.id)
+  // console.log(defaultValues.organizationType.id)
 
   return (
     <div>
@@ -51,19 +51,19 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
         <Card>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container spacing={3} sx={{ p: 3 }}>
-              <Grid item lg={12} md={12} sm={12}>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
                 {' '}
                 <Typography variant="h3" sx={{ p: 3 }}>
                   {formTitle}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField fullWidth label="Organization Name" {...register('name')} />
               </Grid>
-              <Grid item lg={4} md={4} sm={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField fullWidth label="Key" {...register('key')} />
               </Grid>
-              <Grid item lg={4} md={4} sm={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 {/* <TextField fullWidth label="Organization Type" {...register('organizationTypeId')} /> */}
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Organization Type</InputLabel>
@@ -72,7 +72,9 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                     id="demo-simple-select"
                     label="Organization Type"
                     displayEmpty
-                    defaultValue={defaultValues.organizationType ? defaultValues.organizationType.id : ''}
+                    defaultValue={
+                      defaultValues.organizationType ? defaultValues.organizationType.id : ''
+                    }
                     {...register('organizationTypeId', { required: true })}
                   >
                     {organizationTypeData.data.map((organizationType: any) => (
@@ -84,8 +86,8 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                   {/* <Typography variant='inherit' color="error">{errors.organizationTypeId && "This is required"}</Typography> */}
                 </FormControl>
               </Grid>
-   
-              <Grid item lg={12} md={12} sm={12}>
+
+              <Grid item lg={12} md={12} sm={12} xs={12}>
                 <TextField
                   fullWidth
                   label="Organization Description"
@@ -94,7 +96,7 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                   rows={5}
                 />
               </Grid>
-              <Grid item lg={12} md={12} sm={12}>
+              <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Button type="submit" variant="contained">
                   Submit
                 </Button>

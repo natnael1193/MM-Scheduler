@@ -5,7 +5,6 @@ import {
   CircularProgress,
   FormControl,
   Grid,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -14,18 +13,33 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
+import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 
 const PriceClassificationForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
   let priceCategoryData: any = [];
+  let priceConfigData: any = [];
 
   //Get All Price Categories
   const { data, error, isLoading, isSuccess, isFetching } = usePriceCategoriesQuery();
 
-  const { register, formState: { errors }, handleSubmit } = useForm({
+  //Get All Price config
+  const {
+    data: priceConfigDatas,
+    error: priceConfigError,
+    isLoading: priceConfigLoading,
+    isSuccess: priceConfigSuccess,
+    isFetching: priceConfigFetching,
+  } = usePriceConfigsQuery();
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     defaultValues,
   });
 
-  if (isLoading || isFetching)
+  if (isLoading || isFetching || priceConfigLoading || priceConfigFetching)
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <CircularProgress />
@@ -36,14 +50,16 @@ const PriceClassificationForm = ({ defaultValues, onFormSubmit, formTitle }: any
     priceCategoryData = data;
   }
 
-  if (error)
+  if (priceConfigSuccess) {
+    priceConfigData = priceConfigDatas;
+  }
+
+  if (error || priceConfigError)
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <Typography variant="h3">Something Went Wrong</Typography>
       </Grid>
     );
-
-
 
   return (
     <div>
@@ -55,12 +71,16 @@ const PriceClassificationForm = ({ defaultValues, onFormSubmit, formTitle }: any
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container>
               <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
-                <TextField
-                  {...register('priceClassificationName', { required: true })}
-                  fullWidth
-                  label="Price Classification Name"
-                />
-                <Typography variant='inherit' color="error">{errors.priceClassificationName && "This is required"}</Typography>
+                <TextField {...register('name', { required: true })} fullWidth label="Name" />
+                <Typography variant="inherit" color="error">
+                  {errors.name && 'This is required'}
+                </Typography>
+              </Grid>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
+                <TextField {...register('key', { required: true })} label="Key" fullWidth />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
@@ -70,19 +90,43 @@ const PriceClassificationForm = ({ defaultValues, onFormSubmit, formTitle }: any
                     id="demo-simple-select"
                     label="Price Category"
                     displayEmpty
-                    defaultValue={defaultValues.priceCategoryId}
+                    defaultValue={defaultValues.priceCategory ? defaultValues.priceCategory.id : ''}
                     {...register('priceCategoryId', { required: true })}
                   >
-                    {priceCategoryData.responseBody.map((priceCategory: any) => (
+                    {priceCategoryData.data.map((priceCategory: any) => (
                       <MenuItem key={priceCategory.id} value={priceCategory.id}>
                         {priceCategory.name}
                       </MenuItem>
                     ))}
                   </Select>
-                  <Typography variant='inherit' color="error">{errors.priceCategoryId && "This is required"}</Typography>
+                  <Typography variant="inherit" color="error">
+                    {errors.priceCategoryId && 'This is required'}
+                  </Typography>
                 </FormControl>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Price Config</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Price Config"
+                    displayEmpty
+                    defaultValue={defaultValues.priceConfig ? defaultValues.priceConfig.id : ''}
+                    {...register('priceConfigId', { required: true })}
+                  >
+                    {priceConfigData.data.map((priceConfig: any) => (
+                      <MenuItem key={priceConfig.id} value={priceConfig.id}>
+                        {priceConfig.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <Typography variant="inherit" color="error">
+                    {errors.priceConfigId && 'This is required'}
+                  </Typography>
+                </FormControl>
+              </Grid>
+              {/* <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField {...register('priceConfigName', { required: true })} fullWidth label="Price Config Name" />
                 <Typography variant='inherit' color="error">{errors.priceConfigName && "This is required"}</Typography>
               </Grid>
@@ -131,7 +175,7 @@ const PriceClassificationForm = ({ defaultValues, onFormSubmit, formTitle }: any
                   inputProps={{ step: 1 }}
                 />
                 <Typography variant='inherit' color="error">{errors.endDate && "This is required"}</Typography>
-              </Grid>
+              </Grid> */}
               <Grid item sx={{ p: 2 }}>
                 <Button type="submit" variant="contained">
                   Submit

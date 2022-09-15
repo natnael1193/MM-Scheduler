@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const BreadCrumb = ({ main, parent, child, grandChild, parentLink }: any) => {
   console.log(parent);
   return (
-    <Box style={{ marginBottom: 12 }}>
+    <Box style={{ marginBottom: 12, padding: 5 }}>
       <Grid container>
         <Breadcrumbs aria-label="breadcrumb">
           <Link to="/" style={{ textDecoration: 'none' }}>

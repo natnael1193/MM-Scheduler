@@ -11,24 +11,24 @@ export const priceCategoryApi = createApi({
     tagTypes: ["PriceCategory"],
     endpoints: (builder) => ({
         priceCategories: builder.query<PriceCategory[], void>({
-            query: () => `/get_all_price_categories`,
+            query: () => `/PriceCategory`,
             providesTags: ["PriceCategory"]
         }),
         priceCategory: builder.query<PriceCategory, string>({
-            query: (id) => `get_price_category_by_id/${id}`,
+            query: (id) => `PriceCategory/${id}`,
             providesTags: ["PriceCategory"]
         }),
         addPriceCategory: builder.mutation<void, PriceCategory>({
             query: (priceCategory) => ({
-                url: '/create_price_category',
+                url: '/PriceCategory',
                 method: "POST",
                 body: priceCategory
             }),
             invalidatesTags: ["PriceCategory"]
         }),
         updatePriceCategory: builder.mutation<void, PriceCategory>({
-            query: ({ id, ...rest }) => ({
-                url: `update_price_category/${id}`,
+            query: ({ ...rest }) => ({
+                url: `PriceCategory/${rest.id}`,
                 method: "PUT",
                 body: rest
             }),
@@ -36,8 +36,8 @@ export const priceCategoryApi = createApi({
         }),
         deletePriceCategory: builder.mutation<void, string>({
             query: (id) => ({
-                url: `remove_price_category/${id}`,
-                method: 'PUT'
+                url: `PriceCategory/${id}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['PriceCategory']
         })

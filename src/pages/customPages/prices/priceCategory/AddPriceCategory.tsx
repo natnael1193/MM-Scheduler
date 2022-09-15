@@ -31,6 +31,7 @@ const AddPriceCategory = () => {
 
   //Submit Data
   const onSubmit = (data: any) => {
+    console.log(data)
     addPriceCategory(data)
   }
   return (

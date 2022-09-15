@@ -1,10 +1,14 @@
 export interface PriceClassification {
   id: any;
-  priceConfigName: string;
-  endDate: string;
-  startDate: string;
-  rate: number;
-  unit: number;
+  key: string;
+  name: string;
   priceCategoryId: number;
-  priceClassificationName: string;
+  priceConfigId: number;
+  //   priceConfigName: string;
+  //   endDate: string;
+  //   startDate: string;
+  //   rate: number;
+  //   unit: number;
+  //   priceCategoryId: number;
+  //   priceClassificationName: string;
 }

@@ -11,13 +11,10 @@ const AddPriceClassification = () => {
 
   //Initial State
   const initialState: any = {
-    priceClassificationName: "",
+    name: "",
+    key: "",
     priceCategoryId: "",
-    priceConfigName: "",
-    startDate: "",
-    endDate: "",
-    rate: "",
-    unit: ""
+    priceConfigId: "",
   }
 
   //Add New Data
@@ -28,6 +25,7 @@ const AddPriceClassification = () => {
   useEffect(() => {
     if (response.isSuccess) {
       toast.success(response.data.status)
+      navigate('/dashboard/price-classification/list')
     }
     if (response.isError) {
       toast.error(response.error.data.error)
@@ -36,17 +34,17 @@ const AddPriceClassification = () => {
 
   //Submit Data
   const onSubmit = (data: any) => {
-    const newData: any = {
-      priceClassificationName: data.priceClassificationName,
-      priceCategoryId: data.priceCategoryId,
-      priceConfigName: data.priceConfigName,
-      rate: Number(data.rate),
-      unit: Number(data.unit),
-      startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
-      endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
-    };
-    console.log(newData);
-    addPriceClassification(newData);
+    // const newData: any = {
+    //   priceClassificationName: data.priceClassificationName,
+    //   priceCategoryId: data.priceCategoryId,
+    //   priceConfigName: data.priceConfigName,
+    //   rate: Number(data.rate),
+    //   unit: Number(data.unit),
+    //   startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
+    //   endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
+    // };
+    console.log(data);
+    addPriceClassification(data);
   }
 
   return (

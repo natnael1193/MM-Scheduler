@@ -3,23 +3,33 @@ import { DataGrid, GridColumns, GridToolbar } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useDeletePriceCategoryMutation } from 'src/services/PriceCategoryApi';
+import { useDeletePriceConfigMutation } from 'src/services/PriceConfigApi';
 
-const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
-  // Delete Price Category
-  const [deletePriceCategory] = useDeletePriceCategoryMutation();
+const PriceConfigListComponent = ({ priceConfigData }: any) => {
+  // Delete Price config
+  const [deletePriceConfig] = useDeletePriceConfigMutation();
 
   //Data Grid Header
   const columns: GridColumns = [
     {
       field: 'key',
       headerName: 'Key',
-      width: 300,
+      width: 250,
     },
     {
       field: 'name',
       headerName: 'Name',
-      width: 300,
+      width: 250,
+    },
+    {
+      field: 'rate',
+      headerName: 'Rate',
+      width: 150,
+    },
+    {
+      field: 'unit',
+      headerName: 'Unit',
+      width: 150,
     },
     {
       field: '',
@@ -29,14 +39,14 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
       renderCell: (cellValues: any) => (
         <>
           <Link
-            to={`/dashboard/price-category/edit/${cellValues.id}`}
+            to={`/dashboard/price-config/edit/${cellValues.id}`}
             style={{ textDecoration: 'none' }}
           >
             <Button sx={{ mr: 2 }}>
               <EditIcon />
             </Button>
           </Link>
-          <Button color="error" onClick={() => deletePriceCategory(cellValues.id)}>
+          <Button color="error" onClick={() => deletePriceConfig(cellValues.id)}>
             <DeleteIcon />
           </Button>
         </>
@@ -45,9 +55,9 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
   ];
 
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div>
       <DataGrid
-        rows={priceCategoryData}
+        rows={priceConfigData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,
@@ -64,4 +74,4 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
   );
 };
 
-export default PriceCategoryListComponent;
+export default PriceConfigListComponent;

@@ -108,6 +108,16 @@ const navConfig = [
         ],
       },
       {
+        title: 'price config',
+        path: '/dashboard/price-config',
+        icon: <AttachMoneyIcon/>,
+        children: [
+          { title: 'Price config List', path: '/dashboard/price-config/list' },
+          { title: 'Add Price config', path: '/dashboard/price-config/add' },
+          // { title: 'Six', path: '/dashboard/station/six' },
+        ],
+      },
+      {
         title: 'price classification',
         path: '/dashboard/price-classification',
         icon: <MonetizationOnIcon/>,

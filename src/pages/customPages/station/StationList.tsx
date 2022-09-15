@@ -21,6 +21,8 @@ const StationList = () => {
 
   stationData = data;
 
+  console.log(stationData.data)
+
   return (
     <div>
       <Box>
@@ -46,7 +48,7 @@ const StationList = () => {
           {isLoading ? <Skeleton variant="rectangular" /> : ''}
           {isSuccess &&
             stationData &&
-            stationData.responseBody.map((station: any) => (
+            stationData.data.map((station: any) => (
               <StationListComponent
                 key={station.id}
                 id={station.id}

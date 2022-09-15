@@ -23,7 +23,8 @@ const EditOrganization = () => {
   useEffect(() => {
     if (response.isSuccess) {
       console.log(response);
-      toast.success(response.data.status);
+      toast.success("Organization updated successfully");
+      // toast.success("Organization updated successfully"+response.data.message);
     }
   }, [response]);
 

@@ -56,7 +56,7 @@ const PriceClassificationList = () => {
         </Grid>
 
       </Grid>
-      <PriceClassificationListComponent priceClassificationData={priceClassificationData.responseBody} /></div>
+      <PriceClassificationListComponent priceClassificationData={priceClassificationData.data} /></div>
   )
 }
 

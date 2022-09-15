@@ -58,7 +58,7 @@ const EditStation = () => {
       />{' '}
       <StationForm
         formTitle={'Edit Station'}
-        defaultValues={defaultValues.responseBody}
+        defaultValues={defaultValues.data}
         onFormSubmit={onSubmit}
       />
     </div>
