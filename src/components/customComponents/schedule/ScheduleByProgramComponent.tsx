@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataGrid, GridColumns, GridToolbar } from '@mui/x-data-grid';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -13,22 +13,23 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
   // Delete Schedule
   const [deleteSchedule] = useDeleteScheduleMutation();
 
-  console.log(futureSchedule);
+  console.log(scheduleData);
   var newScheduleData: any = [];
   newScheduleData =
     scheduleData &&
-    scheduleData.map(function (schedule: any) {
+    scheduleData.schedules.map(function (schedule: any) {
       return {
         id: schedule.id,
         day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
-        startTime: moment(schedule.startTime).format('LT'),
-        endTime: moment(schedule.endTime).format('LT'),
-        priceClassification: schedule.priceClassification.name,
+        startTime: moment.utc(schedule.startTime).format('LT'),
+        endTime: moment.utc(schedule.endTime).format('LT'),
+        // priceClassification: schedule.priceClassification.name,
+        priceClasifcationId: schedule.priceClasifcationId,
       };
     });
 
   //Filter Future Schedules
-  const futureScheduleData: any = scheduleData.filter(function (date: any) {
+  const futureScheduleData: any = scheduleData.schedules.filter(function (date: any) {
     console.log(moment(date.startTime).format('d-MM-YYYY'))
     return moment(date.startTime).format() > moment(new Date()).format();
   })
@@ -40,9 +41,10 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
       return {
         id: schedule.id,
         day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
-        startTime: moment(schedule.startTime).format('LT'),
-        endTime: moment(schedule.endTime).format('LT'),
-        priceClassification: schedule.priceClassification.name,
+        startTime: moment.utc(schedule.startTime).format('LT'),
+        endTime: moment.utc(schedule.endTime).format('LT'),
+        priceClasifcationId: schedule.priceClasifcationId,
+        // priceClassification: schedule.priceClassification.name,
       };
     });
 
@@ -68,7 +70,7 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
       width: 300,
     },
     {
-      field: 'priceClassification',
+      field: 'priceClasifcationId',
       headerName: 'Price Classification',
       width: 300,
     },
@@ -97,12 +99,15 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
     },
   ];
 
-  console.log(futureSchedule === true ? futureScheduleData : newScheduleData)
-  console.log(newfutureScheduleData)
-  console.log(moment(new Date()).format('D-MM-YYYY'))
+  // console.log(futureSchedule === true ? futureScheduleData : newScheduleData)
+  // console.log(newfutureScheduleData)
+  // console.log(moment(new Date()).format('D-MM-YYYY'))
+
+  console.log(scheduleData)
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
+      <Typography variant="h3">{scheduleData.name}</Typography>
       <DataGrid
         rows={futureSchedule === true ? newfutureScheduleData : newScheduleData}
         columns={columns}

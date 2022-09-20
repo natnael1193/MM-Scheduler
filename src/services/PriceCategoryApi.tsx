@@ -2,11 +2,22 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PriceCategory } from '../interfaces/PriceCategory.interface';
 
 const baseURL = `${process.env.REACT_APP_API_SERVER}`
+const baseToken = `${process.env.REACT_APP_API_TOKEN}`;
 
 export const priceCategoryApi = createApi({
     reducerPath: "priceCategoryApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: `${baseURL}`
+        baseUrl: `${baseURL}`,
+        prepareHeaders: (headers, { getState }) => {
+            const token = baseToken
+      
+            // If we have a token set in state, let's assume that we should be passing it.
+            if (token) {
+              headers.set('authorization', `Bearer ${token}`)
+            }
+      
+            return headers
+          },
     }),
     tagTypes: ["PriceCategory"],
     endpoints: (builder) => ({

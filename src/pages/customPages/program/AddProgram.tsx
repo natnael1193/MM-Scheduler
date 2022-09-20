@@ -12,11 +12,12 @@ const AddProgram = () => {
   //Initial State
   const initalState: any = {
     "description": "",
-    "code": "",
+    // "code": "",
     "isActive": "",
     "stationId": "",
     "programType": "",
-    "name": ""
+    "name": "",
+    "key": ""
   }
 
   //Add New Data

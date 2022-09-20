@@ -40,8 +40,8 @@ const AddPriceConfig = () => {
       key: data.key,
       rate: Number(data.rate),
       unit: Number(data.unit),
-      startDate: data.startDate + '.203Z',
-      endDate:  data.endDate + '.203Z',
+      startDate: data.startDate + ':00.203Z',
+      endDate:  data.endDate + ':00.203Z',
       // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
       // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
     };

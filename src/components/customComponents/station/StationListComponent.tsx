@@ -45,13 +45,13 @@ const StationListComponent = ({ id, name, programs }: any) => {
             <Collapse in={isChecked} sx={{ m: 2 }}>
               <Typography variant="h3">Programs</Typography>
               <Divider />
-              {/* {programs.map((program: any) => (
+              {programs.map((program: any) => (
                 <div key={program.id}>
                   <Typography variant="h4" sx={{ m: 1 }}>
-                    {program.programName}
+                    {program.name}
                   </Typography>
                 </div>
-              ))} */}
+              ))}
             </Collapse>
           </Grid>
         </Card>

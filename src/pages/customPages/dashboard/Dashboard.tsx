@@ -62,7 +62,7 @@ const Dashboard = () => {
     <div>
       <Box sx={{ width: '100%', paddingLeft: 2, paddingRight: 2 }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item lg={4} md={4} sm={6} xs={6} sx={{ mb: 4 }}>
+          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -75,11 +75,11 @@ const Dashboard = () => {
                 </Typography>
               </Item>
               <Item>
-                <Typography variant="h4">{stationData.responseBody.length}</Typography>
+                <Typography variant="h4">{stationData.data.length}</Typography>
               </Item>
             </Card>
           </Grid>
-          <Grid item lg={4} md={4} sm={6} xs={6} sx={{ mb: 4 }}>
+          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -92,11 +92,11 @@ const Dashboard = () => {
                 </Typography>
               </Item>
               <Item>
-                <Typography variant="h4">{programsData.responseBody.length}</Typography>
+                <Typography variant="h4">{programsData.data.length}</Typography>
               </Item>
             </Card>
           </Grid>
-          <Grid item lg={4} md={4} sm={6} xs={6} sx={{ mb: 4 }}>
+          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -114,7 +114,7 @@ const Dashboard = () => {
             </Card>
           </Grid>
           <Divider />
-          <Grid item lg={4} md={4} sm={6} xs={6} sx={{ mb: 4 }}>
+          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">Total Price Classifications</Typography>
@@ -125,11 +125,11 @@ const Dashboard = () => {
                 </Typography>
               </Item>
               <Item>
-                <Typography variant="h4">{priceClassificationsData.responseBody.length}</Typography>
+                <Typography variant="h4">{priceClassificationsData.data.length}</Typography>
               </Item>
             </Card>
           </Grid>
-          <Grid item lg={4} md={4} sm={6} xs={6} sx={{ mb: 4 }}>
+          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -142,7 +142,7 @@ const Dashboard = () => {
                 </Typography>
               </Item>
               <Item>
-                <Typography variant="h4">{ priceCategoriesData.responseBody.length }</Typography>
+                <Typography variant="h4">{ priceCategoriesData.data.length }</Typography>
               </Item>
             </Card>
           </Grid>

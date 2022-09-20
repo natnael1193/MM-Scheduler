@@ -2,17 +2,29 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Station } from '../interfaces/Station.interface';
 
 const baseURL = `${process.env.REACT_APP_API_SERVER}`;
+const baseToken = `${process.env.REACT_APP_API_TOKEN}`;
 
 export const stationApi = createApi({
   reducerPath: 'stationApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${baseURL}`,
+    prepareHeaders: (headers, { getState }) => {
+      const token = baseToken
+
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+
+      return headers
+    },
   }),
+  refetchOnMountOrArgChange: 30,
   tagTypes: ['Station', 'Program'],
   endpoints: (builder) => ({
     stations: builder.query<Station[], void>({
       query: () => `/Station`,
-      providesTags: ['Station'],
+      providesTags: ['Station', "Program"]
     }),
     station: builder.query<Station, string>({
       query: (id) => `/Station/${id}`,

@@ -34,12 +34,12 @@ const ScheduleListByProgram = () => {
   scheduleData = programData;
 
 
-  console.log(scheduleData.responseBody[0] !== undefined ? scheduleData.responseBody[0].program.name : '');
+  console.log(scheduleData.data[0] !== undefined ? scheduleData.data[0].program.name : '');
   return (
     <div>
       <Grid container sx={{ mb: 1 }}>
         <Grid item lg={8} md={8} sm={12} xs={12}>
-          <Typography variant="h3">{scheduleData.responseBody[0] !== undefined ? scheduleData.responseBody[0].program.name : ''}</Typography>
+          <Typography variant="h3">{scheduleData.data[0] !== undefined ? scheduleData.data[0].program.name : ''}</Typography>
         </Grid>
         <Grid item lg={2} md={2} sm={6} xs={6}>
           <Button variant="contained" color="secondary" onClick={futureScheduleHandleChange}>
@@ -55,7 +55,7 @@ const ScheduleListByProgram = () => {
           </Link>
         </Grid>
       </Grid>
-      <ScheduleByProgramComponent scheduleData={scheduleData.responseBody} futureSchedule={futureSchedule} />
+      <ScheduleByProgramComponent scheduleData={scheduleData.data} futureSchedule={futureSchedule} />
     </div>
   );
 };

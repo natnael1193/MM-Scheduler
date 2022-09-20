@@ -4,9 +4,8 @@ import { useForm } from 'react-hook-form';
 
 const OrganizationTypeForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
   const { register, handleSubmit } = useForm({
-    defaultValues
+    defaultValues,
   });
-
 
   return (
     <div>
@@ -18,13 +17,13 @@ const OrganizationTypeForm = ({ formTitle, defaultValues, onFormSubmit }: any) =
                 <Typography variant="h3">{formTitle}</Typography>
               </Grid>
 
-              <Grid item lg={12} md={12} sm={12} sx={{ mb: 2 }}>
+              <Grid item lg={8} md={8} sm={12} sx={{ mb: 2 }}>
                 <TextField fullWidth label="Key" {...register('key')} />
               </Grid>
-              <Grid item lg={12} md={12} sm={12} sx={{ mb: 2 }}>
+              <Grid item lg={8} md={8} sm={12} sx={{ mb: 2 }}>
                 <TextField fullWidth label="Organization Type" {...register('name')} />
               </Grid>
-              <Grid item lg={12} md={12} sm={12}>
+              <Grid item lg={8} md={8} sm={12}>
                 <Button variant="contained" type="submit">
                   Submit
                 </Button>

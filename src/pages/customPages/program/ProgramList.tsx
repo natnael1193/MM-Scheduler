@@ -5,62 +5,68 @@ import ProgramListComponent from '../../../components/customComponents/program/P
 import { Link } from 'react-router-dom';
 import BreadCrumb from '../breadCrumb/BreadCrumb';
 
-
 const ProgramList = () => {
   let programData: any = [];
 
   //Get All Programs
   const { data, error, isLoading, isSuccess, isFetching } = useProgramsQuery();
 
-  if (isLoading || isFetching) return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <CircularProgress />
-    </Grid>
-  )
+  if (isLoading || isFetching)
+    return (
+      <Grid container direction="row" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Grid>
+    );
 
   if (isSuccess) {
     programData = data;
   }
 
-  if (error) return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Typography variant='h3'>Something Went Wrong</Typography>
-    </Grid>
-  )
+  if (error)
+    return (
+      <Grid container direction="row" justifyContent="center" alignItems="center">
+        <Typography variant="h3">Something Went Wrong</Typography>
+      </Grid>
+    );
 
-  console.log(programData)
+  var newProgramData: any = [];
+
+  newProgramData =
+    programData &&
+    programData.data.map(function (program: any) {
+      return {
+        id: program.id,
+        name: program.name,
+        programType: program.programType,
+        isActive: program.isActive,
+        station: program.station.name,
+      };
+    });
 
   return (
     <div>
-    <BreadCrumb
+      <BreadCrumb
         main={'Dashboard'}
         parent={'Program'}
         child={'List'}
         parentLink={'/dashboard/program/list'}
       />
-      <Grid container sx={{ mb: 1 }} direction="row" >
-        <Grid item lg={10} md={8} sm={6} xs={6} >
+      <Grid container sx={{ mb: 1 }} direction="row">
+        <Grid item lg={10} md={8} sm={6} xs={6}>
           <Typography variant="h3">Programs</Typography>
         </Grid>
-        <Grid item lg={2} md={4} sm={6} xs={6} >
-          <Link to='/dashboard/program/add' style={{ textDecoration: 'none' }}> <Button variant='contained'><AddIcon/> Add Program </Button></Link>
+        <Grid item lg={2} md={4} sm={6} xs={6}>
+          <Link to="/dashboard/program/add" style={{ textDecoration: 'none' }}>
+            {' '}
+            <Button variant="contained">
+              <AddIcon /> Add Program{' '}
+            </Button>
+          </Link>
         </Grid>
-        {/* <Grid item lg={6} md={6} sm={6} xs={6}>
-          <Link to='/dashboard/program/add' style={{ textDecoration: 'none' }}><Button variant='contained'>Add New Program</Button></Link>
-        </Grid> */}
       </Grid>
-      <ProgramListComponent programData={programData.responseBody} /></div>
-  )
-}
+      <ProgramListComponent programData={newProgramData} />
+    </div>
+  );
+};
 
-export default ProgramList
+export default ProgramList;

@@ -20,17 +20,17 @@ const ProgramListComponent = ({ programData }: any) => {
     {
       field: 'programType',
       headerName: 'Program Type',
-      width: 250,
+      width: 200,
     },
-    {
-      field: 'code',
-      headerName: 'Program Code',
-      width: 250,
-    },
+    // {
+    //   field: 'code',
+    //   headerName: 'Program Code',
+    //   width: 150,
+    // },
     {
       field: 'isActive',
       headerName: 'Is Active?',
-      width: 250,
+      width: 200,
     },
     {
       field: 'station',
@@ -48,9 +48,14 @@ const ProgramListComponent = ({ programData }: any) => {
             to={`/dashboard/program/detail/${cellValues.id}`}
             style={{ textDecoration: 'none' }}
           >
-            <Button sx={{ mr: 2 }} color="info">
-              <PreviewIcon />
-            </Button>
+            <Link
+              to={`/dashboard/program/detail/${cellValues.id}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <Button sx={{ mr: 2 }} color="info">
+                <PreviewIcon />
+              </Button>
+            </Link>
           </Link>
           <Link to={`/dashboard/program/edit/${cellValues.id}`} style={{ textDecoration: 'none' }}>
             <Button sx={{ mr: 2 }}>

@@ -90,7 +90,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                   defaultValue={defaultValues.priceClassificationId}
                   fullWidth
                 >
-                  {priceClassificationData.responseBody.map((priceClassification: any) => (
+                  {priceClassificationData.data.map((priceClassification: any) => (
                     <MenuItem value={priceClassification.id} key={priceClassification.id}>
                       {priceClassification.name}
                     </MenuItem>

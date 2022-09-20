@@ -54,7 +54,14 @@ const ScheduleForm = () => {
         <Card sx={{ p: 4 }}>
           <Typography variant="h3">Add Schedule</Typography>
           <Grid container spacing={2} sx={{ mt: 3 }}>
-            <Grid item lg={4} md={4} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+              <TextField label="key" {...register('key', { required: true })} fullWidth />
+              <Typography variant="inherit" color="error">
+                {scheduleData.key === '' && 'This is required'}
+              </Typography>
+            </Grid>
+
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Programs</InputLabel>
                 <Select
@@ -66,7 +73,7 @@ const ScheduleForm = () => {
                   defaultValue=""
                   {...register('programId')}
                 >
-                  {programData.responseBody.map((program: any) => (
+                  {programData.data.map((program: any) => (
                     <MenuItem key={program.id} value={program.id.toString()}>
                       {program.name}
                     </MenuItem>
@@ -81,11 +88,11 @@ const ScheduleForm = () => {
                 )}
               </FormControl>
             </Grid>
-            <Grid item lg={4} md={4} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <TextField
                 {...register('startDate')}
                 type={'date'}
-                label="End Time"
+                label="Start Date"
                 InputLabelProps={{ shrink: true }}
                 fullWidth
               />
@@ -97,11 +104,11 @@ const ScheduleForm = () => {
                 ''
               )}
             </Grid>
-            <Grid item lg={4} md={4} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
               <TextField
                 {...register('endDate')}
                 type={'date'}
-                label="End Time"
+                label="End Date"
                 InputLabelProps={{ shrink: true }}
                 fullWidth
               />

@@ -24,11 +24,11 @@ const AddPriceClassification = () => {
   const response: any = result
   useEffect(() => {
     if (response.isSuccess) {
-      toast.success(response.data.status)
+      toast.success(response.data)
       navigate('/dashboard/price-classification/list')
     }
     if (response.isError) {
-      toast.error(response.error.data.error)
+      toast.error(response.error)
     }
   }, [response, navigate]);
 

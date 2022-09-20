@@ -50,14 +50,14 @@ const EditSchedule = () => {
   defaultValues = scheduleData
 
   scheduleDefaultValue = {
-    id: defaultValues.responseBody.id,
-    startTime: moment.utc(defaultValues.responseBody.startTime).format('hh:mm:ss'),
-    endTime: moment.utc(defaultValues.responseBody.endTime).format('hh:mm:ss'),
-    priceClassificationId: defaultValues.responseBody.priceClassification.id
+    id: defaultValues.data.id,
+    startTime: moment.utc(defaultValues.data.startTime).format('hh:mm:ss'),
+    endTime: moment.utc(defaultValues.data.endTime).format('hh:mm:ss'),
+    // priceClassificationId: defaultValues.data.priceClassification.id
   }
 
-  const startDate: any = moment(defaultValues.responseBody.startTime).format('YYYY-MM-DD')
-  const endDate: any = moment(defaultValues.responseBody.endTime).format('YYYY-MM-DD')
+  const startDate: any = moment(defaultValues.data.startTime).format('YYYY-MM-DD')
+  const endDate: any = moment(defaultValues.data.endTime).format('YYYY-MM-DD')
 
   const onSubmit = (data: any) => {
     console.log(data)
@@ -66,7 +66,7 @@ const EditSchedule = () => {
       startTime: startDate.concat(" ", data.startTime),
       endTime: endDate.concat(" ", data.endTime),
       priceClassificationId: data.priceClassificationId,
-      programId: defaultValues.responseBody.program.id
+      programId: defaultValues.data.program.id
     }
     console.log(newData)
     updateSchedule(newData)

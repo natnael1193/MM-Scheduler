@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Grid, Skeleton, Typography, Button, Divider } from '@mui/material';
 import { useStationsQuery } from '../../../services/StationApi';
 import StationListComponent from '../../../components/customComponents/station/StationListComponent';
@@ -10,18 +10,26 @@ import AddIcon from '@mui/icons-material/Add';
 import BreadCrumb from '../breadCrumb/BreadCrumb';
 
 const StationList = () => {
-  let stationData: any = [];
+  // let stationData: any = [];
+  const [stationData, setStationData] = useState([]);
 
   // Get All Stations
-  const { data, error, isLoading, isSuccess } = useStationsQuery();
+  const { data, isFetching, isError, isSuccess, refetch, isLoading, error }: any = useStationsQuery();
+
+  useEffect(() => {
+    refetch();
+    if (isSuccess || isFetching && data) {
+      setStationData(data.data);
+    }
+  }, [isSuccess, isError, data, refetch, isFetching,]);
 
   if (isLoading) return <LoadingComponent />;
 
   if (error) return <ErrorComponent />;
 
-  stationData = data;
+  // setStationData(data.data);
 
-  console.log(stationData.data)
+  // stationData = data;
 
   return (
     <div>
@@ -37,18 +45,26 @@ const StationList = () => {
             <Typography variant="h3">Stations</Typography>
           </Grid>
           <Grid item lg={2} md={2} sm={12} xs={12}>
-            <Link to='/dashboard/schedule/timeline' style={{ textDecoration: 'none' }}><Button variant="contained" color="secondary"><ViewTimelineIcon />Schedule TimeLine</Button></Link>
+            <Link to="/dashboard/schedule/timeline" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" color="secondary">
+                <ViewTimelineIcon />
+                Schedule TimeLine
+              </Button>
+            </Link>
           </Grid>
           <Grid item lg={2} md={2} sm={12} xs={12}>
-            <Link to='/dashboard/station/add' style={{ textDecoration: 'none' }}><Button variant="contained"><AddIcon />Add Station</Button></Link>
+            <Link to="/dashboard/station/add" style={{ textDecoration: 'none' }}>
+              <Button variant="contained">
+                <AddIcon />
+                Add Station
+              </Button>
+            </Link>
           </Grid>
         </Grid>
         <Divider variant="middle" sx={{ color: 'black' }} />
         <Grid container direction="row" sx={{ mt: 3 }}>
-          {isLoading ? <Skeleton variant="rectangular" /> : ''}
-          {isSuccess &&
-            stationData &&
-            stationData.data.map((station: any) => (
+          {isLoading ? <Skeleton variant="rectangular" /> :
+            stationData.map((station: any) => (
               <StationListComponent
                 key={station.id}
                 id={station.id}
@@ -56,6 +72,7 @@ const StationList = () => {
                 programs={station.programs}
               />
             ))}
+
         </Grid>
       </Box>
     </div>

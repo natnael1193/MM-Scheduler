@@ -22,7 +22,7 @@ import React from 'react';
 
 const ScheduleDays = ({ scheduleData }: any) => {
   let priceClassificationData: any = [];
-  var programDataId: string = ''
+  var programDataId: string = '';
 
   const navigate = useNavigate();
 
@@ -51,16 +51,16 @@ const ScheduleDays = ({ scheduleData }: any) => {
   const [addSchedules, result] = useAddScheduleMutation();
 
   programDataId = scheduleData.programId;
-  console.log(programDataId)
+  console.log(programDataId);
   //Check the status
-  const response: any = result
+  const response: any = result;
   React.useEffect(() => {
     if (response.isSuccess) {
-      toast.success(response.data.status)
-      navigate(`/dashboard/program/detail/${programDataId}`)
+      toast.success(response.data.status);
+      navigate(`/dashboard/program/detail/${programDataId}`);
     }
     if (response.isError) {
-      toast.error(response.error.data.error)
+      // toast.error(response.error.data.error)
     }
   }, [response, navigate, programDataId]);
 
@@ -112,12 +112,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
     const newData: any = {
       schedules: newSchedules,
       programId: scheduleData.programId,
-      startDate: scheduleData.startDate,
-      endDate: scheduleData.endDate,
+      key: scheduleData.key,
+      startTime: scheduleData.startDate,
+      endTime: scheduleData.endDate,
     };
-    addSchedules(newData)
+    addSchedules(newData);
   };
-
 
   return (
     <div>
@@ -194,14 +194,14 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 label="Select Price Classification"
                 // displayEmpty
                 {...(state.monday
-                  ? register(`schedules.${0}.priceClassificationId` as const)
+                  ? register(`schedules.${0}.priceClasifcationId` as const)
                   : null)}
                 defaultValue=""
                 required
                 disabled={state.monday ? false : true}
-              // placeholder="Select Price Classification"
+                // placeholder="Select Price Classification"
               >
-                {priceClassificationData.responseBody.map((priceClassification: any) => (
+                {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
                     {priceClassification.name}
                   </MenuItem>
@@ -226,7 +226,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                   keepSubmitCount: false,
                 });
               }}
-            // {...register('monday')}
+              // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -284,14 +284,14 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 displayEmpty
                 // {...register('priceClassification')}
                 {...(state.tuesday
-                  ? register(`schedules.${1}.priceClassificationId` as const)
+                  ? register(`schedules.${1}.priceClasifcationId` as const)
                   : null)}
                 defaultValue=""
                 disabled={state.tuesday ? false : true}
                 required
-              // placeholder="Select Price Classification"
+                // placeholder="Select Price Classification"
               >
-                {priceClassificationData.responseBody.map((priceClassification: any) => (
+                {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
                     {priceClassification.name}
                   </MenuItem>
@@ -316,7 +316,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Wendsday"
-            // {...register('monday')}
+              // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -374,14 +374,14 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 displayEmpty
                 // {...register('priceClassification')}
                 {...(state.wendsday
-                  ? register(`schedules.${2}.priceClassificationId` as const)
+                  ? register(`schedules.${2}.priceClasifcationId` as const)
                   : null)}
                 defaultValue=""
                 disabled={state.wendsday ? false : true}
                 required
-              // placeholder="Select Price Classification"
+                // placeholder="Select Price Classification"
               >
-                {priceClassificationData.responseBody.map((priceClassification: any) => (
+                {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
                     {priceClassification.name}
                   </MenuItem>
@@ -406,7 +406,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Thursday"
-            // {...register('monday')}
+              // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -464,14 +464,14 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 displayEmpty
                 // {...register('priceClassification')}
                 {...(state.thursday
-                  ? register(`schedules.${3}.priceClassificationId` as const)
+                  ? register(`schedules.${3}.priceClasifcationId` as const)
                   : null)}
                 defaultValue=""
                 disabled={state.thursday ? false : true}
                 required
-              // placeholder="Select Price Classification"
+                // placeholder="Select Price Classification"
               >
-                {priceClassificationData.responseBody.map((priceClassification: any) => (
+                {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
                     {priceClassification.name}
                   </MenuItem>
@@ -496,7 +496,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Friday"
-            // {...register('monday')}
+              // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -554,14 +554,14 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 displayEmpty
                 // {...register('priceClassification')}
                 {...(state.friday
-                  ? register(`schedules.${4}.priceClassificationId` as const)
+                  ? register(`schedules.${4}.priceClasifcationId` as const)
                   : null)}
                 defaultValue=""
                 disabled={state.friday ? false : true}
                 required
-              // placeholder="Select Price Classification"
+                // placeholder="Select Price Classification"
               >
-                {priceClassificationData.responseBody.map((priceClassification: any) => (
+                {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
                     {priceClassification.name}
                   </MenuItem>
@@ -586,7 +586,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Saturday"
-            // {...register('monday')}
+              // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -644,14 +644,14 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 displayEmpty
                 // {...register('priceClassification')}
                 {...(state.saturday
-                  ? register(`schedules.${5}.priceClassificationId` as const)
+                  ? register(`schedules.${5}.priceClasifcationId` as const)
                   : null)}
                 defaultValue=""
                 disabled={state.saturday ? false : true}
                 required
-              // placeholder="Select Price Classification"
+                // placeholder="Select Price Classification"
               >
-                {priceClassificationData.responseBody.map((priceClassification: any) => (
+                {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
                     {priceClassification.name}
                   </MenuItem>
@@ -676,7 +676,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 });
               }}
               label="Sunday"
-            // {...register('monday')}
+              // {...register('monday')}
             />
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
@@ -733,13 +733,13 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 label="Select Price Classification"
                 displayEmpty
                 {...(state.sunday
-                  ? register(`schedules.${6}.priceClassificationId` as const)
+                  ? register(`schedules.${6}.priceClasifcationId` as const)
                   : null)}
                 defaultValue=""
                 disabled={state.sunday ? false : true}
                 required
               >
-                {priceClassificationData.responseBody.map((priceClassification: any) => (
+                {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
                     {priceClassification.name}
                   </MenuItem>
@@ -751,7 +751,20 @@ const ScheduleDays = ({ scheduleData }: any) => {
 
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ m: 2 }}>
             <Stack direction="row" spacing={2}>
-              <Button variant="contained" type="submit" disabled={(scheduleData.programId === undefined || scheduleData.programId === '') || (scheduleData.startDate === undefined || scheduleData.startDate === '') || (scheduleData.endDate === undefined || scheduleData.endDate === '') ? true : false}>
+              <Button
+                variant="contained"
+                type="submit"
+                disabled={
+                  scheduleData.programId === undefined ||
+                  scheduleData.programId === '' ||
+                  scheduleData.startDate === undefined ||
+                  scheduleData.startDate === '' ||
+                  scheduleData.endDate === undefined ||
+                  scheduleData.endDate === ''
+                    ? true
+                    : false
+                }
+              >
                 Submit
               </Button>
             </Stack>

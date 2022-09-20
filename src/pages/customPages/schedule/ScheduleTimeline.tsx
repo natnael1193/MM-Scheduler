@@ -76,8 +76,8 @@ const ScheduleTimeline = () => {
       </Grid>
       <Divider variant="middle" sx={{ color: 'black' }} />
       <TimelineComponent
-        scheduleData={scheduleData.responseBody}
-        programData={programsData.responseBody}
+        scheduleData={scheduleData.data}
+        programData={programsData.data}
       />
     </div>
   );

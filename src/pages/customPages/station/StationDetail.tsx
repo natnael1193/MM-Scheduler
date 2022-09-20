@@ -32,16 +32,16 @@ const StationDetail = () => {
       />
       <Grid container>
         <Grid item lg={12} md={12} sm={12} xs={12}>
-          <Typography variant="h3">{isLoading ? <Skeleton width="50%" /> : stationData && stationData.responseBody.name}</Typography>
+          <Typography variant="h3">{isLoading ? <Skeleton width="50%" /> : stationData && stationData.data.name}</Typography>
         </Grid>
         <Grid item lg={12} md={12} sm={12} xs={12} sx={{ ml: 4 }}>
-          <Typography variant="inherit"> {isLoading ? (<><Skeleton /> <Skeleton /> <Skeleton /> </>) : stationData && stationData.responseBody.description} </Typography>
+          <Typography variant="inherit"> {isLoading ? (<><Skeleton /> <Skeleton /> <Skeleton /> </>) : stationData && stationData.data.description} </Typography>
         </Grid>
       </Grid>
       <Grid container sx={{ mt: 5 }}>
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Typography variant="h4">Programs</Typography>
-          <ProgramByStationComponent programData={programData.responseBody} />
+          <ProgramByStationComponent programData={programData.data} />
         </Grid>
       </Grid>
     </Box>

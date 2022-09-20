@@ -44,17 +44,17 @@ const EditProgram = () => {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    const newData: any = {
-      id: data.id,
-      code: data.code,
-      description: data.description,
-      isActive: data.isActive === true ? 1 : data.isActive === false ? 0 : '',
-      name: data.name,
-      programType: data.programType,
-      stationId: data.stationId,
-    };
-    console.log(newData);
-    updateProgram(newData);
+    // const newData: any = {
+    //   id: data.id,
+    //   code: data.code,
+    //   description: data.description,
+    //   isActive: data.isActive === true ? 1 : data.isActive === false ? 0 : '',
+    //   name: data.name,
+    //   programType: data.programType,
+    //   stationId: data.stationId,
+    // };
+    // console.log(data);
+    updateProgram(data);
   };
 
   return (
@@ -66,7 +66,7 @@ const EditProgram = () => {
         parentLink={'/dashboard/program/list'}
       />
       <ProgramForm
-        defaultValues={defaultValues.responseBody}
+        defaultValues={defaultValues.data}
         onFormSubmit={onSubmit}
         formTitle={'Add Program'}
       />
