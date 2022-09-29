@@ -20,7 +20,7 @@ const ProgramListComponent = ({ programData }: any) => {
     {
       field: 'programType',
       headerName: 'Program Type',
-      width: 200,
+      width: 250,
     },
     // {
     //   field: 'code',
@@ -30,13 +30,13 @@ const ProgramListComponent = ({ programData }: any) => {
     {
       field: 'isActive',
       headerName: 'Is Active?',
-      width: 200,
-    },
-    {
-      field: 'station',
-      headerName: 'Station',
       width: 250,
     },
+    // {
+    //   field: 'station',
+    //   headerName: 'Station',
+    //   width: 250,
+    // },
     {
       field: '',
       // headerName: '',

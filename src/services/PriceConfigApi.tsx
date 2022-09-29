@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { PriceConfig } from '../interfaces/PriceConfig.interface';
 
 const baseURL = `${process.env.REACT_APP_API_SERVER}`
-const baseToken = `${process.env.REACT_APP_API_TOKEN}`;
+const token: any = localStorage.getItem('login_token')
+const baseToken = JSON.parse(token)
 
 export const priceConfigApi = createApi({
     reducerPath: "priceConfigApi",

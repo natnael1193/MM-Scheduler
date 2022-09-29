@@ -1,3 +1,4 @@
+import { loginApi } from '../services/LoginApi';
 import { stationApi } from '../services/StationApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { priceCategoryApi } from '../services/PriceCategoryApi';
@@ -11,6 +12,7 @@ import { priceConfigApi } from '../services/PriceConfigApi';
 
 export const store = configureStore({
   reducer: {
+    [loginApi.reducerPath]: loginApi.reducer,
     [stationApi.reducerPath]: stationApi.reducer,
     [priceCategoryApi.reducerPath]: priceCategoryApi.reducer,
     [priceConfigApi.reducerPath]: priceConfigApi.reducer,
@@ -22,6 +24,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
+      loginApi.middleware,
       stationApi.middleware,
       priceCategoryApi.middleware,
       priceConfigApi.middleware,

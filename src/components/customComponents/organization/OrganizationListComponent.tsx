@@ -7,9 +7,8 @@ import { Link } from 'react-router-dom';
 import { useDeleteOrganizationMutation } from 'src/services/OrganizationApi';
 
 const OrganizationListComponent = ({ organizationData }: any) => {
-
-    //Delete Organization T
-    const [deleteOrganization] = useDeleteOrganizationMutation();
+  //Delete Organization T
+  const [deleteOrganization] = useDeleteOrganizationMutation();
 
   //Data Grid Header
   const columns: GridColumns = [
@@ -19,7 +18,7 @@ const OrganizationListComponent = ({ organizationData }: any) => {
       width: 250,
     },
     {
-      field: 'organizationTypeID',
+      field: 'organizationType',
       headerName: 'Organization Type',
       width: 250,
     },
@@ -44,25 +43,37 @@ const OrganizationListComponent = ({ organizationData }: any) => {
               <PreviewIcon />
             </Button>
           </Link>
-          <Link to={`/dashboard/organization/edit/${cellValues.id}`} style={{ textDecoration: 'none' }}>
+          <Link
+            to={`/dashboard/organization/edit/${cellValues.id}`}
+            style={{ textDecoration: 'none' }}
+          >
             <Button sx={{ mr: 2 }}>
               <EditIcon />
             </Button>
           </Link>
-          <Button
-            color="error"
-              onClick={() => deleteOrganization(cellValues.id)}
-          >
+          <Button color="error" onClick={() => deleteOrganization(cellValues.id)}>
             <DeleteIcon />
           </Button>
         </>
       ),
     },
   ];
+
+  var newOrganizationData = [];
+
+  newOrganizationData = organizationData.map(function (organization: any) {
+    return {
+      id: organization.id,
+      name: organization.name,
+      organizationType: organization.organizationType.name,
+      description: organization.description,
+    };
+  });
+
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <DataGrid
-        rows={organizationData}
+        rows={newOrganizationData}
         // rows={[]}
         columns={columns}
         components={{

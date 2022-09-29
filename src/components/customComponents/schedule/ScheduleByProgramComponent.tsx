@@ -23,8 +23,8 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
-        // priceClassification: schedule.priceClassification.name,
-        priceClasifcationId: schedule.priceClasifcationId,
+        priceClassification: schedule.priceClasifcation.name,
+        // priceClasifcationId: schedule.priceClasifcationId,
       };
     });
 
@@ -43,8 +43,8 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
-        priceClasifcationId: schedule.priceClasifcationId,
-        // priceClassification: schedule.priceClassification.name,
+        // priceClasifcationId: schedule.priceClasifcationId,
+        priceClassification: schedule.priceClasifcation.name,
       };
     });
 
@@ -62,15 +62,15 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
     {
       field: 'startTime',
       headerName: 'Start Time',
-      width: 300,
+      width: 200,
     },
     {
       field: 'endTime',
       headerName: 'End Time',
-      width: 300,
+      width: 200,
     },
     {
-      field: 'priceClasifcationId',
+      field: 'priceClassification',
       headerName: 'Price Classification',
       width: 300,
     },

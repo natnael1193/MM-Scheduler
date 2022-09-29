@@ -1,12 +1,11 @@
-import { Button } from '@mui/material'
+import { Button } from '@mui/material';
 import { DataGrid, GridColumns, GridToolbar } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDeletePriceClassificationMutation } from 'src/services/PriceClassificationApi';
 
-const PriceClassificationListComponent = ( { priceClassificationData }: any ) => {
-
+const PriceClassificationListComponent = ({ priceClassificationData }: any) => {
   //Delete Price Classification
   const [deletePriceClassification] = useDeletePriceClassificationMutation();
 
@@ -18,12 +17,12 @@ const PriceClassificationListComponent = ( { priceClassificationData }: any ) =>
       width: 300,
     },
     {
-      field: 'priceCategoryId',
+      field: 'priceCategory',
       headerName: 'Price Category',
       width: 300,
     },
-      {
-      field: 'priceConfigId',
+    {
+      field: 'priceConfig',
       headerName: 'Price Config',
       width: 300,
     },
@@ -34,7 +33,10 @@ const PriceClassificationListComponent = ( { priceClassificationData }: any ) =>
       width: 250,
       renderCell: (cellValues: any) => (
         <>
-          <Link to={`/dashboard/price-classification/edit/${cellValues.id}`} style={{ textDecoration: 'none' }}>
+          <Link
+            to={`/dashboard/price-classification/edit/${cellValues.id}`}
+            style={{ textDecoration: 'none' }}
+          >
             <Button sx={{ mr: 2 }}>
               <EditIcon />
             </Button>
@@ -43,29 +45,29 @@ const PriceClassificationListComponent = ( { priceClassificationData }: any ) =>
             <DeleteIcon />
           </Button>
         </>
-      )
+      ),
     },
   ];
 
+  var newPriceClassificationData: any = [];
 
-  // var newPriceClassificationData: any = [];
+  newPriceClassificationData =
+    priceClassificationData &&
+    priceClassificationData.map(function (item: any) {
+      return {
+        id: item.id,
+        name: item.name,
+        priceCategory: item.priceCategory.name,
+        priceConfig: item.priceConfig.name,
+      };
+    });
 
-  // newPriceClassificationData =
-  //   priceClassificationData &&
-  //   priceClassificationData.map(function (item: any) {
-  //     return {
-  //       id: item.id,
-  //       name: item.name,
-  //       priceCategory: item.priceCategoryId,
-  //       priceConfig: item.priceConfigId,
-  //     };
-  //   });
-
+console.log(newPriceClassificationData)
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <DataGrid
-        rows={priceClassificationData}
+        rows={newPriceClassificationData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,
@@ -79,7 +81,7 @@ const PriceClassificationListComponent = ( { priceClassificationData }: any ) =>
         style={{ height: '80vh' }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default PriceClassificationListComponent
+export default PriceClassificationListComponent;

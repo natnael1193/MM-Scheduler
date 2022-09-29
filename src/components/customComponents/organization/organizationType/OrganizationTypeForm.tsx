@@ -3,7 +3,11 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const OrganizationTypeForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues,
   });
 
@@ -17,11 +21,21 @@ const OrganizationTypeForm = ({ formTitle, defaultValues, onFormSubmit }: any) =
                 <Typography variant="h3">{formTitle}</Typography>
               </Grid>
 
-              <Grid item lg={8} md={8} sm={12} sx={{ mb: 2 }}>
-                <TextField fullWidth label="Key" {...register('key')} />
+              <Grid item lg={6} md={6} sm={12} sx={{ mb: 2 }}>
+                <TextField fullWidth label="Key" {...register('key', { required: true })} />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
               </Grid>
-              <Grid item lg={8} md={8} sm={12} sx={{ mb: 2 }}>
-                <TextField fullWidth label="Organization Type" {...register('name')} />
+              <Grid item lg={6} md={6} sm={12} sx={{ mb: 2 }}>
+                <TextField
+                  fullWidth
+                  label="Organization Type"
+                  {...register('name', { required: true })}
+                />
+                <Typography variant="inherit" color="error">
+                  {errors.name && 'This is required'}
+                </Typography>
               </Grid>
               <Grid item lg={8} md={8} sm={12}>
                 <Button variant="contained" type="submit">

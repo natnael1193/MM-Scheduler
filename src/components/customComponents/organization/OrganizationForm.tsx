@@ -18,7 +18,11 @@ import { useOrganizationTypesQuery } from 'src/services/OrganizationTypeApi';
 const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
   let organizationTypeData: any = [];
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues,
   });
 
@@ -58,10 +62,21 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                 </Typography>
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
-                <TextField fullWidth label="Organization Name" {...register('name')} />
+                <TextField
+                  fullWidth
+                  label="Organization Name"
+                  {...register('name', { required: true })}
+                />
+                <Typography variant="inherit" color="error">
+                  {errors.name && 'This is required'}
+                </Typography>
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
-                <TextField fullWidth label="Key" {...register('key')} />
+                <TextField fullWidth label="Key" {...register('key', { required: true })}
+                />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 {/* <TextField fullWidth label="Organization Type" {...register('organizationTypeId')} /> */}
@@ -83,6 +98,9 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                       </MenuItem>
                     ))}
                   </Select>
+                  <Typography variant="inherit" color="error">
+                  {errors.organizationTypeId && 'This is required'}
+                </Typography>
                   {/* <Typography variant='inherit' color="error">{errors.organizationTypeId && "This is required"}</Typography> */}
                 </FormControl>
               </Grid>
@@ -91,10 +109,13 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                 <TextField
                   fullWidth
                   label="Organization Description"
-                  {...register('description')}
+                  {...register('description', { required: true })}
                   multiline={true}
                   rows={5}
                 />
+                 <Typography variant="inherit" color="error">
+                  {errors.description && 'This is required'}
+                </Typography>
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <Button type="submit" variant="contained">

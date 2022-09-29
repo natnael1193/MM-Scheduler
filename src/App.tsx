@@ -18,17 +18,37 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorFallBack from './components/customComponents/error/ErrorFallBack';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoginRouter from './routes/LoginRouter';
 // ----------------------------------------------------------------------
 
 function ErrorFallback({ error, resetErrorBoundary }: any) {
   return (
-<>
-<ErrorFallBack error={error} resetErrorBoundary={resetErrorBoundary}/>
-</>
+    <>
+      <ErrorFallBack error={error} resetErrorBoundary={resetErrorBoundary} />
+    </>
   );
 }
 
+const token = localStorage.getItem('login_token');
+
+console.log(token);
+
 export default function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token === null) {
+      navigate('/login');
+    }
+    setTimeout(() => {
+      localStorage.clear();
+      navigate('/signin');
+      window.location.reload();
+    }, 360000);
+  }, [navigate]);
+
   return (
     <Provider store={store}>
       <ErrorBoundary
@@ -45,7 +65,7 @@ export default function App() {
                 <Settings />
                 <ScrollToTop />
                 <ToastContainer />
-                <Router />
+                {token !== null ? <Router /> : <LoginRouter />}
               </MotionLazyContainer>
             </RtlLayout>
           </ThemeColorPresets>

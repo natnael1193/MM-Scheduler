@@ -39,7 +39,7 @@ const ProgramList = () => {
         name: program.name,
         programType: program.programType,
         isActive: program.isActive,
-        station: program.station.name,
+        // station: program.station.name,
       };
     });
 

@@ -44,6 +44,7 @@ const ScheduleTimeline = () => {
     );
 
   console.log(programData);
+  console.log(scheduleData)
 
   return (
     <div>
