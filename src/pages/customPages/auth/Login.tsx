@@ -34,25 +34,26 @@ console.log('result', result)
 
   return (
     <div
-      style={{
-        backgroundColor: 'white',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Card>
+    style={{
+      backgroundColor: 'white',
+      minHeight: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
+    <Grid container direction="row" justifyContent="center" alignItems="center" lg={6} sm={12}>
+      <Card sx={{ width: '100%' }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container direction="column" sx={{ width: '100%', p: 5 }} spacing={3}>
             <Grid item>
-              <Typography>Login</Typography>
+              <Typography variant="h4">Login</Typography>
             </Grid>
             <Grid item>
-              <TextField label="Email" {...register('email')} />
+              <TextField label="Email" {...register('email')} fullWidth />
             </Grid>
             <Grid item>
-              <TextField label="Password" {...register('password')} />
+              <TextField label="Password" {...register('password')} fullWidth />
             </Grid>
             <Grid item>
               <Button type="submit">Submit</Button>
@@ -60,7 +61,8 @@ console.log('result', result)
           </Grid>
         </form>
       </Card>
-    </div>
+    </Grid>
+  </div>
   );
 };
 
