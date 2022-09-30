@@ -31,7 +31,7 @@ export const scheduleApi = createApi({
       providesTags: ['Schedule', 'Program'],
     }),
     scheduleByProgam: builder.query<Schedule, string>({
-      query: (id) => `/Program/${id}`,
+      query: (id) => `/Program/${id}/Schedules`,
       providesTags: ['Schedule', 'Program'],
     }),
     addSchedule: builder.mutation<void, Schedule>({

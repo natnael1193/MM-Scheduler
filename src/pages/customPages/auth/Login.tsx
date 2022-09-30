@@ -35,7 +35,7 @@ console.log('result', result)
   return (
     <div
     style={{
-      backgroundColor: 'white',
+      backgroundColor: '#ffeee0',
       minHeight: '100vh',
       display: 'flex',
       justifyContent: 'center',
@@ -56,7 +56,7 @@ console.log('result', result)
               <TextField label="Password" {...register('password')} fullWidth />
             </Grid>
             <Grid item>
-              <Button type="submit">Submit</Button>
+              <Button type="submit" variant='contained'>Submit</Button>
             </Grid>
           </Grid>
         </form>
