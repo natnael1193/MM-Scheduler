@@ -48,19 +48,20 @@ const TimelineComponent = ({ scheduleData, programData }: any) => {
     programData.map(function (program: any) {
       return {
         id: program.id,
-        programName: program.key,
+        programName: program.name,
         Id: program.id,
         IsReadonly: true,
       };
     });
 
-    console.log(newScheduleData)
+    console.log(newProgramData)
 
   return (
     <div>
       <ScheduleComponent
         cssClass="timeline-resource-grouping"
         height="700px"
+        width="100%"
         selectedDate={new Date()}
         eventSettings={{ dataSource: newScheduleData }}
         firstDayOfWeek={4}
@@ -89,7 +90,7 @@ const TimelineComponent = ({ scheduleData, programData }: any) => {
           <ViewDirective option="TimelineDay" />
           <ViewDirective option="TimelineWeek" />
           {/* <ViewDirective option='TimelineWorkWeek'/> */}
-          <ViewDirective option="Month" />
+          <ViewDirective option="Month"  allowVirtualScrolling={true} showWeekNumber={true} readonly={true}/>
           <ViewDirective option="TimelineMonth" />
           <ViewDirective option="Agenda" />
           {/* <ViewDirective option='Print' /> */}

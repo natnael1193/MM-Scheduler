@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography, InputAdornment, Box, Card, Button } from '@mui/material';
+import { Grid, TextField, Typography, InputAdornment, Card, Button } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -13,7 +13,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
 
   return (
     <div>
-      <Box>
+      <Grid>
         <Card sx={{ p: 2 }}>
           <Typography sx={{ p: 2 }} variant="h3">
             {formTitle}
@@ -102,7 +102,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
             </Grid>
           </form>
         </Card>
-      </Box>
+      </Grid>
     </div>
   );
 };

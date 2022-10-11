@@ -15,22 +15,22 @@ const ProgramByStationComponent = ({ programData }: any) => {
         {
             field: 'name',
             headerName: 'Name',
-            width: 300,
+            width: 200,
         },
         {
             field: 'programType',
             headerName: 'Program Type',
-            width: 300,
+            width: 200,
         },
         {
             field: 'code',
             headerName: 'Program Code',
-            width: 300,
+            width: 200,
         },
         {
             field: 'isActive',
             headerName: 'Is Active?',
-            width: 300,
+            width: 200,
         },
         {
             field: '',

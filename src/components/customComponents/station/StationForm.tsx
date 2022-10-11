@@ -1,5 +1,4 @@
 import {
-  Container,
   Card,
   TextField,
   Typography,
@@ -47,10 +46,10 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
 
   return (
     <div>
-      <Container>
+      <Grid>
         <Card sx={{ p: 3 }}>
           <form onSubmit={handleSubmit(onFormSubmit)}>
-            <Typography variant="h4" sx={{ mb: 5 }}>
+            <Typography variant="h3" sx={{ mb: 5 }}>
               {formTitle}
             </Typography>
             <Grid container spacing={2}>
@@ -121,7 +120,7 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
             </Button>
           </form>
         </Card>
-      </Container>
+      </Grid>
     </div>
   );
 };

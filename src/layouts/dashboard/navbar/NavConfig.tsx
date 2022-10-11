@@ -92,7 +92,7 @@ const navConfig = [
         path: '/dashboard/schedule',
         icon: <ScheduleIcon/>,
         children: [
-          { title: 'schedules List', path: '/dashboard/schedule/list' },
+          // { title: 'schedules List', path: '/dashboard/schedule/list' },
           { title: 'Schedule Timeline', path: '/dashboard/schedule/timeline' },
           { title: 'Add schedule', path: '/dashboard/schedule/add' },
         ],

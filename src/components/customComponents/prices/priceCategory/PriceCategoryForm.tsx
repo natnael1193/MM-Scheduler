@@ -1,4 +1,4 @@
-import { Button, Card, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, Card, Grid, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -15,10 +15,10 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
 
   return (
     <div>
-      <Container>
+      <Grid>
         <Card>
           <form onSubmit={handleSubmit(onFormSubmit)}>
-            <Typography variant="h4" sx={{ m: 3 }}>
+            <Typography variant="h3" sx={{ m: 3 }}>
               {formTitle}
             </Typography>
             <Grid container sx={{ m: 1, p: 5, pt: 0 }} spacing={2}>
@@ -46,7 +46,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
             </Grid>
           </form>
         </Card>
-      </Container>
+      </Grid>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CircularProgress,
@@ -51,7 +50,7 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
 
   return (
     <div>
-      <Box>
+      <Grid>
         <Card>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container spacing={3} sx={{ p: 3 }}>
@@ -125,7 +124,7 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
             </Grid>
           </form>
         </Card>
-      </Box>
+      </Grid>
     </div>
   );
 };

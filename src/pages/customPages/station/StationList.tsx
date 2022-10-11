@@ -17,7 +17,7 @@ const StationList = () => {
   const { data, isFetching, isError, isSuccess, refetch, isLoading, error }: any = useStationsQuery();
 
   useEffect(() => {
-    refetch();
+    // refetch();
     if (isSuccess || isFetching && data) {
       setStationData(data.data);
     }

@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CircularProgress,
@@ -63,7 +62,7 @@ const PriceClassificationForm = ({ defaultValues, onFormSubmit, formTitle }: any
 
   return (
     <div>
-      <Box>
+      <Grid>
         <Card sx={{ p: 2 }}>
           <Typography sx={{ p: 2 }} variant="h3">
             {formTitle}
@@ -184,7 +183,7 @@ const PriceClassificationForm = ({ defaultValues, onFormSubmit, formTitle }: any
             </Grid>
           </form>
         </Card>
-      </Box>
+      </Grid>
     </div>
   );
 };

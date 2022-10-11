@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   CircularProgress,
@@ -50,7 +49,7 @@ const ProgramForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
 
   return (
     <div>
-      <Box sx={{ m: 2 }}>
+      <Grid sx={{ m: 2 }}>
         <Card sx={{ p: 4 }}>
           <Typography variant="h3" sx={{ mb: 2 }}>
             {formTitle}
@@ -180,7 +179,7 @@ const ProgramForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
             </Grid>
           </form>
         </Card>
-      </Box>
+      </Grid>
     </div>
   );
 };
