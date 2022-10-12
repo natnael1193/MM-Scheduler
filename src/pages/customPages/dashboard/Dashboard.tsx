@@ -2,7 +2,7 @@ import { Grid, Box, Paper, Card, Typography, Divider } from '@mui/material';
 // import MovingIcon from '@mui/icons-material/Moving';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import NextPlanIcon from '@mui/icons-material/NextPlan';
-import SourceIcon from '@mui/icons-material/Source';
+// import SourceIcon from '@mui/icons-material/Source';
 import DetailsIcon from '@mui/icons-material/Details';
 import { styled } from '@mui/material/styles';
 import ErrorComponent from 'src/components/customComponents/shared/ErrorComponent';
@@ -31,6 +31,9 @@ const Dashboard = () => {
   let programsData: any = [];
   let priceClassificationsData: any = [];
   let priceCategoriesData: any = [];
+  let stationChartData: any = [];
+  let programsChartData: any = [];
+  let programChartData: any = [];
 
   // Get All Stations
   const { data, error, isLoading } = useStationsQuery();
@@ -55,11 +58,25 @@ const Dashboard = () => {
     return <ErrorComponent />;
 
   stationData = data;
+  // Get station data
+  stationChartData = stationData.data.map(function (stations: any) {
+    return stations.name;
+  });
+  // Get programs data length from it's station data
+  programsChartData = stationData.data.map(function (programs: any) {
+    return programs.programs.length;
+  });
+
   programsData = programData;
+  // Get program data for the chart
+  programChartData = programsData.data.map(function (program: any) {
+    return program.name;
+  });
+
   priceClassificationsData = priceClassificationData;
   priceCategoriesData = priceCategoryData;
 
-  console.log(programsData)
+  console.log(programChartData);
 
   return (
     <div>
@@ -151,9 +168,24 @@ const Dashboard = () => {
         </Grid>
 
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ mt: 5 }}>
+          {/* Chart for stations and programs */}
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mb: 4 }}>
-            <BarChart chartData={stationData.data} title={"Station With Programs"}/>
+            <BarChart
+              xData={stationChartData}
+              yData={programsChartData}
+              title={'Stations With Programs'}
+            />
           </Grid>
+
+        {/* Chart for programs and schedules */}
+          <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mb: 4 }}>
+            <BarChart
+              xData={programChartData}
+              yData={programsChartData}
+              title={'Programs With Schedules'}
+            />
+          </Grid>
+
         </Grid>
       </Box>
     </div>

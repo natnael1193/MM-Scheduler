@@ -15,19 +15,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 
 
-const BarChart = ({ chartData, title }: any) => {
-  // Get stations data from chart data
-  let stationData: any = [];
-  stationData = chartData.map(function (stations: any) {
-    return stations.name;
-  });
-
-  // Get programs data from chart data
-  let programsData: any = [];
-  programsData = chartData.map(function (programs: any) {
-    return programs.programs.length;
-  });
-  const labels = stationData;
+const BarChart = ({ xData, yData, title }: any) => {
+ 
+  const labels = xData;
 
   const options = {
     responsive: true,
@@ -47,7 +37,7 @@ const BarChart = ({ chartData, title }: any) => {
     datasets: [
       {
         label: 'Programs',
-        data: programsData,
+        data: yData,
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
       // {
