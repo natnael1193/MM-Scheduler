@@ -11,6 +11,7 @@ import { useStationsQuery } from 'src/services/StationApi';
 import { useProgramsQuery } from 'src/services/ProgramApi';
 import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
+import BarChart from './BarChart';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -58,11 +59,13 @@ const Dashboard = () => {
   priceClassificationsData = priceClassificationData;
   priceCategoriesData = priceCategoryData;
 
+  console.log(programsData)
+
   return (
     <div>
       <Box sx={{ width: '100%', paddingLeft: 2, paddingRight: 2 }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -79,7 +82,7 @@ const Dashboard = () => {
               </Item>
             </Card>
           </Grid>
-          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -96,7 +99,7 @@ const Dashboard = () => {
               </Item>
             </Card>
           </Grid>
-          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
+          {/* <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -105,16 +108,15 @@ const Dashboard = () => {
               </Item>
               <Item>
                 <Typography variant="inherit">
-                  {/* +2.6% <MovingIcon color="success" />{' '} */}
                 </Typography>
               </Item>
               <Item>
                 <Typography variant="h4">664</Typography>
               </Item>
             </Card>
-          </Grid>
+          </Grid> */}
           <Divider />
-          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">Total Price Classifications</Typography>
@@ -129,7 +131,7 @@ const Dashboard = () => {
               </Item>
             </Card>
           </Grid>
-          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mb: 4 }}>
+          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
                 <Typography variant="h6">
@@ -142,9 +144,15 @@ const Dashboard = () => {
                 </Typography>
               </Item>
               <Item>
-                <Typography variant="h4">{ priceCategoriesData.data.length }</Typography>
+                <Typography variant="h4">{priceCategoriesData.data.length}</Typography>
               </Item>
             </Card>
+          </Grid>
+        </Grid>
+
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{ mt: 5 }}>
+          <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mb: 4 }}>
+            <BarChart chartData={stationData.data} title={"Station With Programs"}/>
           </Grid>
         </Grid>
       </Box>

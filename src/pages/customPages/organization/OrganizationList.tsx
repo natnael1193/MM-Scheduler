@@ -21,8 +21,6 @@ const OrganizationList = () => {
     organizationData = data.data;
   }
 
-  console.log(organizationData);
-
   return (
     <div>
       <BreadCrumb
