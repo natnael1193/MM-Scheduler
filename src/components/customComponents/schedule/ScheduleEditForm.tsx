@@ -60,7 +60,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                 <TextField
                   {...register('startTime')}
                   label="Start Time"
-                  type="time"
+                  type="datetime-local"
                   InputLabelProps={{ shrink: true }}
                   inputProps={{ step: 1 }}
                   fullWidth
@@ -70,7 +70,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                 <TextField
                   {...register('endTime')}
                   label="End Time"
-                  type="time"
+                  type="datetime-local"
                   InputLabelProps={{ shrink: true }}
                   inputProps={{ step: 1 }}
                   fullWidth

@@ -45,8 +45,10 @@ const EditSchedule = () => {
 
   scheduleDefaultValue = {
     id: defaultValues.data.id,
-    startTime: moment.utc(defaultValues.data.startTime).format('hh:mm:ss'),
-    endTime: moment.utc(defaultValues.data.endTime).format('hh:mm:ss'),
+    // startTime: moment.utc(defaultValues.data.startTime).format('hh:mm:ss'),
+    startTime: moment.utc(defaultValues.data.startTime).format('YYYY-MM-DD hh:mm:ss'),
+    endTime: moment.utc(defaultValues.data.endTime).format('YYYY-MM-DD hh:mm:ss'),
+    // endTime: defaultValues.data.endTime,
     key: defaultValues.data.key,
     priceClassificationId: defaultValues.data.priceClasifcation.id,
   };
@@ -58,17 +60,29 @@ const EditSchedule = () => {
     console.log(data);
     const newData: any = {
       id: data.id,
-      startTime: startDate.concat(' ', data.startTime),
-      endTime: endDate.concat(' ', data.endTime),
+      // startTime: startDate.concat(' ', data.startTime),
+      // endTime: endDate.concat(' ', data.endTime),
+      startTime: data.startTime,
+      endTime: data.endTime,
       priceClasifcationId: data.priceClassificationId,
       programId: defaultValues.data.program.id,
       key: data.key,
     };
-    console.log(newData);
-    updateSchedule(newData);
-  };
 
-  console.log(defaultValues);
+    if (newData.startTime > newData.endTime) {
+      return toast.error('Start Date should be less than End Date');
+    }
+
+    if (
+      moment(newData.startTime).format('YYYY-MM-DD') !==
+      moment(newData.endTime).format('YYYY-MM-DD')
+    ) {
+      return toast.error("Dates can't be different");
+    }
+
+    updateSchedule(newData);
+    return toast.success("Schedule Updated");
+  };
 
   return (
     <div>
