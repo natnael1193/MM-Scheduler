@@ -34,6 +34,7 @@ const Dashboard = () => {
   let stationChartData: any = [];
   let programsChartData: any = [];
   let programChartData: any = [];
+  let scheduleChartData: any = [];
 
   // Get All Stations
   const { data, error, isLoading } = useStationsQuery();
@@ -69,14 +70,19 @@ const Dashboard = () => {
 
   programsData = programData;
   // Get program data for the chart
-  programChartData = programsData.data.map(function (program: any) {
-    return program.name;
+  programChartData = programsData.data.map(function (programs: any) {
+    return programs.name;
   });
+
+    // Get program schedules for the chart
+    scheduleChartData = programsData.data.map(function (schedules: any) {
+      return schedules.schedules.length;
+    });
 
   priceClassificationsData = priceClassificationData;
   priceCategoriesData = priceCategoryData;
 
-  console.log(programChartData);
+  console.log(scheduleChartData);
 
   return (
     <div>
@@ -181,7 +187,7 @@ const Dashboard = () => {
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mb: 4 }}>
             <BarChart
               xData={programChartData}
-              yData={programsChartData}
+              yData={scheduleChartData}
               title={'Programs With Schedules'}
             />
           </Grid>

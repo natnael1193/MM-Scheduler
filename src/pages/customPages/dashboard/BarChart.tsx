@@ -13,10 +13,7 @@ import { Typography } from '@mui/material';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-
-
 const BarChart = ({ xData, yData, title }: any) => {
- 
   const labels = xData;
 
   const options = {
@@ -38,7 +35,12 @@ const BarChart = ({ xData, yData, title }: any) => {
       {
         label: 'Programs',
         data: yData,
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        backgroundColor:
+          '#' +
+          Math.floor(Math.random() * 16777215)
+            .toString(16)
+            .padStart(6, '0')
+            .toUpperCase(),
       },
       // {
       //   label: 'Schedules',
@@ -50,7 +52,7 @@ const BarChart = ({ xData, yData, title }: any) => {
 
   return (
     <div>
-      <Typography variant='h3'>{title}</Typography>
+      <Typography variant="h3">{title}</Typography>
       <Bar options={options} data={data} />
     </div>
   );
