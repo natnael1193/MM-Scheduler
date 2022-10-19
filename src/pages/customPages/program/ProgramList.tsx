@@ -1,18 +1,30 @@
 import { Button, CircularProgress, Grid, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { useProgramsQuery } from 'src/services/ProgramApi';
+import { useProgramByDateQuery, useProgramsQuery } from 'src/services/ProgramApi';
 import ProgramListComponent from '../../../components/customComponents/program/ProgramListComponent';
 import { Link } from 'react-router-dom';
 import BreadCrumb from '../breadCrumb/BreadCrumb';
 import ProgramsByDates from 'src/components/customComponents/program/ProgramsByDates';
+import React from 'react';
 
 const ProgramList = () => {
+  const [activeDate, setActiveDate] = React.useState('Monday');
   let programData: any = [];
+  let programDataByDate: any = [];
 
   //Get All Programs
   const { data, error, isLoading, isSuccess, isFetching } = useProgramsQuery();
 
-  if (isLoading || isFetching)
+  //Get Program By Dates
+  const {
+    data: programByDate,
+    error: programByDateError,
+    isSuccess: programByDateSuccess,
+    isLoading: programByDateLoading,
+    isFetching: programByDateFetching,
+  } = useProgramByDateQuery(activeDate);
+
+  if (isLoading || isFetching || programByDateLoading || programByDateFetching)
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <CircularProgress />
@@ -22,8 +34,11 @@ const ProgramList = () => {
   if (isSuccess) {
     programData = data;
   }
+  if (programByDateSuccess) {
+    programDataByDate = programByDate;
+  }
 
-  if (error)
+  if (error || programByDateError)
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <Typography variant="h3">Something Went Wrong</Typography>
@@ -31,18 +46,24 @@ const ProgramList = () => {
     );
 
   var newProgramData: any = [];
+  // newProgramData =
+  //   programDataByDate.data.programs.length === 0
+  //     ? programData.data
+  //     : programDataByDate.data.programs;
 
-  newProgramData =
-    programData &&
-    programData.data.map(function (program: any) {
-      return {
-        id: program.id,
-        name: program.name,
-        programType: program.programType,
-        isActive: program.isActive,
-        // station: program.station.name,
-      };
-    });
+  newProgramData = programDataByDate.data.programs.map(function (program: any) {
+    return {
+      id: program.program.id,
+      name: program.program.name,
+      programType: program.program.programType,
+      isActive: program.program.isActive,
+      // station: program.station.name,
+    };
+  });
+
+  // console.log(newProgramData);
+
+  console.log(programDataByDate.data.programs);
 
   return (
     <div>
@@ -65,8 +86,8 @@ const ProgramList = () => {
           </Link>
         </Grid>
       </Grid>
-      <Grid item lg={12} md={12} sm={12} xs={12}>
-        <ProgramsByDates />
+      <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2}}>
+        <ProgramsByDates activeDate={activeDate} setActiveDate={setActiveDate} />
       </Grid>
       <ProgramListComponent programData={newProgramData} />
     </div>

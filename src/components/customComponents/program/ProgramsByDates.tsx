@@ -1,8 +1,7 @@
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, CircularProgress, Grid, Typography } from '@mui/material';
 import React from 'react';
 
-const ProgramsByDates = () => {
-  const [activeDate, setActiveDate] = React.useState('');
+const ProgramsByDates = ({ setActiveDate, activeDate }: any) => {
   const DatesList: any = [
     {
       id: 1,
@@ -34,26 +33,23 @@ const ProgramsByDates = () => {
     },
   ];
 
-  console.log(activeDate);
-
   return (
     <Grid container spacing={4}>
-      {DatesList.map((dates: any) =>  (
-          <Grid item key={dates.id}>
-            <Button
-              variant="contained"
-              color={dates.id === activeDate ? 'warning' : 'primary'}
-              onClick={() => {
-                setActiveDate(dates.id);
-              }}
-            >
-              <Typography variant="inherit" color="white">
-                {dates.label}
-              </Typography>
-            </Button>
-          </Grid>
-        )
-      )}
+      {DatesList.map((dates: any) => (
+        <Grid item key={dates.id}>
+          <Button
+            variant="contained"
+            color={dates.label === activeDate ? 'warning' : 'primary'}
+            onClick={() => {
+              setActiveDate(dates.label);
+            }}
+          >
+            <Typography variant="inherit" color="white">
+              {dates.label}
+            </Typography>
+          </Button>
+        </Grid>
+      ))}
     </Grid>
   );
 };
