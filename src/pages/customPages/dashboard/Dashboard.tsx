@@ -180,6 +180,7 @@ const Dashboard = () => {
               xData={stationChartData}
               yData={programsChartData}
               title={'Stations With Programs'}
+              label={"Programs"}
             />
           </Grid>
 
@@ -189,6 +190,7 @@ const Dashboard = () => {
               xData={programChartData}
               yData={scheduleChartData}
               title={'Programs With Schedules'}
+              label={"Schedules"}
             />
           </Grid>
 

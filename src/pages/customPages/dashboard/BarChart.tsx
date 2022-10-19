@@ -13,7 +13,7 @@ import { Typography } from '@mui/material';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart = ({ xData, yData, title }: any) => {
+const BarChart = ({ xData, yData, title, label }: any) => {
   const labels = xData;
 
   const options = {
@@ -33,7 +33,7 @@ const BarChart = ({ xData, yData, title }: any) => {
     labels,
     datasets: [
       {
-        label: 'Programs',
+        label: label,
         data: yData,
         backgroundColor:
           '#' +

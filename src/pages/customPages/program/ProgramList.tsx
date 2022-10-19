@@ -4,6 +4,7 @@ import { useProgramsQuery } from 'src/services/ProgramApi';
 import ProgramListComponent from '../../../components/customComponents/program/ProgramListComponent';
 import { Link } from 'react-router-dom';
 import BreadCrumb from '../breadCrumb/BreadCrumb';
+import ProgramsByDates from 'src/components/customComponents/program/ProgramsByDates';
 
 const ProgramList = () => {
   let programData: any = [];
@@ -63,6 +64,9 @@ const ProgramList = () => {
             </Button>
           </Link>
         </Grid>
+      </Grid>
+      <Grid item lg={12} md={12} sm={12} xs={12}>
+        <ProgramsByDates />
       </Grid>
       <ProgramListComponent programData={newProgramData} />
     </div>
