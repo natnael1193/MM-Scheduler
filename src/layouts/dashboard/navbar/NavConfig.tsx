@@ -95,6 +95,7 @@ const navConfig = [
           // { title: 'schedules List', path: '/dashboard/schedule/list' },
           { title: 'Schedule Timeline', path: '/dashboard/schedule/timeline' },
           { title: 'Add schedule', path: '/dashboard/schedule/add' },
+          { title: 'Add Single schedule', path: '/dashboard/schedule/add-single' },
         ],
       },
       {

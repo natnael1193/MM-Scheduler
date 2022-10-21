@@ -84,6 +84,7 @@ export default function Router() {
             { element: <Navigate to="/dashboard/schedule/list" replace />, index: true },
             { path: '/dashboard/schedule/list', element: <ScheduleByProgram /> },
             { path: '/dashboard/schedule/add', element: <AddSchedule /> },
+            { path: '/dashboard/schedule/add-single', element: <AddSingleSchedule /> },
             { path: '/dashboard/schedule/edit/:scheduleId', element: <EditSchedule /> },
             // { path: '/dashboard/station/detail/:stationId', element: <StationDetail /> },
             { path: '/dashboard/schedule/timeline', element: <ScheduleTimeline /> },
@@ -184,6 +185,7 @@ const EditProgram = Loadable(lazy(() => import('../pages/customPages/program/Edi
 //Schedule
 const ScheduleByProgram = Loadable(lazy(() => import('../pages/customPages/schedule/ScheduleListByProgram')));
 const AddSchedule = Loadable(lazy(() => import('../pages/customPages/schedule/AddSchedule')));
+const AddSingleSchedule = Loadable(lazy(() => import('../pages/customPages/schedule/AddSingleSchedule')));
 const EditSchedule = Loadable(lazy(() => import('../pages/customPages/schedule/EditSchedule')));
 // const ScheduleByProgram = Loadable(lazy(() => import('../pages/customPages/schedule/ScheduleListByProgram')));
 const ScheduleTimeline = Loadable(lazy(() => import('../pages/customPages/schedule/ScheduleTimeline')));
