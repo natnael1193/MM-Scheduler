@@ -46,10 +46,7 @@ const ProgramList = () => {
     );
 
   var newProgramData: any = [];
-  // newProgramData =
-  //   programDataByDate.data.programs.length === 0
-  //     ? programData.data
-  //     : programDataByDate.data.programs;
+
 
   newProgramData = programDataByDate.data.programs.map(function (program: any) {
     return {

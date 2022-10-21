@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Schedule } from '../interfaces/Schedule.interface';
 
 const baseURL = `${process.env.REACT_APP_API_SERVER}`;
-const token: any = localStorage.getItem('login_token')
-const baseToken = JSON.parse(token)
+const token: any = localStorage.getItem('login_token');
+const baseToken = JSON.parse(token);
 
 export const scheduleApi = createApi({
   reducerPath: 'scheduleApi',
@@ -42,6 +42,14 @@ export const scheduleApi = createApi({
       }),
       invalidatesTags: ['Schedule', 'Program'],
     }),
+    addSingleSchedule: builder.mutation<void, Schedule>({
+      query: ({ ...rest }) => ({
+        url: '/Schedule/Single',
+        method: 'POST',
+        body: rest,
+      }),
+      invalidatesTags: ['Schedule', 'Program'],
+    }),
     updateSchedule: builder.mutation<void, Schedule>({
       query: ({ ...rest }) => ({
         url: `Schedule/${rest.id}`,
@@ -65,6 +73,7 @@ export const {
   useScheduleQuery,
   useScheduleByProgamQuery,
   useAddScheduleMutation,
+  useAddSingleScheduleMutation,
   useUpdateScheduleMutation,
   useDeleteScheduleMutation,
 } = scheduleApi;

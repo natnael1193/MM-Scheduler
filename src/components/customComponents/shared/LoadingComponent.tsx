@@ -1,14 +1,15 @@
 import { Grid, CircularProgress } from '@mui/material';
-import React from 'react'
+import React from 'react';
 
-const LoadingComponent = () =>  (
-      <div>
-        {' '}
-        <Grid container direction="row" justifyContent="center" alignItems="center">
- <CircularProgress/>
-        </Grid>
-      </div>
-    );
-  
+const LoadingComponent = () => (
 
-export default LoadingComponent
+
+  <div>
+    {' '}
+    <Grid container direction="row" justifyContent="center" alignItems="center">
+      <CircularProgress />
+    </Grid>
+  </div>
+);
+
+export default LoadingComponent;
