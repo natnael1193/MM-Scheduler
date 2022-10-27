@@ -19,6 +19,7 @@ import { usePriceClassificationsQuery } from 'src/services/PriceClassificationAp
 import { useAddScheduleMutation } from 'src/services/ScheduleApi';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 
 const ScheduleDays = ({ scheduleData }: any) => {
   let priceClassificationData: any = [];
@@ -46,6 +47,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
 
   //Get All Price Classifications
   const { data, error, isLoading, isSuccess, isFetching } = usePriceClassificationsQuery();
+  // const { data, error, isLoading, isSuccess, isFetching } = usePriceConfigsQuery();
 
   //Add Schedules
   const [addSchedules, result] = useAddScheduleMutation();
@@ -193,9 +195,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
                 // displayEmpty
-                {...(state.monday
-                  ? register(`schedules.${0}.priceClasifcationId` as const)
-                  : null)}
+                {...(state.monday ? register(`schedules.${0}.priceId` as const) : null)}
                 defaultValue=""
                 required
                 disabled={state.monday ? false : true}
@@ -283,9 +283,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 label="Select Price Classification"
                 displayEmpty
                 // {...register('priceClassification')}
-                {...(state.tuesday
-                  ? register(`schedules.${1}.priceClasifcationId` as const)
-                  : null)}
+                {...(state.tuesday ? register(`schedules.${1}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.tuesday ? false : true}
                 required
@@ -373,9 +371,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 label="Select Price Classification"
                 displayEmpty
                 // {...register('priceClassification')}
-                {...(state.wendsday
-                  ? register(`schedules.${2}.priceClasifcationId` as const)
-                  : null)}
+                {...(state.wendsday ? register(`schedules.${2}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.wendsday ? false : true}
                 required
@@ -463,9 +459,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 label="Select Price Classification"
                 displayEmpty
                 // {...register('priceClassification')}
-                {...(state.thursday
-                  ? register(`schedules.${3}.priceClasifcationId` as const)
-                  : null)}
+                {...(state.thursday ? register(`schedules.${3}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.thursday ? false : true}
                 required
@@ -553,9 +547,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 label="Select Price Classification"
                 displayEmpty
                 // {...register('priceClassification')}
-                {...(state.friday
-                  ? register(`schedules.${4}.priceClasifcationId` as const)
-                  : null)}
+                {...(state.friday ? register(`schedules.${4}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.friday ? false : true}
                 required
@@ -643,9 +635,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 label="Select Price Classification"
                 displayEmpty
                 // {...register('priceClassification')}
-                {...(state.saturday
-                  ? register(`schedules.${5}.priceClasifcationId` as const)
-                  : null)}
+                {...(state.saturday ? register(`schedules.${5}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.saturday ? false : true}
                 required
@@ -732,9 +722,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
                 displayEmpty
-                {...(state.sunday
-                  ? register(`schedules.${6}.priceClasifcationId` as const)
-                  : null)}
+                {...(state.sunday ? register(`schedules.${6}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.sunday ? false : true}
                 required

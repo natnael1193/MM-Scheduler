@@ -35,6 +35,20 @@ const ProgramsByDates = ({ setActiveDate, activeDate }: any) => {
 
   return (
     <Grid container spacing={4}>
+      <Grid item>
+        <Button
+          variant="contained"
+          // color={activeDate ===  ? 'warning' : 'primary'}
+          onClick={() => {
+            setActiveDate('');
+          }}
+        >
+          <Typography variant="inherit" color="white">
+            All Programs
+          </Typography>
+        </Button>
+      </Grid>
+
       {DatesList.map((dates: any) => (
         <Grid item key={dates.id}>
           <Button

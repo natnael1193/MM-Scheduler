@@ -6,7 +6,7 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import { Link } from 'react-router-dom';
 import { useDeleteProgramMutation } from 'src/services/ProgramApi';
 
-const ProgramListComponent = ({ programData }: any) => {
+const ProgramListComponent = ({ programData, allProgramData, activeDate }: any) => {
   // Delete Program
   const [deleteProgram] = useDeleteProgramMutation();
 
@@ -69,10 +69,13 @@ const ProgramListComponent = ({ programData }: any) => {
       ),
     },
   ];
+
+  console.log('allProgramData', allProgramData)
+
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <DataGrid
-        rows={programData}
+        rows={activeDate === '' ? allProgramData : programData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,

@@ -15,12 +15,14 @@ import moment from 'moment';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
+import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 
 const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, endDate }: any) => {
   var priceClassificationData: any = [];
 
   //Get All Price Classifications
-  const { data, error, isLoading, isSuccess } = usePriceClassificationsQuery();
+  // const { data, error, isLoading, isSuccess } = usePriceClassificationsQuery();
+  const { data, error, isLoading, isSuccess } = usePriceConfigsQuery();
 
   const { register, handleSubmit } = useForm({
     defaultValues,
@@ -53,7 +55,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
               {formTitle}
             </Typography>
             <Typography variant="h4" sx={{ mb: 3 }}>
-             {moment.utc(startDate).format('dddd D, MMMM YYYY')}
+              {moment.utc(startDate).format('dddd D, MMMM YYYY')}
             </Typography>
             <Grid container spacing={3}>
               <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -77,33 +79,29 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12}>
-                <TextField
-                  {...register('key')}
-                  label="Key"
-                  fullWidth
-                />
+                <TextField {...register('key')} label="Key" fullWidth />
               </Grid>
 
               <Grid item lg={6} md={6} sm={12} xs={12}>
-              <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                label="Select Price Classification"
-                displayEmpty
-                  {...register('priceClassificationId')}
-                  defaultValue={defaultValues.priceClassificationId}
-                  fullWidth
-                >
-                  {priceClassificationData.data.map((priceClassification: any) => (
-                    <MenuItem value={priceClassification.id} key={priceClassification.id}>
-                      {priceClassification.name}
-                    </MenuItem>
-                  ))}
-                </Select>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Select Price Classification
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Select Price Classification"
+                    displayEmpty
+                    {...register('priceConfigId')}
+                    defaultValue={defaultValues.priceConfigId}
+                    fullWidth
+                  >
+                    {priceClassificationData.data.map((priceClassification: any) => (
+                      <MenuItem value={priceClassification.id} key={priceClassification.id}>
+                        {priceClassification.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </FormControl>
               </Grid>
             </Grid>

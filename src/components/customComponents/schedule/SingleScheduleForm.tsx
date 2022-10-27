@@ -12,6 +12,7 @@ import { useProgramsQuery } from 'src/services/ProgramApi';
 import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
 import LoadingComponent from '../shared/LoadingComponent';
 import ErrorComponent from '../shared/ErrorComponent';
+import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 
 const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
   const {
@@ -20,13 +21,13 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
     error: programError,
   }: any = useProgramsQuery();
   const {
-    data: priceClassificationData,
-    isLoading: priceClassificationLoading,
-    error: priceClassificationError,
-  }: any = usePriceClassificationsQuery();
+    data: priceConfigData,
+    isLoading: priceConfigLoading,
+    error: priceConfigError,
+  }: any = usePriceConfigsQuery();
 
-  if (programLoading || priceClassificationLoading) return <LoadingComponent />;
-  if (programError || priceClassificationError) return <ErrorComponent />;
+  if (programLoading || priceConfigLoading) return <LoadingComponent />;
+  if (programError || priceConfigError) return <ErrorComponent />;
 
   return (
     <Grid container spacing={4} sx={{ width: '100%', pt: 2 }}>
@@ -88,25 +89,25 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
       </Grid>
       <Grid item lg={6} md={6} sm={12} xs={12}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Price Classification</InputLabel>
+          <InputLabel id="demo-simple-select-label">Price Config</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            label="Price Classification"
-            {...register('priceClasifcationId', { required: true })}
+            label="Price Config"
+            {...register('priceConfigId', { required: true })}
             displayEmpty
             defaultValue={''}
           >
-            {priceClassificationData.data.map((priceClassifications: any) => {
+            {priceConfigData.data.map((priceConfigs: any) => {
               return (
-                <MenuItem value={priceClassifications.id} key={priceClassifications.id}>
-                  {priceClassifications.name}
+                <MenuItem value={priceConfigs.id} key={priceConfigs.id}>
+                  {priceConfigs.name}
                 </MenuItem>
               );
             })}
           </Select>
           <Typography variant="inherit" color="error">
-            {errors.priceClasifcationId && 'This is required'}
+            {errors.priceConfigId && 'This is required'}
           </Typography>
         </FormControl>
       </Grid>

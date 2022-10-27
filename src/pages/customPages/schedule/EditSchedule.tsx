@@ -50,7 +50,8 @@ const EditSchedule = () => {
     endTime: moment.utc(defaultValues.data.endTime).format('YYYY-MM-DD hh:mm:ss'),
     // endTime: defaultValues.data.endTime,
     key: defaultValues.data.key,
-    priceClassificationId: defaultValues.data.priceClasifcation.id,
+    // priceClassificationId: defaultValues.data.priceClasifcation.id,
+    priceConfigId: defaultValues.data.priceConfig.id,
   };
 
   const startDate: any = moment(defaultValues.data.startTime).format('YYYY-MM-DD');
@@ -64,7 +65,8 @@ const EditSchedule = () => {
       // endTime: endDate.concat(' ', data.endTime),
       startTime: data.startTime,
       endTime: data.endTime,
-      priceClasifcationId: data.priceClassificationId,
+      // priceClasifcationId: data.priceClassificationId,
+      priceConfigId: data.priceConfigId,
       programId: defaultValues.data.program.id,
       key: data.key,
     };

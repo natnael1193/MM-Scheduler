@@ -8,7 +8,7 @@ import ProgramsByDates from 'src/components/customComponents/program/ProgramsByD
 import React from 'react';
 
 const ProgramList = () => {
-  const [activeDate, setActiveDate] = React.useState('Monday');
+  const [activeDate, setActiveDate] = React.useState('');
   let programData: any = [];
   let programDataByDate: any = [];
 
@@ -22,7 +22,7 @@ const ProgramList = () => {
     isSuccess: programByDateSuccess,
     isLoading: programByDateLoading,
     isFetching: programByDateFetching,
-  } = useProgramByDateQuery(activeDate);
+  } = useProgramByDateQuery(activeDate === '' ? 'Monday' : activeDate);
 
   if (isLoading || isFetching || programByDateLoading || programByDateFetching)
     return (
@@ -45,8 +45,10 @@ const ProgramList = () => {
       </Grid>
     );
 
+  var allProgramData: any = [];
   var newProgramData: any = [];
 
+  allProgramData = programData.data;
 
   newProgramData = programDataByDate.data.programs.map(function (program: any) {
     return {
@@ -58,9 +60,9 @@ const ProgramList = () => {
     };
   });
 
-  // console.log(newProgramData);
+  // console.log(programData);
 
-  console.log(programDataByDate.data.programs);
+  // console.log(programDataByDate.data.programs);
 
   return (
     <div>
@@ -83,10 +85,14 @@ const ProgramList = () => {
           </Link>
         </Grid>
       </Grid>
-      <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2}}>
+      <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 2 }}>
         <ProgramsByDates activeDate={activeDate} setActiveDate={setActiveDate} />
       </Grid>
-      <ProgramListComponent programData={newProgramData} />
+      <ProgramListComponent
+        programData={newProgramData}
+        allProgramData={allProgramData}
+        activeDate={activeDate}
+      />
     </div>
   );
 };

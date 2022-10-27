@@ -47,6 +47,9 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   InputProps={{
                     startAdornment: <InputAdornment position="start">Birr</InputAdornment>,
                   }}
+                  inputProps={{
+                    step: "any",
+                  }}
                   fullWidth
                   label="Rate"
                 />
@@ -60,6 +63,9 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   type="number"
                   InputProps={{
                     startAdornment: <InputAdornment position="start">Sec</InputAdornment>,
+                  }}
+                  inputProps={{
+                    step: "any",
                   }}
                   fullWidth
                   label="Unit"
