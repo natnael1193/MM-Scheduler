@@ -10,7 +10,6 @@ const AddSingleSchedule = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const [addSingleSchedule, result] = useAddSingleScheduleMutation();

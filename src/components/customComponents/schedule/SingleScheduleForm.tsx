@@ -9,10 +9,10 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useProgramsQuery } from 'src/services/ProgramApi';
-import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
+// import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
 import LoadingComponent from '../shared/LoadingComponent';
 import ErrorComponent from '../shared/ErrorComponent';
-import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
+// import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 
 const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
   const {
@@ -20,14 +20,15 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
     isLoading: programLoading,
     error: programError,
   }: any = useProgramsQuery();
-  const {
-    data: priceConfigData,
-    isLoading: priceConfigLoading,
-    error: priceConfigError,
-  }: any = usePriceConfigsQuery();
 
-  if (programLoading || priceConfigLoading) return <LoadingComponent />;
-  if (programError || priceConfigError) return <ErrorComponent />;
+  // const {
+  //   data: priceConfigData,
+  //   isLoading: priceConfigLoading,
+  //   error: priceConfigError,
+  // }: any = usePriceConfigsQuery();
+
+  if (programLoading) return <LoadingComponent />;
+  if (programError) return <ErrorComponent />;
 
   return (
     <Grid container spacing={4} sx={{ width: '100%', pt: 2 }}>
@@ -74,20 +75,20 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
             displayEmpty
             defaultValue={''}
           >
-            {programData.data.map((programs: any) => {
-              return (
+            {programData.data.map((programs: any) => 
+               (
                 <MenuItem value={programs.id} key={programs.id}>
                   {programs.name}
                 </MenuItem>
-              );
-            })}
+              )
+            )}
           </Select>
           <Typography variant="inherit" color="error">
             {errors.programId && 'This is required'}
           </Typography>
         </FormControl>
       </Grid>
-      <Grid item lg={6} md={6} sm={12} xs={12}>
+      {/* <Grid item lg={6} md={6} sm={12} xs={12}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Price Config</InputLabel>
           <Select
@@ -110,7 +111,7 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
             {errors.priceConfigId && 'This is required'}
           </Typography>
         </FormControl>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };
