@@ -49,8 +49,8 @@ const EditPriceConfig = () => {
     name: priceConfigData.data.name,
     rate: priceConfigData.data.rate,
     unit: priceConfigData.data.unit,
-    startDate: priceConfigData.data.startDate.replace(/.203Z/g, ''),
-    endDate: priceConfigData.data.endDate.replace(/.203Z/g, ''),
+    startDate: priceConfigData.data.startDate.replace(/Z/g, ''),
+    endDate: priceConfigData.data.endDate.replace(/Z/g, ''),
   };
 
   //Submit the new data
@@ -61,8 +61,8 @@ const EditPriceConfig = () => {
       key: data.key,
       rate: Number(data.rate),
       unit: Number(data.unit),
-      startDate: data.startDate + ':00.203Z',
-      endDate:  data.endDate + ':00.203Z',
+      startDate: data.startDate + 'Z',
+      endDate:  data.endDate + 'Z',
       // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
       // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
     };

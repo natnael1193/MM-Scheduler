@@ -11,6 +11,8 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
     defaultValues,
   });
 
+
+
   return (
     <div>
       <Grid>
@@ -81,7 +83,8 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   label="Start Date"
                   type="datetime-local"
                   InputLabelProps={{ shrink: true }}
-                  inputProps={{ step: 1 }}
+                  inputProps={{ step: 'any' }}
+                  defaultValue={defaultValues.startDate}
                 />
                 <Typography variant="inherit" color="error">
                   {errors.startDate && 'This is required'}
@@ -94,7 +97,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   label="End Date"
                   type="datetime-local"
                   InputLabelProps={{ shrink: true }}
-                  inputProps={{ step: 1 }}
+                  inputProps={{ step: 'any' }}
                 />
                 <Typography variant="inherit" color="error">
                   {errors.endDate && 'This is required'}
