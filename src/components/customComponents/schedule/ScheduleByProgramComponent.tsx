@@ -23,8 +23,6 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
-        // priceClassification: schedule.priceClasifcation.name,
-        priceConfig: schedule.priceConfig.name,
       };
     });
 
@@ -43,14 +41,8 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
-        priceConfig: schedule.priceConfig.name,
-        // priceClassification: schedule.priceClasifcation.name,
       };
     });
-
-  // function checkDate(date: any) {
-  //   return date.startTime > new Date();
-  // }
 
   //Data Grid Header
   const columns: GridColumns = [
@@ -68,11 +60,6 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
       field: 'endTime',
       headerName: 'End Time',
       width: 200,
-    },
-    {
-      field: 'priceConfig',
-      headerName: 'Price Config',
-      width: 300,
     },
     {
       field: '',
@@ -99,11 +86,7 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
     },
   ];
 
-  // console.log(futureSchedule === true ? futureScheduleData : newScheduleData)
-  // console.log(newfutureScheduleData)
-  // console.log(moment(new Date()).format('D-MM-YYYY'))
 
-  console.log(scheduleData)
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
