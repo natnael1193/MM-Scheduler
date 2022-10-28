@@ -14,38 +14,38 @@ import {
 import moment from 'moment';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
-import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
+// import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
+// import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 
 const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, endDate }: any) => {
-  var priceClassificationData: any = [];
+  // var priceClassificationData: any = [];
 
   //Get All Price Classifications
   // const { data, error, isLoading, isSuccess } = usePriceClassificationsQuery();
-  const { data, error, isLoading, isSuccess } = usePriceConfigsQuery();
+  // const { data, error, isLoading, isSuccess } = usePriceConfigsQuery();
 
   const { register, handleSubmit } = useForm({
     defaultValues,
   });
 
-  if (isLoading)
-    return (
-      <Grid container direction="row" justifyContent="center" alignItems="center">
-        <CircularProgress />
-      </Grid>
-    );
+  // if (isLoading)
+  //   return (
+  //     <Grid container direction="row" justifyContent="center" alignItems="center">
+  //       <CircularProgress />
+  //     </Grid>
+  //   );
 
-  if (isSuccess) {
-    priceClassificationData = data;
-  }
+  // if (isSuccess) {
+  //   priceClassificationData = data;
+  // }
 
-  if (error)
-    return (
-      <Grid container direction="row" justifyContent="center" alignItems="center">
-        <Typography variant="h3">Something Went Wrong</Typography>
-      </Grid>
-    );
-  console.log(defaultValues);
+  // if (error)
+  //   return (
+  //     <Grid container direction="row" justifyContent="center" alignItems="center">
+  //       <Typography variant="h3">Something Went Wrong</Typography>
+  //     </Grid>
+  //   );
+  // console.log(defaultValues);
   return (
     <div>
       <Box>
@@ -58,7 +58,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
               {moment.utc(startDate).format('dddd D, MMMM YYYY')}
             </Typography>
             <Grid container spacing={3}>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField
                   {...register('startTime')}
                   label="Start Time"
@@ -68,7 +68,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                   fullWidth
                 />
               </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField
                   {...register('endTime')}
                   label="End Time"
@@ -78,11 +78,11 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                   fullWidth
                 />
               </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField {...register('key')} label="Key" fullWidth />
               </Grid>
 
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              {/* <Grid item lg={6} md={6} sm={12} xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-helper-label">
                     Select Price Classification
@@ -103,7 +103,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                     ))}
                   </Select>
                 </FormControl>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button variant="contained" type="submit" sx={{ mt: 3 }}>
               Submit
