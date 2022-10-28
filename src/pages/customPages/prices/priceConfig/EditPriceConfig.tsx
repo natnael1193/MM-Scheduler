@@ -51,6 +51,7 @@ const EditPriceConfig = () => {
     unit: priceConfigData.data.unit,
     startDate: priceConfigData.data.startDate.replace(/Z/g, ''),
     endDate: priceConfigData.data.endDate.replace(/Z/g, ''),
+    priceCategoryId: priceConfigData.data.priceCategoryId,
   };
 
   //Submit the new data
@@ -63,6 +64,7 @@ const EditPriceConfig = () => {
       unit: Number(data.unit),
       startDate: data.startDate + 'Z',
       endDate:  data.endDate + 'Z',
+      priceCategoryId: data.priceCategoryId,
       // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
       // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
     };

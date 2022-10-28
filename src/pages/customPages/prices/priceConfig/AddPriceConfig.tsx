@@ -16,6 +16,7 @@ const AddPriceConfig = () => {
     endDate: '',
     rate: '',
     unit: '',
+    priceCategoryId: ''
   };
 
   //Add New Data
@@ -42,6 +43,7 @@ const AddPriceConfig = () => {
       unit: Number(data.unit),
       startDate: data.startDate + 'Z',
       endDate:  data.endDate + 'Z',
+      priceCategoryId: data.priceCategoryId
       // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
       // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
     };

@@ -72,9 +72,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                     displayEmpty
                     {...register('stationId', { required: true })}
                   >
-                    {stationsData?.data?.map((stations: any) => {
-                      return <MenuItem value={stations.id} key={stations.id}>{stations.name}</MenuItem>;
-                    })}
+                    {stationsData?.data?.map((stations: any) =>  <MenuItem value={stations.id} key={stations.id}>{stations.name}</MenuItem>)}
                   </Select>
                   <Typography variant="inherit" color="error">
                   {errors.stationId && 'This is required'}

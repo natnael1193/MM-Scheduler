@@ -1,8 +1,23 @@
-import { Grid, TextField, Typography, InputAdornment, Card, Button } from '@mui/material';
+import {
+  Grid,
+  TextField,
+  Typography,
+  InputAdornment,
+  Card,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import ErrorComponent from '../../shared/ErrorComponent';
+import LoadingComponent from '../../shared/LoadingComponent';
+import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
 
 const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
+  let priceCategoriesData: any = [];
   const {
     register,
     formState: { errors },
@@ -11,8 +26,20 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
     defaultValues,
   });
 
+  const {
+    data: priceCategoryData,
+    isLoading: priceCategoryLoading,
+    error: priceCategoryError,
+    isSuccess: priceCategorySuccess,
+  } = usePriceCategoriesQuery();
 
+  if (priceCategoryLoading) return <LoadingComponent />;
+  if (priceCategoryError) return <ErrorComponent />;
+  if (priceCategorySuccess) {
+    priceCategoriesData = priceCategoryData;
+  }
 
+  console.log(defaultValues)
   return (
     <div>
       <Grid>
@@ -22,7 +49,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
           </Typography>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container>
-              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField
                   {...register('name', { required: true })}
                   fullWidth
@@ -32,15 +59,33 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
-                <TextField
-                  {...register('key', { required: true })}
-                  fullWidth
-                  label="Key"
-                />
+              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+                <TextField {...register('key', { required: true })} fullWidth label="Key" />
                 <Typography variant="inherit" color="error">
                   {errors.key && 'This is required'}
                 </Typography>
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Price Category</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Price Category"
+                    defaultValue={defaultValues.priceCategoryId}
+                    {...register('priceCategoryId', { required: true })}
+                    displayEmpty
+                  >
+                    {priceCategoriesData?.data.map((priceCategories: any) => (
+                      <MenuItem value={priceCategories.id} key={priceCategories.id}>
+                        {priceCategories.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <Typography variant="inherit" color="error">
+                    {errors.priceCategoryId && 'This is required'}
+                  </Typography>
+                </FormControl>
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField
@@ -50,7 +95,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     startAdornment: <InputAdornment position="start">Birr</InputAdornment>,
                   }}
                   inputProps={{
-                    step: "any",
+                    step: 'any',
                   }}
                   fullWidth
                   label="Rate"
@@ -67,7 +112,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     startAdornment: <InputAdornment position="start">Sec</InputAdornment>,
                   }}
                   inputProps={{
-                    step: "any",
+                    step: 'any',
                   }}
                   fullWidth
                   label="Unit"
