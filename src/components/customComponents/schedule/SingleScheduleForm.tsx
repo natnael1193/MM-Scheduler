@@ -32,36 +32,10 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
 
   return (
     <Grid container spacing={4} sx={{ width: '100%', pt: 2 }}>
-      <Grid item lg={4} md={4} sm={12} xs={12}>
+      <Grid item lg={6} md={6} sm={12} xs={12}>
         <TextField label="Alias" {...register('key', { required: true })} fullWidth />
         <Typography variant="inherit" color="error">
           {errors.key && 'This is required'}
-        </Typography>
-      </Grid>
-      <Grid item lg={4} md={4} sm={12} xs={12}>
-        <TextField
-          label="Start Time"
-          type="datetime-local"
-          InputLabelProps={{ shrink: true }}
-          inputProps={{ step: 1 }}
-          fullWidth
-          {...register('startTime', { required: true })}
-        />
-        <Typography variant="inherit" color="error">
-          {errors.startTime && 'This is required'}
-        </Typography>
-      </Grid>
-      <Grid item lg={4} md={4} sm={12} xs={12}>
-        <TextField
-          label="End Time"
-          type="datetime-local"
-          InputLabelProps={{ shrink: true }}
-          inputProps={{ step: 1 }}
-          fullWidth
-          {...register('endTime', { required: true })}
-        />
-        <Typography variant="inherit" color="error">
-          {errors.endTime && 'This is required'}
         </Typography>
       </Grid>
       <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -88,6 +62,33 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
           </Typography>
         </FormControl>
       </Grid>
+      <Grid item lg={6} md={6} sm={12} xs={12}>
+        <TextField
+          label="Start Time"
+          type="datetime-local"
+          InputLabelProps={{ shrink: true }}
+          inputProps={{ step: 1 }}
+          fullWidth
+          {...register('startTime', { required: true })}
+        />
+        <Typography variant="inherit" color="error">
+          {errors.startTime && 'This is required'}
+        </Typography>
+      </Grid>
+      <Grid item lg={6} md={6} sm={12} xs={12}>
+        <TextField
+          label="End Time"
+          type="datetime-local"
+          InputLabelProps={{ shrink: true }}
+          inputProps={{ step: 1 }}
+          fullWidth
+          {...register('endTime', { required: true })}
+        />
+        <Typography variant="inherit" color="error">
+          {errors.endTime && 'This is required'}
+        </Typography>
+      </Grid>
+
       {/* <Grid item lg={6} md={6} sm={12} xs={12}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Price Config</InputLabel>
