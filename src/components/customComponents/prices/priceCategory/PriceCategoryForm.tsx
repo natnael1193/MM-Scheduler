@@ -1,8 +1,22 @@
-import { Button, Card, Grid, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  Card,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useStationsQuery } from 'src/services/StationApi';
+import ErrorComponent from '../../shared/ErrorComponent';
+import LoadingComponent from '../../shared/LoadingComponent';
 
 const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
+  let stationsData: any = [];
   const {
     register,
     formState: { errors },
@@ -11,7 +25,16 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
     defaultValues,
   });
 
-  console.log(defaultValues);
+  // Fetch Stations
+  const { data: stationData, isLoading: stationLoading, error: stationError, isSuccess: stationSucess } = useStationsQuery();
+
+  if (stationLoading) return <LoadingComponent />;
+  if (stationError) return <ErrorComponent />;
+  if(stationSucess){
+    stationsData = stationData
+  }
+
+  console.log(defaultValues)
 
   return (
     <div>
@@ -22,7 +45,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
               {formTitle}
             </Typography>
             <Grid container sx={{ m: 1, p: 5, pt: 0 }} spacing={2}>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField
                   {...register('name', { required: true })}
                   label="Price Category Name"
@@ -32,11 +55,31 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField {...register('key', { required: true })} label="Key" fullWidth />
                 <Typography variant="inherit" color="error">
                   {errors.key && 'This is required'}
                 </Typography>
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Station</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Station"
+                    defaultValue={defaultValues.stationId}
+                    displayEmpty
+                    {...register('stationId', { required: true })}
+                  >
+                    {stationsData?.data?.map((stations: any) => {
+                      return <MenuItem value={stations.id} key={stations.id}>{stations.name}</MenuItem>;
+                    })}
+                  </Select>
+                  <Typography variant="inherit" color="error">
+                  {errors.stationId && 'This is required'}
+                </Typography>
+                </FormControl>
               </Grid>
               <Grid item lg={8} md={10} sm={12} xs={12} sx={{ mb: 3 }}>
                 <Button variant="contained" type="submit">
