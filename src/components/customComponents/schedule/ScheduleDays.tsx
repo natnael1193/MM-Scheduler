@@ -1,28 +1,28 @@
 import {
   Button,
-  CircularProgress,
-  FormControl,
+  // CircularProgress,
+  // FormControl,
   FormControlLabel,
   Grid,
   Input,
-  InputLabel,
-  MenuItem,
-  Select,
+  // InputLabel,
+  // MenuItem,
+  // Select,
   Stack,
   Switch,
   TextField,
-  Typography,
+  // Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
+// import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
+// import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 import { useAddScheduleMutation } from 'src/services/ScheduleApi';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 
 const ScheduleDays = ({ scheduleData }: any) => {
-  let priceClassificationData: any = [];
+  // let priceClassificationData: any = [];
   var programDataId: string = '';
 
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
   };
 
   //Get All Price Classifications
-  const { data, error, isLoading, isSuccess, isFetching } = usePriceClassificationsQuery();
+  // const { data, error, isLoading, isSuccess, isFetching } = usePriceClassificationsQuery();
   // const { data, error, isLoading, isSuccess, isFetching } = usePriceConfigsQuery();
 
   //Add Schedules
@@ -73,23 +73,23 @@ const ScheduleDays = ({ scheduleData }: any) => {
     // formState: { errors },
   } = useForm();
 
-  if (isLoading || isFetching)
-    return (
-      <Grid container direction="row" justifyContent="center" alignItems="center">
-        <CircularProgress />
-      </Grid>
-    );
+  // if (isLoading || isFetching)
+  //   return (
+  //     <Grid container direction="row" justifyContent="center" alignItems="center">
+  //       <CircularProgress />
+  //     </Grid>
+  //   );
 
-  if (isSuccess) {
-    priceClassificationData = data;
-  }
+  // if (isSuccess) {
+  //   priceClassificationData = data;
+  // }
 
-  if (error)
-    return (
-      <Grid container direction="row" justifyContent="center" alignItems="center">
-        <Typography variant="h3">Something Went Wrong</Typography>
-      </Grid>
-    );
+  // if (error)
+  //   return (
+  //     <Grid container direction="row" justifyContent="center" alignItems="center">
+  //       <Typography variant="h3">Something Went Wrong</Typography>
+  //     </Grid>
+  //   );
 
   const onSubmit = (data: any) => {
     //Check at least one date is selected
@@ -142,7 +142,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               label="Monday"
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Input
               type="hidden"
               value="monday"
@@ -166,7 +166,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             {state.monday ? (
               <TextField
                 {...register(`schedules.${0}.endTime` as const)}
@@ -185,7 +185,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          {/* <Grid item lg={5} md={5} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
                 Select Price Classification
@@ -194,12 +194,10 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
-                // displayEmpty
                 {...(state.monday ? register(`schedules.${0}.priceId` as const) : null)}
                 defaultValue=""
                 required
                 disabled={state.monday ? false : true}
-                // placeholder="Select Price Classification"
               >
                 {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -208,7 +206,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           {/*  Monday Schedule End */}
 
           {/* Tuesday Schedule Start */}
@@ -229,7 +227,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Input
               type="hidden"
               value="tuesday"
@@ -253,7 +251,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             {state.tuesday ? (
               <TextField
                 {...register(`schedules.${1}.endTime` as const)}
@@ -272,7 +270,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          {/* <Grid item lg={5} md={5} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
                 Select Price Classification
@@ -282,12 +280,10 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
                 displayEmpty
-                // {...register('priceClassification')}
                 {...(state.tuesday ? register(`schedules.${1}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.tuesday ? false : true}
                 required
-                // placeholder="Select Price Classification"
               >
                 {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -296,7 +292,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           {/* Tuesday Schedule End */}
 
           {/* Wendsday Shedule Start */}
@@ -317,7 +313,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Input
               type="hidden"
               value="wednesday"
@@ -341,7 +337,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             {state.wendsday ? (
               <TextField
                 {...register(`schedules.${2}.endTime` as const)}
@@ -360,7 +356,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          {/* <Grid item lg={5} md={5} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
                 Select Price Classification
@@ -370,12 +366,10 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
                 displayEmpty
-                // {...register('priceClassification')}
                 {...(state.wendsday ? register(`schedules.${2}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.wendsday ? false : true}
                 required
-                // placeholder="Select Price Classification"
               >
                 {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -384,7 +378,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           {/* Wendsday Schdule End */}
 
           {/* Thursday Schedule Start */}
@@ -405,7 +399,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Input
               type="hidden"
               value="thursday"
@@ -429,7 +423,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             {state.thursday ? (
               <TextField
                 {...register(`schedules.${3}.endTime` as const)}
@@ -448,7 +442,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          {/* <Grid item lg={5} md={5} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
                 Select Price Classification
@@ -458,12 +452,10 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
                 displayEmpty
-                // {...register('priceClassification')}
                 {...(state.thursday ? register(`schedules.${3}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.thursday ? false : true}
                 required
-                // placeholder="Select Price Classification"
               >
                 {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -472,7 +464,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           {/* Thursday Schedule End */}
 
           {/* Friday Schedule Start */}
@@ -493,7 +485,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Input
               type="hidden"
               value="friday"
@@ -517,7 +509,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             {state.friday ? (
               <TextField
                 {...register(`schedules.${4}.endTime` as const)}
@@ -536,7 +528,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          {/* <Grid item lg={5} md={5} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
                 Select Price Classification
@@ -546,12 +538,10 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
                 displayEmpty
-                // {...register('priceClassification')}
                 {...(state.friday ? register(`schedules.${4}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.friday ? false : true}
                 required
-                // placeholder="Select Price Classification"
               >
                 {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -560,7 +550,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           {/* Friday Schedule End */}
 
           {/* Saturday Schedule Start */}
@@ -581,7 +571,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Input
               type="hidden"
               value="saturday"
@@ -605,7 +595,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             {state.saturday ? (
               <TextField
                 {...register(`schedules.${5}.endTime` as const)}
@@ -624,7 +614,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          {/* <Grid item lg={5} md={5} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
                 Select Price Classification
@@ -634,12 +624,10 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 id="demo-simple-select-helper"
                 label="Select Price Classification"
                 displayEmpty
-                // {...register('priceClassification')}
                 {...(state.saturday ? register(`schedules.${5}.priceId` as const) : null)}
                 defaultValue=""
                 disabled={state.saturday ? false : true}
                 required
-                // placeholder="Select Price Classification"
               >
                 {priceClassificationData.data.map((priceClassification: any) => (
                   <MenuItem value={priceClassification.id} key={priceClassification.id}>
@@ -648,7 +636,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           {/* Saturday Schedule End */}
 
           {/* Sunday Schedule Start */}
@@ -669,7 +657,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             <Input
               type="hidden"
               value="sunday"
@@ -693,7 +681,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
             {state.sunday ? (
               <TextField
                 {...register(`schedules.${6}.endTime` as const)}
@@ -712,7 +700,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          {/* <Grid item lg={5} md={5} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
                 Select Price Classification
@@ -734,7 +722,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </Grid> */}
           {/* Sunday Schedule Start */}
 
           <Grid item lg={12} md={12} sm={12} xs={12} sx={{ m: 2 }}>
