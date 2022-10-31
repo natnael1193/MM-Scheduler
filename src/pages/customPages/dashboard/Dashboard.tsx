@@ -41,11 +41,11 @@ const Dashboard = () => {
   //Get All Programs
   const { data: programData, error: programError, isLoading: programLoading } = useProgramsQuery();
   //Get All Price Classification
-  const {
-    data: priceClassificationData,
-    error: priceClassificationError,
-    isLoading: priceClassificationLoading,
-  } = usePriceClassificationsQuery();
+  // const {
+  //   data: priceClassificationData,
+  //   error: priceClassificationError,
+  //   isLoading: priceClassificationLoading,
+  // } = usePriceClassificationsQuery();
   //Get All Price Categories
   const {
     data: priceCategoryData,
@@ -53,9 +53,9 @@ const Dashboard = () => {
     isLoading: priceCategoryLoading,
   } = usePriceCategoriesQuery();
 
-  if (isLoading || programLoading || priceClassificationLoading || priceCategoryLoading)
+  if (isLoading || programLoading || priceCategoryLoading)
     return <LoadingComponent />;
-  if (error || programError || priceClassificationError || priceCategoryError)
+  if (error || programError || priceCategoryError)
     return <ErrorComponent />;
 
   stationData = data;
@@ -79,7 +79,7 @@ const Dashboard = () => {
       return schedules.schedules.length;
     });
 
-  priceClassificationsData = priceClassificationData;
+  // priceClassificationsData = priceClassificationData;
   priceCategoriesData = priceCategoryData;
 
   console.log(scheduleChartData);
@@ -139,21 +139,6 @@ const Dashboard = () => {
             </Card>
           </Grid> */}
           <Divider />
-          <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mb: 4 }}>
-            <Card sx={{ boxShadow: 5 }}>
-              <Item>
-                <Typography variant="h6">Total Price Classifications</Typography>
-              </Item>
-              <Item>
-                <Typography variant="inherit">
-                  {/* +2.6% <MovingIcon color="success" />{' '} */}
-                </Typography>
-              </Item>
-              <Item>
-                <Typography variant="h4">{priceClassificationsData.data.length}</Typography>
-              </Item>
-            </Card>
-          </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mb: 4 }}>
             <Card sx={{ boxShadow: 5 }}>
               <Item>
