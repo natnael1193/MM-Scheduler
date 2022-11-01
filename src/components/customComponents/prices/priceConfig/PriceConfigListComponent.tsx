@@ -13,7 +13,7 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
   const columns: GridColumns = [
     {
       field: 'key',
-      headerName: 'Key',
+     headerName: 'Alias',
       width: 400,
     },
     {
