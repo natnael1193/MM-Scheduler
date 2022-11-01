@@ -61,6 +61,13 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                 </Typography>
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
+                <TextField fullWidth label="Alias" {...register('key', { required: true })}
+                />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField
                   fullWidth
                   label="Organization Name"
@@ -70,13 +77,7 @@ const OrganizationForm = ({ onFormSubmit, formTitle, defaultValues }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
-                <TextField fullWidth label="Key" {...register('key', { required: true })}
-                />
-                <Typography variant="inherit" color="error">
-                  {errors.key && 'This is required'}
-                </Typography>
-              </Grid>
+
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 {/* <TextField fullWidth label="Organization Type" {...register('organizationTypeId')} /> */}
                 <FormControl fullWidth>

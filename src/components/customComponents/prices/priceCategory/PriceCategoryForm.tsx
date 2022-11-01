@@ -46,7 +46,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
             </Typography>
             <Grid container sx={{ m: 1, p: 5, pt: 0 }} spacing={2}>
             <Grid item lg={6} md={6} sm={12} xs={12}>
-                <TextField {...register('key', { required: true })} label="Key" fullWidth />
+                <TextField {...register('key', { required: true })} label="Alias" fullWidth />
                 <Typography variant="inherit" color="error">
                   {errors.key && 'This is required'}
                 </Typography>

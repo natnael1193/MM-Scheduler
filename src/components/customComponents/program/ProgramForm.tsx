@@ -58,6 +58,18 @@ const ProgramForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
             <Grid container spacing={4}>
               <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
                 <TextField
+                  {...register('key', { required: true })}
+                  id="outlined-basic"
+                  label="Alias"
+                  variant="outlined"
+                  fullWidth
+                />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
+                <TextField
                   {...register('name', { required: true })}
                   id="outlined-basic"
                   label="Name"
@@ -68,18 +80,7 @@ const ProgramForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
-                <TextField
-                  {...register('key', { required: true })}
-                  id="outlined-basic"
-                  label="Key"
-                  variant="outlined"
-                  fullWidth
-                />
-                <Typography variant="inherit" color="error">
-                  {errors.key && 'This is required'}
-                </Typography>
-              </Grid>
+
               <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Program Type</InputLabel>
@@ -88,7 +89,7 @@ const ProgramForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     id="demo-simple-select"
                     label="Program Type"
                     displayEmpty
-                    defaultValue={ defaultValues.programType ? defaultValues.programType : ''}
+                    defaultValue={defaultValues.programType ? defaultValues.programType : ''}
                     {...register('programType', { required: true })}
                   >
                     <MenuItem value="TV">Tv</MenuItem>
@@ -138,8 +139,8 @@ const ProgramForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     }
                     {...register('isActive', { required: true })}
                   >
-                    <MenuItem value={JSON.parse("True".toLowerCase())}>Active</MenuItem>
-                    <MenuItem value={JSON.parse("False".toLowerCase())}>Not Active</MenuItem>
+                    <MenuItem value={JSON.parse('True'.toLowerCase())}>Active</MenuItem>
+                    <MenuItem value={JSON.parse('False'.toLowerCase())}>Not Active</MenuItem>
                   </Select>
                   <Typography variant="inherit" color="error">
                     {errors.isActive && 'This is required'}

@@ -22,7 +22,7 @@ const OrganizationTypeForm = ({ formTitle, defaultValues, onFormSubmit }: any) =
               </Grid>
 
               <Grid item lg={6} md={6} sm={12} sx={{ mb: 2 }}>
-                <TextField fullWidth label="Key" {...register('key', { required: true })} />
+                <TextField fullWidth label="Alias" {...register('key', { required: true })} />
                 <Typography variant="inherit" color="error">
                   {errors.key && 'This is required'}
                 </Typography>

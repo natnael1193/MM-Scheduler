@@ -9,7 +9,6 @@ import ErrorComponent from 'src/components/customComponents/shared/ErrorComponen
 import LoadingComponent from 'src/components/customComponents/shared/LoadingComponent';
 import { useStationsQuery } from 'src/services/StationApi';
 import { useProgramsQuery } from 'src/services/ProgramApi';
-import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
 import BarChart from './BarChart';
 
@@ -29,7 +28,6 @@ const Item = styled(Paper)(({ theme }) => ({
 const Dashboard = () => {
   let stationData: any = [];
   let programsData: any = [];
-  let priceClassificationsData: any = [];
   let priceCategoriesData: any = [];
   let stationChartData: any = [];
   let programsChartData: any = [];
@@ -40,13 +38,7 @@ const Dashboard = () => {
   const { data, error, isLoading } = useStationsQuery();
   //Get All Programs
   const { data: programData, error: programError, isLoading: programLoading } = useProgramsQuery();
-  //Get All Price Classification
-  // const {
-  //   data: priceClassificationData,
-  //   error: priceClassificationError,
-  //   isLoading: priceClassificationLoading,
-  // } = usePriceClassificationsQuery();
-  //Get All Price Categories
+
   const {
     data: priceCategoryData,
     error: priceCategoryError,

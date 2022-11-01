@@ -55,7 +55,7 @@ const ScheduleForm = () => {
           <Typography variant="h3">Add Schedule</Typography>
           <Grid container spacing={2} sx={{ mt: 3 }}>
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <TextField label="key" {...register('key', { required: true })} fullWidth />
+              <TextField label="Alias" {...register('key', { required: true })} fullWidth />
               <Typography variant="inherit" color="error">
                 {scheduleData.key === '' && 'This is required'}
               </Typography>

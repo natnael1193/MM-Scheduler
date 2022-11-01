@@ -58,6 +58,10 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
               {moment.utc(startDate).format('dddd D, MMMM YYYY')}
             </Typography>
             <Grid container spacing={3}>
+            <Grid item lg={4} md={4} sm={12} xs={12}>
+                <TextField {...register('key')} label="Alias" fullWidth />
+              </Grid>
+
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField
                   {...register('startTime')}
@@ -77,9 +81,6 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                   inputProps={{ step: 1 }}
                   fullWidth
                 />
-              </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
-                <TextField {...register('key')} label="Key" fullWidth />
               </Grid>
 
               {/* <Grid item lg={6} md={6} sm={12} xs={12}>

@@ -49,6 +49,12 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
           </Typography>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container>
+            <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+                <TextField {...register('key', { required: true })} fullWidth label="Alias" />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
+              </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField
                   {...register('name', { required: true })}
@@ -59,12 +65,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
-                <TextField {...register('key', { required: true })} fullWidth label="Key" />
-                <Typography variant="inherit" color="error">
-                  {errors.key && 'This is required'}
-                </Typography>
-              </Grid>
+    
               <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Price Category</InputLabel>

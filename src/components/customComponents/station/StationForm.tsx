@@ -53,6 +53,18 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
               {formTitle}
             </Typography>
             <Grid container spacing={2}>
+            <Grid item lg={4} md={4} sm={12} xs={12}>
+                <TextField
+                  {...register('key', { required: true })}
+                  id="outlined-basic"
+                  label="Alias"
+                  variant="outlined"
+                  fullWidth
+                />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
+              </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField
                   {...register('name', { required: true })}
@@ -65,18 +77,7 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
-                <TextField
-                  {...register('key', { required: true })}
-                  id="outlined-basic"
-                  label="Key"
-                  variant="outlined"
-                  fullWidth
-                />
-                <Typography variant="inherit" color="error">
-                  {errors.key && 'This is required'}
-                </Typography>
-              </Grid>
+  
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Organization</InputLabel>
