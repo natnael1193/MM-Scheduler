@@ -45,7 +45,13 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
               {formTitle}
             </Typography>
             <Grid container sx={{ m: 1, p: 5, pt: 0 }} spacing={2}>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
+                <TextField {...register('key', { required: true })} label="Key" fullWidth />
+                <Typography variant="inherit" color="error">
+                  {errors.key && 'This is required'}
+                </Typography>
+              </Grid>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
                 <TextField
                   {...register('name', { required: true })}
                   label="Price Category Name"
@@ -55,13 +61,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
-                <TextField {...register('key', { required: true })} label="Key" fullWidth />
-                <Typography variant="inherit" color="error">
-                  {errors.key && 'This is required'}
-                </Typography>
-              </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Station</InputLabel>
                   <Select
@@ -76,6 +76,25 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                   </Select>
                   <Typography variant="inherit" color="error">
                   {errors.stationId && 'This is required'}
+                </Typography>
+                </FormControl>
+              </Grid>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Price Type</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Price Type"
+                    defaultValue={defaultValues?.priceType}
+                    displayEmpty
+                    {...register('priceType', { required: true })}
+                  >
+                    <MenuItem value="Spot">Spot</MenuItem>
+                    <MenuItem value="Sponsorship" >Sponsorship</MenuItem>
+                  </Select>
+                  <Typography variant="inherit" color="error">
+                  {errors.priceType && 'This is required'}
                 </Typography>
                 </FormControl>
               </Grid>
