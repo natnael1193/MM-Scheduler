@@ -14,12 +14,12 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
     {
       field: 'key',
       headerName: 'Key',
-      width: 250,
+      width: 400,
     },
     {
       field: 'name',
       headerName: 'Name',
-      width: 250,
+      width: 400,
     },
     {
       field: 'rate',

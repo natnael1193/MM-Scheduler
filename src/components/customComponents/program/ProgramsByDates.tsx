@@ -13,7 +13,7 @@ const ProgramsByDates = ({ setActiveDate, activeDate }: any) => {
     },
     {
       id: 3,
-      label: 'Wendsday',
+      label: 'Wednesday',
     },
     {
       id: 4,

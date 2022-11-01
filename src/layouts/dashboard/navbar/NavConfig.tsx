@@ -35,7 +35,7 @@ const navConfig = [
   // MANAGEMENT
   // ----------------------------------------------------------------------
   {
-    subheader: 'management',
+    subheader: 'Organization',
     items: [
       // {
       //   title: 'user',
@@ -98,6 +98,11 @@ const navConfig = [
           { title: 'Add Single schedule', path: '/dashboard/schedule/add-single' },
         ],
       },
+    ]
+    },
+    {
+      subheader: 'Prices',
+      items: [
       {
         title: 'price category',
         path: '/dashboard/price-category',
@@ -118,16 +123,16 @@ const navConfig = [
           // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },
-      {
-        title: 'price classification',
-        path: '/dashboard/price-classification',
-        icon: <MonetizationOnIcon/>,
-        children: [
-          { title: 'Price Classification List', path: '/dashboard/price-classification/list' },
-          { title: 'Add Price Classification', path: '/dashboard/price-classification/add' },
-          // { title: 'Six', path: '/dashboard/station/six' },
-        ],
-      },
+      // {
+      //   title: 'price classification',
+      //   path: '/dashboard/price-classification',
+      //   icon: <MonetizationOnIcon/>,
+      //   children: [
+      //     { title: 'Price Classification List', path: '/dashboard/price-classification/list' },
+      //     { title: 'Add Price Classification', path: '/dashboard/price-classification/add' },
+      //     // { title: 'Six', path: '/dashboard/station/six' },
+      //   ],
+      // },
     ],
   },
 ];
