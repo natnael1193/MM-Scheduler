@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
   Box,
   Card,
@@ -12,8 +12,11 @@ import {
   Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import ScheduleDays from './ScheduleDays';
+// import ScheduleDays from './ScheduleDays';
 import { useProgramsQuery } from 'src/services/ProgramApi';
+import LoadingScreen from 'src/components/LoadingScreen';
+
+const ScheduleDays = lazy(() => import('./ScheduleDays'));
 
 const ScheduleForm = () => {
   let programData: any = [];
@@ -122,7 +125,9 @@ const ScheduleForm = () => {
             </Grid>
           </Grid>
           {/* <DaysList scheduleData={scheduleData} /> */}
-          <ScheduleDays scheduleData={scheduleData} />
+          <Suspense fallback={<LoadingScreen />}>
+            <ScheduleDays scheduleData={scheduleData} />
+          </Suspense>
         </Card>
       </Box>
     </div>

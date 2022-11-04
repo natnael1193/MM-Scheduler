@@ -27,7 +27,7 @@ const EditStation = () => {
   }, [response]);
 
   // Loading state to get the data
-  if (isLoading || isFetching)
+  if (isLoading)
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <CircularProgress />

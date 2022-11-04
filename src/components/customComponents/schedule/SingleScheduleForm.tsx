@@ -18,6 +18,7 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
   const {
     data: programData,
     isLoading: programLoading,
+    // isFetching: programFetching
     error: programError,
   }: any = useProgramsQuery();
 
@@ -49,13 +50,11 @@ const SingleScheduleForm = ({ register, handleSubmit, errors }: any) => {
             displayEmpty
             defaultValue={''}
           >
-            {programData.data.map((programs: any) => 
-               (
-                <MenuItem value={programs.id} key={programs.id}>
-                  {programs.name}
-                </MenuItem>
-              )
-            )}
+            {programData.data.map((programs: any) => (
+              <MenuItem value={programs.id} key={programs.id}>
+                {programs.name}
+              </MenuItem>
+            ))}
           </Select>
           <Typography variant="inherit" color="error">
             {errors.programId && 'This is required'}

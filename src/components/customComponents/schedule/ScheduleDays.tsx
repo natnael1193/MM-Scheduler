@@ -5,27 +5,26 @@ import {
   FormControlLabel,
   Grid,
   Input,
-  // InputLabel,
-  // MenuItem,
-  // Select,
   Stack,
   Switch,
   TextField,
-  // Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-// import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
-// import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 import { useAddScheduleMutation } from 'src/services/ScheduleApi';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import LoadingComponent from '../shared/LoadingComponent';
 
 const ScheduleDays = ({ scheduleData }: any) => {
-  // let priceClassificationData: any = [];
   var programDataId: string = '';
 
   const navigate = useNavigate();
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
 
   //Switch States
   const [state, setState] = React.useState({
@@ -45,9 +44,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
     });
   };
 
-  //Get All Price Classifications
-  // const { data, error, isLoading, isSuccess, isFetching } = usePriceClassificationsQuery();
-  // const { data, error, isLoading, isSuccess, isFetching } = usePriceConfigsQuery();
+
 
   //Add Schedules
   const [addSchedules, result] = useAddScheduleMutation();
@@ -72,24 +69,6 @@ const ScheduleDays = ({ scheduleData }: any) => {
     reset,
     // formState: { errors },
   } = useForm();
-
-  // if (isLoading || isFetching)
-  //   return (
-  //     <Grid container direction="row" justifyContent="center" alignItems="center">
-  //       <CircularProgress />
-  //     </Grid>
-  //   );
-
-  // if (isSuccess) {
-  //   priceClassificationData = data;
-  // }
-
-  // if (error)
-  //   return (
-  //     <Grid container direction="row" justifyContent="center" alignItems="center">
-  //       <Typography variant="h3">Something Went Wrong</Typography>
-  //     </Grid>
-  //   );
 
   const onSubmit = (data: any) => {
     //Check at least one date is selected
@@ -121,6 +100,8 @@ const ScheduleDays = ({ scheduleData }: any) => {
     addSchedules(newData);
   };
 
+  if (loading) return <LoadingComponent />;
+  
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
