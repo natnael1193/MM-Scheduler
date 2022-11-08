@@ -5,8 +5,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import PreviewIcon from '@mui/icons-material/Preview';
 import { Link } from 'react-router-dom';
 import { useDeleteProgramMutation } from 'src/services/ProgramApi';
+import DeleteItem from '../shared/DeleteItem';
+import React from 'react';
 
 const ProgramListComponent = ({ programData, allProgramData, activeDate }: any) => {
+  const [open, setOpen] = React.useState(false);
+  const [programId, setProgramId] = React.useState('');
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   // Delete Program
   const [deleteProgram] = useDeleteProgramMutation();
 
@@ -62,7 +69,14 @@ const ProgramListComponent = ({ programData, allProgramData, activeDate }: any) 
               <EditIcon />
             </Button>
           </Link>
-          <Button color="error" onClick={() => deleteProgram(cellValues.id)}>
+          <Button
+            color="error"
+            // onClick={() => deleteProgram(cellValues.id)}
+            onClick={() => {
+              setProgramId(cellValues.id);
+              setOpen(true);
+            }}
+          >
             <DeleteIcon />
           </Button>
         </>
@@ -70,7 +84,7 @@ const ProgramListComponent = ({ programData, allProgramData, activeDate }: any) 
     },
   ];
 
-  console.log('allProgramData', allProgramData)
+  console.log('allProgramData', open);
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
@@ -87,6 +101,9 @@ const ProgramListComponent = ({ programData, allProgramData, activeDate }: any) 
           },
         }}
         style={{ height: '80vh' }}
+      />
+      <DeleteItem
+        {...{ deleteItem: deleteProgram, setOpen, handleClose, open, itemId: programId }}
       />
     </div>
   );
