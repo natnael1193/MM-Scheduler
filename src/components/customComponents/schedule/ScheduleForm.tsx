@@ -127,7 +127,7 @@ const ScheduleForm = () => {
                     </MenuItem>
                   ))}
                 </Select>
-                {scheduleData.stationId === undefined || scheduleData.stationId === '' ? (
+                {stationId === undefined || stationId === '' ? (
                   <Typography variant="inherit" color="error">
                     This is required
                   </Typography>

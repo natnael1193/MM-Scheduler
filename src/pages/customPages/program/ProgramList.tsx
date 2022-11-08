@@ -50,7 +50,7 @@ const ProgramList = () => {
 
   allProgramData = programData.data;
 
-  newProgramData = programDataByDate.data.programs.map(function (program: any) {
+  newProgramData = programDataByDate.data.map(function (program: any) {
     return {
       id: program.program.id,
       name: program.program.name,
