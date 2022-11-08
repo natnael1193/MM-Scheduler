@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import {
   Box,
+  Button,
   Card,
   CircularProgress,
   FormControl,
@@ -15,14 +16,25 @@ import { useForm } from 'react-hook-form';
 // import ScheduleDays from './ScheduleDays';
 import { useProgramsQuery } from 'src/services/ProgramApi';
 import LoadingScreen from 'src/components/LoadingScreen';
+import { useStationsQuery } from 'src/services/StationApi';
 
 const ScheduleDays = lazy(() => import('./ScheduleDays'));
 
 const ScheduleForm = () => {
   let programData: any = [];
+  const [stationId, setStationId] = React.useState('');
 
+  //Get All Stations
+  const {
+    data: stationData,
+    error: stationError,
+    isLoading: stationLoading,
+    isSuccess: stationSuccess,
+    isFetching: stationFetching,
+    refetch: stationRefetch,
+  }: any = useStationsQuery();
   //Get All Programs
-  const { data, error, isLoading, isSuccess, isFetching } = useProgramsQuery();
+  // const { data, error, isLoading, isSuccess, isFetching } = useProgramsQuery();
 
   const {
     register,
@@ -31,40 +43,101 @@ const ScheduleForm = () => {
   } = useForm();
 
   const scheduleData: any = watch();
-  console.log(scheduleData);
 
-  if (isLoading || isFetching)
+  if (
+    // isLoading || isFetching ||
+    stationLoading ||
+    stationFetching
+  )
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <CircularProgress />
       </Grid>
     );
 
-  if (isSuccess) {
-    programData = data;
-  }
+  // if (isSuccess) {
+  //   programData = data;
+  // }
 
-  if (error)
+  programData = stationData?.data?.filter((programs: any) => {
+    return programs.id === stationId;
+  });
+
+  programData = programData?.[0]?.programs;
+
+  if (
+    // error
+    stationError
+  )
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <Typography variant="h3">Something Went Wrong</Typography>
       </Grid>
     );
 
+
+
   return (
     <div>
       <Box>
         <Card sx={{ p: 4 }}>
-          <Typography variant="h3">Add Schedule</Typography>
+          <Grid container spacing={2}>
+            <Grid item lg={8} md={8} sm={12} xs={12}>
+              <Typography variant="h3">Add Schedule</Typography>
+            </Grid>
+            <Grid item lg={4} md={4} sm={12} xs={12}>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  stationRefetch();
+                }}
+              >
+                Refresh
+              </Button>
+            </Grid>
+          </Grid>
+
           <Grid container spacing={2} sx={{ mt: 3 }}>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
+            <Grid item lg={4} md={4} sm={12} xs={12}>
               <TextField label="Alias" {...register('key', { required: true })} fullWidth />
               <Typography variant="inherit" color="error">
                 {scheduleData.key === '' && 'This is required'}
               </Typography>
             </Grid>
 
-            <Grid item lg={6} md={6} sm={12} xs={12}>
+            <Grid item lg={4} md={4} sm={12} xs={12}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Stations</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Stations"
+                  fullWidth
+                  displayEmpty
+                  defaultValue=""
+                  value={stationId}
+                  {...register('stationId')}
+                  onChange={(e: any) => {
+                    setStationId(e.target.value);
+                  }}
+                >
+                  {stationData.data.map((station: any) => (
+                    <MenuItem key={station.id} value={station.id.toString()}>
+                      {station.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {scheduleData.stationId === undefined || scheduleData.stationId === '' ? (
+                  <Typography variant="inherit" color="error">
+                    This is required
+                  </Typography>
+                ) : (
+                  ''
+                )}
+              </FormControl>
+            </Grid>
+
+            <Grid item lg={4} md={4} sm={12} xs={12}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Programs</InputLabel>
                 <Select
@@ -76,7 +149,7 @@ const ScheduleForm = () => {
                   defaultValue=""
                   {...register('programId')}
                 >
-                  {programData.data.map((program: any) => (
+                  {programData?.map((program: any, key: any) => (
                     <MenuItem key={program.id} value={program.id.toString()}>
                       {program.name}
                     </MenuItem>

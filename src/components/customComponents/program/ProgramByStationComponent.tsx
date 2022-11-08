@@ -44,7 +44,7 @@ const ProgramByStationComponent = ({ programData }: any) => {
                             <PreviewIcon />
                         </Button>
                     </Link>
-                    <Link to={`/dashboard/schedule/edit/${cellValues.id}`} style={{ textDecoration: 'none' }}>
+                    <Link to={`/dashboard/program/edit/${cellValues.id}`} style={{ textDecoration: 'none' }}>
                         <Button sx={{ mr: 2 }}>
                             <EditIcon />
                         </Button>

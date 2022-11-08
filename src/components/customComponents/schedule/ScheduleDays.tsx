@@ -44,8 +44,6 @@ const ScheduleDays = ({ scheduleData }: any) => {
     });
   };
 
-
-
   //Add Schedules
   const [addSchedules, result] = useAddScheduleMutation();
 
@@ -57,6 +55,7 @@ const ScheduleDays = ({ scheduleData }: any) => {
     if (response.isSuccess) {
       toast.success(response.data.status);
       navigate(`/dashboard/program/detail/${programDataId}`);
+      window.location.reload();
     }
     if (response.isError) {
       // toast.error(response.error.data.error)
@@ -97,11 +96,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
       startTime: scheduleData.startDate,
       endTime: scheduleData.endDate,
     };
+    console.log(newData);
     addSchedules(newData);
   };
 
   if (loading) return <LoadingComponent />;
-  
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
