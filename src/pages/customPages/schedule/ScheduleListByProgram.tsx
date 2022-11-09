@@ -11,6 +11,7 @@ const ScheduleListByProgram = () => {
   var scheduleData: any = {};
   const [futureSchedule, setFutureSchedule] = React.useState(false);
 
+
   //Change the schedule to future 
   const futureScheduleHandleChange: any = () => {
     futureSchedule === false ? setFutureSchedule(true) : setFutureSchedule(false)

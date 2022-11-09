@@ -4,8 +4,15 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDeletePriceCategoryMutation } from 'src/services/PriceCategoryApi';
+import DeleteItem from '../../shared/DeleteItem';
+import React from 'react';
 
 const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
+  const [open, setOpen] = React.useState(false);
+  const [priceCategoryId, setPriceCategoryId] = React.useState('');
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   // Delete Price Category
   const [deletePriceCategory] = useDeletePriceCategoryMutation();
 
@@ -13,7 +20,7 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
   const columns: GridColumns = [
     {
       field: 'key',
-     headerName: 'Alias',
+      headerName: 'Alias',
       width: 300,
     },
     {
@@ -36,7 +43,13 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
               <EditIcon />
             </Button>
           </Link>
-          <Button color="error" onClick={() => deletePriceCategory(cellValues.id)}>
+          <Button
+            color="error"
+            onClick={() => {
+              setPriceCategoryId(cellValues.id);
+              setOpen(true);
+            }}
+          >
             <DeleteIcon />
           </Button>
         </>
@@ -59,6 +72,15 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
           },
         }}
         style={{ height: '80vh' }}
+      />
+      <DeleteItem
+        {...{
+          deleteItem: deletePriceCategory,
+          setOpen,
+          handleClose,
+          open,
+          itemId: priceCategoryId,
+        }}
       />
     </div>
   );

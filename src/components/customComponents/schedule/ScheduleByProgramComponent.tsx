@@ -7,8 +7,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import PreviewIcon from '@mui/icons-material/Preview';
 import moment from 'moment';
 import { useDeleteScheduleMutation } from 'src/services/ScheduleApi';
+import DeleteItem from '../shared/DeleteItem';
 
 const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
+  const [open, setOpen] = React.useState(false);
+  const [scheduleId, setSchedule] = React.useState('');
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   // Delete Schedule
   const [deleteSchedule] = useDeleteScheduleMutation();
 
@@ -77,7 +83,14 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
               <EditIcon />
             </Button>
           </Link>
-          <Button color="error" onClick={() => deleteSchedule(cellValues.id)}>
+          <Button
+            color="error"
+            //  onClick={() => deleteSchedule(cellValues.id)}
+            onClick={() => {
+              setSchedule(cellValues.id);
+              setOpen(true);
+            }}
+          >
             <DeleteIcon />
           </Button>
         </>
@@ -101,6 +114,9 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
           },
         }}
         style={{ height: '80vh' }}
+      />
+      <DeleteItem
+        {...{ deleteItem: deleteSchedule, setOpen, handleClose, open, itemId: scheduleId }}
       />
     </div>
   );

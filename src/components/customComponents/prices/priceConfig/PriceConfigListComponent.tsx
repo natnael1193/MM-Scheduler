@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDeletePriceConfigMutation } from 'src/services/PriceConfigApi';
+import React from 'react';
+import DeleteItem from '../../shared/DeleteItem';
 
 const PriceConfigListComponent = ({ priceConfigData }: any) => {
+  const [open, setOpen] = React.useState(false);
+  const [priceConfigId, setPriceConfigId] = React.useState('');
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   // Delete Price config
   const [deletePriceConfig] = useDeletePriceConfigMutation();
 
@@ -13,7 +19,7 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
   const columns: GridColumns = [
     {
       field: 'key',
-     headerName: 'Alias',
+      headerName: 'Alias',
       width: 400,
     },
     {
@@ -46,7 +52,14 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
               <EditIcon />
             </Button>
           </Link>
-          <Button color="error" onClick={() => deletePriceConfig(cellValues.id)}>
+          <Button
+            color="error"
+            // onClick={() => deletePriceConfig(cellValues.id)}
+            onClick={() => {
+              setPriceConfigId(cellValues.id);
+              setOpen(true);
+            }}
+          >
             <DeleteIcon />
           </Button>
         </>
@@ -69,6 +82,15 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
           },
         }}
         style={{ height: '80vh' }}
+      />
+      <DeleteItem
+        {...{
+          deleteItem: deletePriceConfig,
+          setOpen,
+          handleClose,
+          open,
+          itemId: priceConfigId,
+        }}
       />
     </div>
   );
