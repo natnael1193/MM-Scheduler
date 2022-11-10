@@ -23,7 +23,7 @@ const ProgramByStationComponent = ({ programData }: any) => {
     {
       field: 'name',
       headerName: 'Name',
-      width: 200,
+      width: 400,
     },
     {
       field: 'programType',
