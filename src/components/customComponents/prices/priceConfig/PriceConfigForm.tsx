@@ -15,13 +15,19 @@ import { useForm } from 'react-hook-form';
 import ErrorComponent from '../../shared/ErrorComponent';
 import LoadingComponent from '../../shared/LoadingComponent';
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
+import { useStationsQuery } from 'src/services/StationApi';
+import { useProgramsQuery } from 'src/services/ProgramApi';
 
 const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
   let priceCategoriesData: any = [];
+  let filteredProgramData: any = [];
+  let stationId: string = '';
+  let filteredPriceCategoryData: any = [];
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm({
     defaultValues,
   });
@@ -33,13 +39,30 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
     isSuccess: priceCategorySuccess,
   } = usePriceCategoriesQuery();
 
-  if (priceCategoryLoading) return <LoadingComponent />;
-  if (priceCategoryError) return <ErrorComponent />;
+  const {
+    data: stationData,
+    isLoading: stationLoading,
+    error: stationError,
+  }: any = useStationsQuery();
+
+  if (priceCategoryLoading || stationLoading) return <LoadingComponent />;
+  if (priceCategoryError || stationError) return <ErrorComponent />;
   if (priceCategorySuccess) {
     priceCategoriesData = priceCategoryData;
   }
 
-  console.log(defaultValues)
+  stationId = watch('stationId');
+  filteredProgramData = stationData?.data?.filter((station: any) => {
+    return station.id === stationId;
+  });
+  filteredProgramData = filteredProgramData?.[0]?.programs;
+
+  filteredPriceCategoryData = priceCategoriesData?.data?.filter((priceCategory: any) => {
+    return priceCategory.stationId === stationId;
+  });
+
+  console.log(filteredProgramData);
+  console.log('filteredPriceCategoryData', filteredPriceCategoryData);
   return (
     <div>
       <Grid>
@@ -49,13 +72,13 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
           </Typography>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container>
-            <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField {...register('key', { required: true })} fullWidth label="Alias" />
                 <Typography variant="inherit" color="error">
                   {errors.key && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField
                   {...register('name', { required: true })}
                   fullWidth
@@ -65,7 +88,52 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                   {errors.name && 'This is required'}
                 </Typography>
               </Grid>
-    
+
+              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Station</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Price Category"
+                    // defaultValue={defaultValues?.stationId}
+                    defaultValue={''}
+                    {...register('stationId', { required: true })}
+                    displayEmpty
+                  >
+                    {stationData?.data?.map((station: any) => (
+                      <MenuItem value={station.id} key={station.id}>
+                        {station.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <Typography variant="inherit" color="error">
+                    {errors.priceCategoryId && 'This is required'}
+                  </Typography>
+                </FormControl>
+              </Grid>
+              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Program</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Price Category"
+                    defaultValue={defaultValues?.priceCategoryId}
+                    {...register('priceCategoryId', { required: true })}
+                    displayEmpty
+                  >
+                    {filteredProgramData?.map((program: any) => (
+                      <MenuItem value={program.id} key={program.id}>
+                        {program.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <Typography variant="inherit" color="error">
+                    {errors.priceCategoryId && 'This is required'}
+                  </Typography>
+                </FormControl>
+              </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Price Category</InputLabel>
@@ -73,11 +141,11 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Price Category"
-                    defaultValue={defaultValues.priceCategoryId}
+                    defaultValue={defaultValues?.priceCategoryId}
                     {...register('priceCategoryId', { required: true })}
                     displayEmpty
                   >
-                    {priceCategoriesData?.data.map((priceCategories: any) => (
+                    {filteredPriceCategoryData?.map((priceCategories: any) => (
                       <MenuItem value={priceCategories.id} key={priceCategories.id}>
                         {priceCategories.name}
                       </MenuItem>
