@@ -184,12 +184,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
+                Select Price Config
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Select Price Classification"
+                label="Select Price Config"
                 {...(state.monday ? register(`schedules.${0}.priceId` as const) : null)}
                 defaultValue=""
                 required
@@ -269,12 +269,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
+                Select Price Config
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Select Price Classification"
+                label="Select Price Config"
                 displayEmpty
                 {...(state.tuesday ? register(`schedules.${1}.priceId` as const) : null)}
                 defaultValue=""
@@ -355,12 +355,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
+                Select Price Config
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Select Price Classification"
+                label="Select Price Config"
                 displayEmpty
                 {...(state.wendsday ? register(`schedules.${2}.priceId` as const) : null)}
                 defaultValue=""
@@ -441,12 +441,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
+                Select Price Config
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Select Price Classification"
+                label="Select Price Config"
                 displayEmpty
                 {...(state.thursday ? register(`schedules.${3}.priceId` as const) : null)}
                 defaultValue=""
@@ -527,12 +527,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
+                Select Price Config
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Select Price Classification"
+                label="Select Price Config"
                 displayEmpty
                 {...(state.friday ? register(`schedules.${4}.priceId` as const) : null)}
                 defaultValue=""
@@ -613,12 +613,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
+                Select Price Config
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Select Price Classification"
+                label="Select Price Config"
                 displayEmpty
                 {...(state.saturday ? register(`schedules.${5}.priceId` as const) : null)}
                 defaultValue=""
@@ -699,12 +699,12 @@ const ScheduleDays = ({ scheduleData }: any) => {
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-helper-label">
-                Select Price Classification
+                Select Price Config
               </InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="Select Price Classification"
+                label="Select Price Config"
                 displayEmpty
                 {...(state.sunday ? register(`schedules.${6}.priceId` as const) : null)}
                 defaultValue=""

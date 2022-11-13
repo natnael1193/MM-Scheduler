@@ -28,12 +28,17 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         day: moment.utc(schedule.startTime).format('dddd Do MMMM YYYY'),
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
+        date: moment.utc(schedule.startTime).unix(),
       };
     });
 
+    newScheduleData = newScheduleData.sort((firstItem: any, secondItem: any) => firstItem.date - secondItem.date);
+
+
+
   //Filter Future Schedules
   const futureScheduleData: any = scheduleData.schedules.filter(function (date: any) {
-    console.log(moment(date.startTime).format('d-MM-YYYY'));
+    // console.log(moment(date.startTime).format('d-MM-YYYY'));
     return moment(date.startTime).format() > moment(new Date()).format();
   });
 
@@ -97,6 +102,9 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
       ),
     },
   ];
+
+
+
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
