@@ -53,7 +53,7 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
               {formTitle}
             </Typography>
             <Grid container spacing={2}>
-            <Grid item lg={4} md={4} sm={12} xs={12}>
+            <Grid item lg={6} md={6} sm={12} xs={12}>
                 <TextField
                   {...register('key', { required: true })}
                   id="outlined-basic"
@@ -65,7 +65,7 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                   {errors.key && 'This is required'}
                 </Typography>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12}>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
                 <TextField
                   {...register('name', { required: true })}
                   id="outlined-basic"
@@ -78,7 +78,7 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                 </Typography>
               </Grid>
   
-              <Grid item lg={4} md={4} sm={12} xs={12}>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Organization</InputLabel>
                   <Select
@@ -100,6 +100,18 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                   <Typography variant='inherit' color="error">{errors.organizationId && "This is required"}</Typography>
                 </FormControl>
 
+              </Grid>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
+                <TextField
+                  {...register('discountPrice', { required: true })}
+                  id="outlined-basic"
+                  label="Discount Price"
+                  variant="outlined"
+                  fullWidth
+                />
+                <Typography variant="inherit" color="error">
+                  {errors.discountPrice && 'This is required'}
+                </Typography>
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 3, mb: 3 }}>
                 <TextField
