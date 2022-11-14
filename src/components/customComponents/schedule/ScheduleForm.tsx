@@ -82,7 +82,7 @@ const ScheduleForm = () => {
       </Grid>
     );
 
-  console.log(priceCategory);
+  console.log(programData);
 
   return (
     <div>

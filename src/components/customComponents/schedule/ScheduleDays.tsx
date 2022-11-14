@@ -28,11 +28,20 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
 
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(true);
+  const [priceConfig, setPriceConfig] = React.useState({
+    monday: '',
+    tuesday: '',
+    wendsday: '',
+    thursday: '',
+    friday: '',
+    saturday: '',
+    sunday: '',
+  });
 
   const {
-    data: priceConfigData,
-    isLoading: priceConfigLoading,
-    error: priceConfigError,
+    data: priceCategoryData,
+    isLoading: priceCategoryLoading,
+    error: priceCategoryError,
   }: any = usePriceCategoriesQuery();
 
   React.useEffect(() => {
@@ -49,6 +58,14 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
     saturday: false,
     sunday: false,
   });
+
+  const [mondayPrice, setMondayPrice] = React.useState([]);
+  const [tuesdayPrice, setTuesdayPrice] = React.useState([]);
+  const [wendsdayPrice, setWendsdayPrice] = React.useState([]);
+  const [thursdayPrice, setThursdayPrice] = React.useState([]);
+  const [fridayPrice, setFridayPrice] = React.useState([]);
+  const [saturdayPrice, setSaturdayPrice] = React.useState([]);
+  const [sundayPrice, setSundayPrice] = React.useState([]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -107,17 +124,17 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
       programId: scheduleData.programId,
       key: scheduleData.key,
       startTime: scheduleData.startDate.concat('T00:00:00Z'),
-      endTime: scheduleData.endDate.concat('T00:00:00Z'),
+      endTime: scheduleData.endDate,
     };
     console.log(newData);
     addSchedules(newData);
   };
 
-  if (loading || priceConfigLoading) return <LoadingComponent />;
-  if (priceConfigError) return <ErrorComponent />;
+  if (loading || priceCategoryLoading) return <LoadingComponent />;
+  if (priceCategoryError) return <ErrorComponent />;
 
   // console.log(priceConfigData)
-  // console.log('scheduleData', scheduleData)
+  console.log('scheduleData', mondayPrice);
 
   return (
     <div>
@@ -140,7 +157,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               label="Monday"
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             <Input
               type="hidden"
               value="monday"
@@ -164,7 +181,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {state.monday ? (
               <TextField
                 {...register(`schedules.${0}.endTime` as const)}
@@ -185,9 +202,33 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Config
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Select Price Category"
+                {...(state.monday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                defaultValue=""
+                required
+                disabled={state.monday ? false : true}
+              >
+                {priceCategory?.map((priceCategory: any) => (
+                  <MenuItem
+                    value={priceCategory.id}
+                    key={priceCategory.id}
+                    onClick={() => {
+                      setMondayPrice(priceCategory.priceConfigs);
+                    }}
+                  >
+                    {priceCategory.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -197,7 +238,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 required
                 disabled={state.monday ? false : true}
               >
-                {priceCategory?.map((priceConfig: any) => (
+                {mondayPrice?.map((priceConfig: any) => (
                   <MenuItem value={priceConfig.id} key={priceConfig.id}>
                     {priceConfig.name}
                   </MenuItem>
@@ -225,7 +266,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             <Input
               type="hidden"
               value="tuesday"
@@ -249,7 +290,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {state.tuesday ? (
               <TextField
                 {...register(`schedules.${1}.endTime` as const)}
@@ -270,9 +311,33 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Config
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Select Price Category"
+                {...(state.tuesday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                defaultValue=""
+                required
+                disabled={state.tuesday ? false : true}
+              >
+                {priceCategory?.map((priceCategory: any) => (
+                  <MenuItem
+                    value={priceCategory.id}
+                    key={priceCategory.id}
+                    onClick={() => {
+                      setTuesdayPrice(priceCategory.priceConfigs);
+                    }}
+                  >
+                    {priceCategory.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -283,7 +348,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 disabled={state.tuesday ? false : true}
                 required
               >
-                {priceCategory?.map((priceConfig: any) => (
+                {tuesdayPrice?.map((priceConfig: any) => (
                   <MenuItem value={priceConfig.id} key={priceConfig.id}>
                     {priceConfig.name}
                   </MenuItem>
@@ -311,7 +376,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             <Input
               type="hidden"
               value="wednesday"
@@ -335,7 +400,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {state.wendsday ? (
               <TextField
                 {...register(`schedules.${2}.endTime` as const)}
@@ -356,9 +421,33 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Config
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Select Price Category"
+                {...(state.wendsday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                defaultValue=""
+                required
+                disabled={state.wendsday ? false : true}
+              >
+                {wendsdayPrice?.map((priceCategory: any) => (
+                  <MenuItem
+                    value={priceCategory.id}
+                    key={priceCategory.id}
+                    onClick={() => {
+                      setWendsdayPrice(priceCategory.priceConfigs);
+                    }}
+                  >
+                    {priceCategory.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -397,7 +486,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             <Input
               type="hidden"
               value="thursday"
@@ -421,7 +510,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {state.thursday ? (
               <TextField
                 {...register(`schedules.${3}.endTime` as const)}
@@ -442,9 +531,33 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Config
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Select Price Category"
+                {...(state.thursday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                defaultValue=""
+                required
+                disabled={state.thursday ? false : true}
+              >
+                {priceCategory?.map((priceCategory: any) => (
+                  <MenuItem
+                    value={priceCategory.id}
+                    key={priceCategory.id}
+                    onClick={() => {
+                      setThursdayPrice(priceCategory.priceConfigs);
+                    }}
+                  >
+                    {priceCategory.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -455,7 +568,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 disabled={state.thursday ? false : true}
                 required
               >
-                {priceCategory?.map((priceConfig: any) => (
+                {thursdayPrice?.map((priceConfig: any) => (
                   <MenuItem value={priceConfig.id} key={priceConfig.id}>
                     {priceConfig.name}
                   </MenuItem>
@@ -483,7 +596,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             <Input
               type="hidden"
               value="friday"
@@ -507,7 +620,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {state.friday ? (
               <TextField
                 {...register(`schedules.${4}.endTime` as const)}
@@ -528,9 +641,33 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Config
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Select Price Category"
+                {...(state.saturday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                defaultValue=""
+                required
+                disabled={state.saturday ? false : true}
+              >
+                {priceCategory?.map((priceCategory: any) => (
+                  <MenuItem
+                    value={priceCategory.id}
+                    key={priceCategory.id}
+                    onClick={() => {
+                      setSaturdayPrice(priceCategory.priceConfigs);
+                    }}
+                  >
+                    {priceCategory.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -541,7 +678,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 disabled={state.friday ? false : true}
                 required
               >
-                {priceCategory?.map((priceConfig: any) => (
+                {fridayPrice?.map((priceConfig: any) => (
                   <MenuItem value={priceConfig.id} key={priceConfig.id}>
                     {priceConfig.name}
                   </MenuItem>
@@ -569,7 +706,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             <Input
               type="hidden"
               value="saturday"
@@ -593,7 +730,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {state.saturday ? (
               <TextField
                 {...register(`schedules.${5}.endTime` as const)}
@@ -614,9 +751,33 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Config
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Select Price Category"
+                {...(state.sunday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                defaultValue=""
+                required
+                disabled={state.sunday ? false : true}
+              >
+                {priceCategory?.map((priceCategory: any) => (
+                  <MenuItem
+                    value={priceCategory.id}
+                    key={priceCategory.id}
+                    onClick={() => {
+                      setSundayPrice(priceCategory.priceConfigs);
+                    }}
+                  >
+                    {priceCategory.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
@@ -627,7 +788,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 disabled={state.saturday ? false : true}
                 required
               >
-                {priceCategory?.map((priceConfig: any) => (
+                {saturdayPrice?.map((priceConfig: any) => (
                   <MenuItem value={priceConfig.id} key={priceConfig.id}>
                     {priceConfig.name}
                   </MenuItem>
@@ -655,7 +816,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               // {...register('monday')}
             />
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             <Input
               type="hidden"
               value="sunday"
@@ -679,7 +840,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
               />
             )}
           </Grid>
-          <Grid item lg={3} md={3} sm={12} xs={12}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {state.sunday ? (
               <TextField
                 {...register(`schedules.${6}.endTime` as const)}
@@ -700,9 +861,27 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">
-                Select Price Config
-              </InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="Select Price Category"
+                {...(state.sunday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                defaultValue=""
+                required
+                disabled={state.sunday ? false : true}
+              >
+                {sundayPrice?.map((priceCategory: any) => (
+                  <MenuItem value={priceCategory.id} key={priceCategory.id}>
+                    {priceCategory.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item lg={3} md={3} sm={12} xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
