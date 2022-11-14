@@ -89,7 +89,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                 </Typography>
               </Grid>
 
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              {/* <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Station</InputLabel>
                   <Select
@@ -111,7 +111,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     {errors.priceCategoryId && 'This is required'}
                   </Typography>
                 </FormControl>
-              </Grid>
+              </Grid> */}
               {/* <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Program</InputLabel>
@@ -133,7 +133,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     {errors.priceCategoryId && 'This is required'}
                   </Typography>
                 </FormControl>
-              </Grid>
+              </Grid> */}
               <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Price Category</InputLabel>
@@ -155,7 +155,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     {errors.priceCategoryId && 'This is required'}
                   </Typography>
                 </FormControl>
-              </Grid> */}
+              </Grid> 
               <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField
                   {...register('rate', { required: true })}
