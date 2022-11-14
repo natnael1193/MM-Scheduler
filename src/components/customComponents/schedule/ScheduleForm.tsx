@@ -14,15 +14,16 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 // import ScheduleDays from './ScheduleDays';
-import { useProgramsQuery } from 'src/services/ProgramApi';
+import { useProgramByStationQuery, useProgramsQuery } from 'src/services/ProgramApi';
 import LoadingScreen from 'src/components/LoadingScreen';
 import { useStationsQuery } from 'src/services/StationApi';
 
 const ScheduleDays = lazy(() => import('./ScheduleDays'));
 
 const ScheduleForm = () => {
-  let programData: any = [];
+  // let programData: any = [];
   const [stationId, setStationId] = React.useState('');
+  const [priceCategory, setPriceCategory] = React.useState([]);
 
   //Get All Stations
   const {
@@ -34,7 +35,11 @@ const ScheduleForm = () => {
     refetch: stationRefetch,
   }: any = useStationsQuery();
   //Get All Programs
-  // const { data, error, isLoading, isSuccess, isFetching } = useProgramsQuery();
+  const {
+    data: programData,
+    error: programError,
+    isLoading: programLoading,
+  }: any = useProgramByStationQuery(stationId);
 
   const {
     register,
@@ -47,7 +52,8 @@ const ScheduleForm = () => {
   if (
     // isLoading || isFetching ||
     stationLoading ||
-    stationFetching
+    stationFetching ||
+    programLoading
   )
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -59,15 +65,16 @@ const ScheduleForm = () => {
   //   programData = data;
   // }
 
-  programData = stationData?.data?.filter((programs: any) => {
-    return programs.id === stationId;
-  });
+  // programData = stationData?.data?.filter((programs: any) => {
+  //   return programs.id === stationId;
+  // });
 
-  programData = programData?.[0]?.programs;
+  // programData = programData?.[0]?.programs;
 
   if (
     // error
-    stationError
+    stationError ||
+    programError
   )
     return (
       <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -75,7 +82,7 @@ const ScheduleForm = () => {
       </Grid>
     );
 
-
+  console.log(priceCategory);
 
   return (
     <div>
@@ -149,8 +156,14 @@ const ScheduleForm = () => {
                   defaultValue=""
                   {...register('programId')}
                 >
-                  {programData?.map((program: any, key: any) => (
-                    <MenuItem key={program.id} value={program.id.toString()}>
+                  {programData?.data?.programs?.map((program: any, key: any) => (
+                    <MenuItem
+                      key={program.id}
+                      value={program.id.toString()}
+                      onClick={() => {
+                        setPriceCategory(program.priceCategories);
+                      }}
+                    >
                       {program.name}
                     </MenuItem>
                   ))}
@@ -199,7 +212,7 @@ const ScheduleForm = () => {
           </Grid>
           {/* <DaysList scheduleData={scheduleData} /> */}
           <Suspense fallback={<LoadingScreen />}>
-            <ScheduleDays scheduleData={scheduleData} />
+            <ScheduleDays scheduleData={scheduleData} priceCategory={priceCategory} />
           </Suspense>
         </Card>
       </Box>
