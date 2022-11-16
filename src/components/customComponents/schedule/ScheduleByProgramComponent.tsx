@@ -29,12 +29,13 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
         date: moment.utc(schedule.startTime).unix(),
+        station: schedule.station,
       };
     });
 
-    newScheduleData = newScheduleData.sort((firstItem: any, secondItem: any) => firstItem.date - secondItem.date);
-
-
+  newScheduleData = newScheduleData.sort(
+    (firstItem: any, secondItem: any) => firstItem.date - secondItem.date
+  );
 
   //Filter Future Schedules
   const futureScheduleData: any = scheduleData.schedules.filter(function (date: any) {
@@ -51,6 +52,7 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         day: moment(schedule.startTime).format('dddd Do MMMM YYYY'),
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
+        station: schedule.station,
       };
     });
 
@@ -71,6 +73,11 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
       headerName: 'End Time',
       width: 200,
     },
+    // {
+    //   field: 'station',
+    //   headerName: 'Station',
+    //   width: 200,
+    // },
     {
       field: '',
       // headerName: '',
@@ -103,8 +110,7 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
     },
   ];
 
-
-
+  console.log(newScheduleData)
 
   return (
     <div style={{ height: '400px', width: '100%' }}>

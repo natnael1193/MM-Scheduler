@@ -56,6 +56,8 @@ const EditPriceCategory = () => {
     updatePriceCategory(data)
   }
 
+  console.log(defaultValues)
+
   return (
     <div>
       <BreadCrumb

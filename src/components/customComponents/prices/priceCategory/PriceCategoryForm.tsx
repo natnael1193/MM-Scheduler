@@ -28,7 +28,8 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
     defaultValues,
   });
 
-  let stationId: any = watch('stationId');
+  let stationId: any = '';
+  stationId = watch('stationId');
 
   // Fetch Stations
   const {
@@ -43,16 +44,17 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
     data: programData,
     isLoading: programLoading,
     error: programError,
-  }: any = useProgramByStationQuery(stationId);
+  }: any = 
+  useProgramByStationQuery(stationId);
   // useProgramByStationQuery(programId)
 
   if (stationLoading || programLoading) return <LoadingComponent />;
-  if (stationError || programError) return <ErrorComponent />;
+  if (stationError) return <ErrorComponent />;
   if (stationSucess) {
     stationsData = stationData;
   }
 
-  console.log(programData);
+  console.log(defaultValues);
 
   return (
     <div>
@@ -108,7 +110,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Program"
-                    defaultValue={defaultValues.stationId}
+                    defaultValue={defaultValues.programId}
                     displayEmpty
                     {...register('programId', { required: true })}
                   >
@@ -119,7 +121,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                     ))}
                   </Select>
                   <Typography variant="inherit" color="error">
-                    {errors.stationId && 'This is required'}
+                    {errors.programId && 'This is required'}
                   </Typography>
                 </FormControl>
               </Grid>

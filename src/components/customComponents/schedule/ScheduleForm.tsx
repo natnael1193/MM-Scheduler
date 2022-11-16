@@ -25,6 +25,14 @@ const ScheduleForm = () => {
   const [stationId, setStationId] = React.useState('');
   const [priceCategory, setPriceCategory] = React.useState([]);
 
+  const [mondayPrice, setMondayPrice] = React.useState([]);
+  const [tuesdayPrice, setTuesdayPrice] = React.useState([]);
+  const [wendsdayPrice, setWendsdayPrice] = React.useState([]);
+  const [thursdayPrice, setThursdayPrice] = React.useState([]);
+  const [fridayPrice, setFridayPrice] = React.useState([]);
+  const [saturdayPrice, setSaturdayPrice] = React.useState([]);
+  const [sundayPrice, setSundayPrice] = React.useState([]);
+
   //Get All Stations
   const {
     data: stationData,
@@ -155,6 +163,15 @@ const ScheduleForm = () => {
                   displayEmpty
                   defaultValue=""
                   {...register('programId')}
+                  onChange={() => {
+                    setMondayPrice([]);
+                    setTuesdayPrice([]);
+                    setWendsdayPrice([]);
+                    setThursdayPrice([]);
+                    setFridayPrice([]);
+                    setSaturdayPrice([]);
+                    setSundayPrice([]);
+                  }}
                 >
                   {programData?.data?.programs?.map((program: any, key: any) => (
                     <MenuItem
@@ -212,7 +229,26 @@ const ScheduleForm = () => {
           </Grid>
           {/* <DaysList scheduleData={scheduleData} /> */}
           <Suspense fallback={<LoadingScreen />}>
-            <ScheduleDays scheduleData={scheduleData} priceCategory={priceCategory} />
+            <ScheduleDays
+              scheduleData={scheduleData}
+              priceCategory={priceCategory}
+              {...{
+                mondayPrice,
+                setMondayPrice,
+                tuesdayPrice,
+                setTuesdayPrice,
+                wendsdayPrice,
+                setWendsdayPrice,
+                thursdayPrice,
+                setThursdayPrice,
+                fridayPrice,
+                setFridayPrice,
+                saturdayPrice,
+                setSaturdayPrice,
+                sundayPrice,
+                setSundayPrice,
+              }}
+            />
           </Suspense>
         </Card>
       </Box>

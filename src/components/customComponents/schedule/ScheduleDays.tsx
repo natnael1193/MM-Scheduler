@@ -23,7 +23,24 @@ import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
 import ErrorComponent from '../shared/ErrorComponent';
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
 
-const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
+const ScheduleDays = ({
+  scheduleData,
+  priceCategory,
+  mondayPrice,
+  setMondayPrice,
+  tuesdayPrice,
+  setTuesdayPrice,
+  wendsdayPrice,
+  setWendsdayPrice,
+  thursdayPrice,
+  setThursdayPrice,
+  fridayPrice,
+  setFridayPrice,
+  saturdayPrice,
+  setSaturdayPrice,
+  sundayPrice,
+  setSundayPrice,
+}: any) => {
   var programDataId: string = '';
 
   const navigate = useNavigate();
@@ -59,13 +76,13 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
     sunday: false,
   });
 
-  const [mondayPrice, setMondayPrice] = React.useState([]);
-  const [tuesdayPrice, setTuesdayPrice] = React.useState([]);
-  const [wendsdayPrice, setWendsdayPrice] = React.useState([]);
-  const [thursdayPrice, setThursdayPrice] = React.useState([]);
-  const [fridayPrice, setFridayPrice] = React.useState([]);
-  const [saturdayPrice, setSaturdayPrice] = React.useState([]);
-  const [sundayPrice, setSundayPrice] = React.useState([]);
+  // const [mondayPrice, setMondayPrice] = React.useState([]);
+  // const [tuesdayPrice, setTuesdayPrice] = React.useState([]);
+  // const [wendsdayPrice, setWendsdayPrice] = React.useState([]);
+  // const [thursdayPrice, setThursdayPrice] = React.useState([]);
+  // const [fridayPrice, setFridayPrice] = React.useState([]);
+  // const [saturdayPrice, setSaturdayPrice] = React.useState([]);
+  // const [sundayPrice, setSundayPrice] = React.useState([]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -134,7 +151,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
   if (priceCategoryError) return <ErrorComponent />;
 
   // console.log(priceConfigData)
-  console.log('scheduleData', mondayPrice);
+  console.log('scheduleData', sundayPrice);
 
   return (
     <div>
@@ -431,7 +448,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 required
                 disabled={state.wendsday ? false : true}
               >
-                {wendsdayPrice?.map((priceCategory: any) => (
+                {priceCategory?.map((priceCategory: any) => (
                   <MenuItem
                     value={priceCategory.id}
                     key={priceCategory.id}
@@ -458,7 +475,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 disabled={state.wendsday ? false : true}
                 required
               >
-                {priceCategory?.map((priceConfig: any) => (
+                {wendsdayPrice?.map((priceConfig: any) => (
                   <MenuItem value={priceConfig.id} key={priceConfig.id}>
                     {priceConfig.name}
                   </MenuItem>
@@ -649,14 +666,14 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 {...(state.saturday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
                 defaultValue=""
                 required
-                disabled={state.saturday ? false : true}
+                disabled={state.friday ? false : true}
               >
                 {priceCategory?.map((priceCategory: any) => (
                   <MenuItem
                     value={priceCategory.id}
                     key={priceCategory.id}
                     onClick={() => {
-                      setSaturdayPrice(priceCategory.priceConfigs);
+                      setFridayPrice(priceCategory.priceConfigs);
                     }}
                   >
                     {priceCategory.name}
@@ -756,17 +773,17 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
                 label="Select Price Category"
-                {...(state.sunday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
+                {...(state.saturday ? register(`schedules.${0}.priceCategoryId` as const) : null)}
                 defaultValue=""
                 required
-                disabled={state.sunday ? false : true}
+                disabled={state.saturday ? false : true}
               >
                 {priceCategory?.map((priceCategory: any) => (
                   <MenuItem
                     value={priceCategory.id}
                     key={priceCategory.id}
                     onClick={() => {
-                      setSundayPrice(priceCategory.priceConfigs);
+                      setSaturdayPrice(priceCategory.priceConfigs);
                     }}
                   >
                     {priceCategory.name}
@@ -871,8 +888,14 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 required
                 disabled={state.sunday ? false : true}
               >
-                {sundayPrice?.map((priceCategory: any) => (
-                  <MenuItem value={priceCategory.id} key={priceCategory.id}>
+                {priceCategory?.map((priceCategory: any) => (
+                  <MenuItem
+                    value={priceCategory.id}
+                    key={priceCategory.id}
+                    onClick={() => {
+                      setSundayPrice(priceCategory.priceConfigs);
+                    }}
+                  >
                     {priceCategory.name}
                   </MenuItem>
                 ))}
@@ -892,7 +915,7 @@ const ScheduleDays = ({ scheduleData, priceCategory }: any) => {
                 disabled={state.sunday ? false : true}
                 required
               >
-                {priceCategory?.map((priceConfig: any) => (
+                {sundayPrice?.map((priceConfig: any) => (
                   <MenuItem value={priceConfig.id} key={priceConfig.id}>
                     {priceConfig.name}
                   </MenuItem>
