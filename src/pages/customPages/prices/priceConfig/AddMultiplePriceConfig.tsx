@@ -1,0 +1,72 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import MultiplePriceConfigForm from 'src/components/customComponents/prices/priceConfig/MultiplePriceConfigForm';
+import PriceConfigForm from 'src/components/customComponents/prices/priceConfig/PriceConfigForm';
+import { useAddPriceConfigMutation } from 'src/services/PriceConfigApi';
+import BreadCrumb from '../../breadCrumb/BreadCrumb';
+
+const AddMultiplePriceConfig = () => {
+  const navigate = useNavigate();
+
+  //Initial State
+  const initialState: any = {
+    key: '',
+    name: '',
+    startDate: '',
+    endDate: '',
+    rate: '',
+    unit: '',
+    priceCategoryId: '',
+  };
+
+  //Add New Data
+  const [addPriceConfig, result] = useAddPriceConfigMutation();
+
+  //Check the status
+  const response: any = result;
+  useEffect(() => {
+    if (response.isSuccess) {
+      toast.success(response.data.status);
+      navigate('/dashboard/price-config/list');
+    }
+    if (response.isError) {
+      toast.error(response.error.data.error);
+    }
+  }, [response, navigate]);
+
+  //Submit Data
+  const onSubmit = (data: any) => {
+    console.log(data)
+    const newData: any = {
+      name: data.name,
+      key: data.key,
+      rate: Number(data.rate),
+      unit: Number(data.unit),
+      startDate: data.startDate + 'Z',
+      endDate: data.endDate + 'Z',
+      priceCategoryId: data.priceCategoryId,
+      // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
+      // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
+    };
+    // addPriceConfig(newData);
+  };
+  return (
+    <div>
+      <BreadCrumb
+        main={'Dashboard'}
+        parent={'Price Config'}
+        child={'Add'}
+        parentLink={'/dashboard/price-config/list'}
+      />
+
+      <MultiplePriceConfigForm
+        defaultValues={initialState}
+        onFormSubmit={onSubmit}
+        formTitle={'Add Multiple Price Config'}
+      />
+    </div>
+  );
+};
+
+export default AddMultiplePriceConfig;

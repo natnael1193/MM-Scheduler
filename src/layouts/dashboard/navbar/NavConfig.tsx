@@ -120,6 +120,7 @@ const navConfig = [
         children: [
           { title: 'Price config List', path: '/dashboard/price-config/list' },
           { title: 'Add Price config', path: '/dashboard/price-config/add' },
+          { title: 'Add Price config multiple', path: '/dashboard/price-config/add-multiple' },
           // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },

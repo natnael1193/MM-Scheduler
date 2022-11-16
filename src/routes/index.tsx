@@ -117,7 +117,7 @@ export default function Router() {
             { path: '/dashboard/price-config/list', element: <PriceConfigList /> },
             { path: '/dashboard/price-config/add', element: <AddPriceConfig /> },
             { path: '/dashboard/price-config/edit/:priceConfigId', element: <EditPriceConfig /> },
-            // { path: '/dashboard/price-category/detail/:priceCategoryId', element: <PriceCategoryDetail /> },
+            { path: '/dashboard/price-config/add-multiple', element: <AddMultiplePriceConfig /> },
           ],
         },
       ],
@@ -195,3 +195,4 @@ const ScheduleTimeline = Loadable(lazy(() => import('../pages/customPages/schedu
 const PriceConfigList = Loadable(lazy(() => import('../pages/customPages/prices/priceConfig/PriceConfigList')));
 const AddPriceConfig = Loadable(lazy(() => import('../pages/customPages/prices/priceConfig/AddPriceConfig')));
 const EditPriceConfig = Loadable(lazy(() => import('../pages/customPages/prices/priceConfig/EditPriceConfig')));
+const AddMultiplePriceConfig = Loadable(lazy(() => import('../pages/customPages/prices/priceConfig/AddMultiplePriceConfig')));
