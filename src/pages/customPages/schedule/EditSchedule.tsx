@@ -42,7 +42,7 @@ const EditSchedule = () => {
   if (error) return <Typography variant="h3">Something Went Wrong</Typography>;
 
   defaultValues = scheduleData;
-
+  console.log(defaultValues);
   scheduleDefaultValue = {
     id: defaultValues.data.id,
     // startTime: moment.utc(defaultValues.data.startTime).format('hh:mm:ss'),
@@ -52,6 +52,7 @@ const EditSchedule = () => {
     key: defaultValues.data.key,
     // priceClassificationId: defaultValues.data.priceClasifcation.id,
     priceConfigId: defaultValues.data.priceConfig.id,
+    priceConfig: defaultValues.data.priceConfig,
   };
 
   const startDate: any = moment(defaultValues.data.startTime).format('YYYY-MM-DD');
@@ -83,7 +84,7 @@ const EditSchedule = () => {
     }
 
     updateSchedule(newData);
-    return toast.success("Schedule Updated");
+    return toast.success('Schedule Updated');
   };
 
   return (

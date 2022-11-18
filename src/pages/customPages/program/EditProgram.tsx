@@ -68,7 +68,7 @@ const EditProgram = () => {
       <ProgramForm
         defaultValues={defaultValues.data}
         onFormSubmit={onSubmit}
-        formTitle={'Add Program'}
+        formTitle={'Edit Program'}
       />
     </div>
   );

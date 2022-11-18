@@ -108,7 +108,7 @@ const ProgramForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     id="demo-simple-select"
                     label="Station"
                     displayEmpty
-                    defaultValue={defaultValues.station ? defaultValues.stationId : ''}
+                    defaultValue={defaultValues.stationId ? defaultValues.stationId : ''}
                     {...register('stationId', { required: true })}
                   >
                     {stationData.data.map((station: any) => (

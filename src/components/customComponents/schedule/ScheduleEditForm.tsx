@@ -2,50 +2,54 @@ import {
   Box,
   Button,
   Card,
-  // CircularProgress,
-  // FormControl,
+  CircularProgress,
+  FormControl,
   Grid,
-  // InputLabel,
-  // MenuItem,
-  // Select,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from '@mui/material';
 import moment from 'moment';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-// import { usePriceClassificationsQuery } from 'src/services/PriceClassificationApi';
-// import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
+import { usePriceCategoriesQuery, usePriceCategoryQuery } from 'src/services/PriceCategoryApi';
+
 
 const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, endDate }: any) => {
   // var priceClassificationData: any = [];
-
+  const [priceCategoryId, setPriceCategoryId] = React.useState(defaultValues?.priceConfig?.priceCategoryId);
   //Get All Price Classifications
-  // const { data, error, isLoading, isSuccess } = usePriceClassificationsQuery();
-  // const { data, error, isLoading, isSuccess } = usePriceConfigsQuery();
+  const {
+    data: priceCategoryData,
+    error: priceCategoryError,
+    isLoading: priceCategoryLoading,
+  }: any = usePriceCategoriesQuery();
+  const {
+    data: priceConfigData,
+    error: priceConfigError,
+    isLoading: priceConfigLoading,
+  }: any = usePriceCategoryQuery(priceCategoryId);
 
   const { register, handleSubmit } = useForm({
     defaultValues,
   });
 
-  // if (isLoading)
-  //   return (
-  //     <Grid container direction="row" justifyContent="center" alignItems="center">
-  //       <CircularProgress />
-  //     </Grid>
-  //   );
+  if (priceCategoryLoading || priceConfigLoading)
+    return (
+      <Grid container direction="row" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Grid>
+    );
 
-  // if (isSuccess) {
-  //   priceClassificationData = data;
-  // }
-
-  // if (error)
-  //   return (
-  //     <Grid container direction="row" justifyContent="center" alignItems="center">
-  //       <Typography variant="h3">Something Went Wrong</Typography>
-  //     </Grid>
-  //   );
-  // console.log(defaultValues);
+  if (priceCategoryError || priceConfigError)
+    return (
+      <Grid container direction="row" justifyContent="center" alignItems="center">
+        <Typography variant="h3">Something Went Wrong</Typography>
+      </Grid>
+    );
+  console.log(defaultValues?.priceConfig?.priceCategoryId);
   return (
     <div>
       <Box>
@@ -58,7 +62,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
               {moment.utc(startDate).format('dddd D, MMMM YYYY')}
             </Typography>
             <Grid container spacing={3}>
-            <Grid item lg={4} md={4} sm={12} xs={12}>
+              <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField {...register('key')} label="Alias" fullWidth />
               </Grid>
 
@@ -83,28 +87,53 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                 />
               </Grid>
 
-              {/* <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={6} md={6} sm={12} xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-helper-label">
-                    Select Price Classification
+                    Select Price Category
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label="Select Price Classification"
+                    label="Select Price Category"
                     displayEmpty
                     {...register('priceConfigId')}
-                    defaultValue={defaultValues.priceConfigId}
+                    defaultValue={defaultValues?.priceConfig?.priceCategoryId}
+                    // value={priceCategoryId}
+                    onChange={(e: any) => {
+                      setPriceCategoryId(e.target.value);
+                    }}
                     fullWidth
                   >
-                    {priceClassificationData.data.map((priceClassification: any) => (
-                      <MenuItem value={priceClassification.id} key={priceClassification.id}>
-                        {priceClassification.name}
+                    {priceCategoryData?.data?.map((priceCategory: any) => (
+                      <MenuItem value={priceCategory.id} key={priceCategory.id}>
+                        {priceCategory.name}
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
-              </Grid> */}
+              </Grid>
+
+              <Grid item lg={6} md={6} sm={12} xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-helper-label">Select Price Config</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-helper-label"
+                    id="demo-simple-select-helper"
+                    label="Select Price Config"
+                    displayEmpty
+                    {...register('priceConfigId')}
+                    defaultValue={defaultValues?.priceConfig?.id}
+                    fullWidth
+                  >
+                    {priceConfigData?.data?.priceConfigs?.map((priceConfig: any) => (
+                      <MenuItem value={priceConfig.id} key={priceConfig.id}>
+                        {priceConfig.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
             <Button variant="contained" type="submit" sx={{ mt: 3 }}>
               Submit
