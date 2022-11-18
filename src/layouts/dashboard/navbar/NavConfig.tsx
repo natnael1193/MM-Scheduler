@@ -4,7 +4,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import MovieIcon from '@mui/icons-material/Movie';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import DomainIcon from '@mui/icons-material/Domain';
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
 // ----------------------------------------------------------------------

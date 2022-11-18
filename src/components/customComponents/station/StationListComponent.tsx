@@ -7,14 +7,9 @@ import {
   Switch,
   Collapse,
   Divider,
-  Alert,
-  Box,
-  IconButton,
-  Modal,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDeleteStationMutation } from 'src/services/StationApi';
-import { CloseIcon } from 'src/theme/overrides/CustomIcons';
 import DeleteItem from '../shared/DeleteItem';
 
 const StationListComponent = ({ id, name, programs }: any) => {
@@ -30,8 +25,6 @@ const StationListComponent = ({ id, name, programs }: any) => {
 
   // Delete a station
   const [deleteStation] = useDeleteStationMutation();
-
-  console.log(isChecked);
 
   return (
     <>
@@ -88,16 +81,5 @@ const StationListComponent = ({ id, name, programs }: any) => {
   );
 };
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  borderRadius: 2,
-  p: 4,
-};
 
 export default StationListComponent;

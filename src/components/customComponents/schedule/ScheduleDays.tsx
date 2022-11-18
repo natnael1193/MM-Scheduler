@@ -1,8 +1,6 @@
 import {
   Button,
   FormControl,
-  // CircularProgress,
-  // FormControl,
   FormControlLabel,
   Grid,
   Input,
@@ -19,9 +17,7 @@ import { useAddScheduleMutation } from 'src/services/ScheduleApi';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import LoadingComponent from '../shared/LoadingComponent';
-import { usePriceConfigsQuery } from 'src/services/PriceConfigApi';
-import ErrorComponent from '../shared/ErrorComponent';
-import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
+
 
 const ScheduleDays = ({
   scheduleData,
@@ -45,21 +41,6 @@ const ScheduleDays = ({
 
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(true);
-  const [priceConfig, setPriceConfig] = React.useState({
-    monday: '',
-    tuesday: '',
-    wendsday: '',
-    thursday: '',
-    friday: '',
-    saturday: '',
-    sunday: '',
-  });
-
-  const {
-    data: priceCategoryData,
-    isLoading: priceCategoryLoading,
-    error: priceCategoryError,
-  }: any = usePriceCategoriesQuery();
 
   React.useEffect(() => {
     setTimeout(() => setLoading(false), 2000);
@@ -76,13 +57,6 @@ const ScheduleDays = ({
     sunday: false,
   });
 
-  // const [mondayPrice, setMondayPrice] = React.useState([]);
-  // const [tuesdayPrice, setTuesdayPrice] = React.useState([]);
-  // const [wendsdayPrice, setWendsdayPrice] = React.useState([]);
-  // const [thursdayPrice, setThursdayPrice] = React.useState([]);
-  // const [fridayPrice, setFridayPrice] = React.useState([]);
-  // const [saturdayPrice, setSaturdayPrice] = React.useState([]);
-  // const [sundayPrice, setSundayPrice] = React.useState([]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -147,8 +121,8 @@ const ScheduleDays = ({
     addSchedules(newData);
   };
 
-  if (loading || priceCategoryLoading) return <LoadingComponent />;
-  if (priceCategoryError) return <ErrorComponent />;
+  if (loading) return <LoadingComponent />;
+
 
   // console.log(priceConfigData)
   console.log('scheduleData', sundayPrice);

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import MultiplePriceConfigForm from 'src/components/customComponents/prices/priceConfig/MultiplePriceConfigForm';
-import PriceConfigForm from 'src/components/customComponents/prices/priceConfig/PriceConfigForm';
 import { useAddPriceConfigMutation } from 'src/services/PriceConfigApi';
 import BreadCrumb from '../../breadCrumb/BreadCrumb';
 
@@ -37,7 +36,7 @@ const AddMultiplePriceConfig = () => {
 
   //Submit Data
   const onSubmit = (data: any) => {
-    console.log(data)
+    console.log(data);
     const newData: any = {
       name: data.name,
       key: data.key,
@@ -49,7 +48,8 @@ const AddMultiplePriceConfig = () => {
       // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
       // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
     };
-    // addPriceConfig(newData);
+    console.log(newData);
+    addPriceConfig(newData);
   };
   return (
     <div>

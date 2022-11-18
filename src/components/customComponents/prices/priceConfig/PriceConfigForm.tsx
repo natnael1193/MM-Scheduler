@@ -16,7 +16,6 @@ import ErrorComponent from '../../shared/ErrorComponent';
 import LoadingComponent from '../../shared/LoadingComponent';
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
 import { useStationsQuery } from 'src/services/StationApi';
-import { useProgramsQuery } from 'src/services/ProgramApi';
 
 const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
   let priceCategoriesData: any = [];
@@ -52,14 +51,12 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
   }
 
   stationId = watch('stationId');
-  filteredProgramData = stationData?.data?.filter((station: any) => {
-    return station.id === stationId;
-  });
+  filteredProgramData = stationData?.data?.filter((station: any) => station.id === stationId);
   filteredProgramData = filteredProgramData?.[0]?.programs;
 
-  filteredPriceCategoryData = priceCategoriesData?.data?.filter((priceCategory: any) => {
-    return priceCategory.stationId === stationId;
-  });
+  filteredPriceCategoryData = priceCategoriesData?.data?.filter(
+    (priceCategory: any) => priceCategory.stationId === stationId
+  );
 
   console.log(filteredProgramData);
   console.log('filteredPriceCategoryData', filteredPriceCategoryData);
@@ -155,7 +152,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     {errors.priceCategoryId && 'This is required'}
                   </Typography>
                 </FormControl>
-              </Grid> 
+              </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <TextField
                   {...register('rate', { required: true })}

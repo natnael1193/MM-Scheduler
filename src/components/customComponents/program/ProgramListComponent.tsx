@@ -11,7 +11,6 @@ import React from 'react';
 const ProgramListComponent = ({ programData, allProgramData, activeDate }: any) => {
   const [open, setOpen] = React.useState(false);
   const [programId, setProgramId] = React.useState('');
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   // Delete Program

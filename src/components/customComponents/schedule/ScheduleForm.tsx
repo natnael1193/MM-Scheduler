@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 // import ScheduleDays from './ScheduleDays';
-import { useProgramByStationQuery, useProgramsQuery } from 'src/services/ProgramApi';
+import { useProgramByStationQuery } from 'src/services/ProgramApi';
 import LoadingScreen from 'src/components/LoadingScreen';
 import { useStationsQuery } from 'src/services/StationApi';
 
@@ -38,7 +38,6 @@ const ScheduleForm = () => {
     data: stationData,
     error: stationError,
     isLoading: stationLoading,
-    isSuccess: stationSuccess,
     isFetching: stationFetching,
     refetch: stationRefetch,
   }: any = useStationsQuery();

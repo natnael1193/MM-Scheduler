@@ -16,8 +16,6 @@ import ErrorComponent from '../../shared/ErrorComponent';
 import LoadingComponent from '../../shared/LoadingComponent';
 import { usePriceCategoriesQuery } from 'src/services/PriceCategoryApi';
 import { useStationsQuery } from 'src/services/StationApi';
-import { useProgramsQuery } from 'src/services/ProgramApi';
-
 const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
   let priceCategoriesData: any = [];
   let filteredProgramData: any = [];
@@ -64,15 +62,13 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
   }
 
   stationId = watch('stationId');
-  filteredProgramData = stationData?.data?.filter((station: any) => {
-    return station.id === stationId;
-  });
+  filteredProgramData = stationData?.data?.filter((station: any) => station.id === stationId);
   console.log(filteredProgramData);
   filteredProgramData = filteredProgramData?.[0]?.programs;
 
-  filteredPriceCategoryData = priceCategoriesData?.data?.filter((priceCategory: any) => {
-    return priceCategory.stationId === stationId;
-  });
+  filteredPriceCategoryData = priceCategoriesData?.data?.filter(
+    (priceCategory: any) => priceCategory.stationId === stationId
+  );
 
   console.log(filteredProgramData);
   console.log('filteredPriceCategoryData', filteredPriceCategoryData);
@@ -143,9 +139,10 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
                     id="demo-simple-select"
                     label="Programs"
                     defaultValue={defaultValues?.priceCategoryId}
-                    {...register('priceCategoryId',
-                    //  { required: true }
-                     )}
+                    {...register(
+                      'priceCategoryId'
+                      //  { required: true }
+                    )}
                     displayEmpty
                   >
                     {filteredProgramData?.map((programs: any) => (
@@ -183,8 +180,7 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
               </Grid>
             </Grid>
 
-            {fields.map((item, index) => {
-              return (
+            {fields.map((item, index) => (
                 <Grid container key={item.id}>
                   <Grid item lg={10} md={12} sm={12} xs={12} sx={{ p: 1 }}>
                     <Grid container>
@@ -256,8 +252,7 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
                     </Button>
                   </Grid>
                 </Grid>
-              );
-            })}
+              ))}
             <Grid container>
               <Grid item lg={1} md={2} sm={12} xs={12} sx={{ p: 2 }}>
                 <Button

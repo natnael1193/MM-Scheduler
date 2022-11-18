@@ -12,7 +12,7 @@ const EditStation = () => {
   var defaultValues: any = {};
 
   //Get Station By Id
-  const { data: stationData, error, isLoading, isFetching } = useStationQuery(paramsId);
+  const { data: stationData, error, isLoading } = useStationQuery(paramsId);
 
   //Update the data
   const [updateStation, result] = useUpdateStationMutation();

@@ -12,7 +12,6 @@ import DeleteItem from '../shared/DeleteItem';
 const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
   const [open, setOpen] = React.useState(false);
   const [scheduleId, setSchedule] = React.useState('');
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   // Delete Schedule

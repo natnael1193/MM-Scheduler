@@ -10,7 +10,7 @@ import React from 'react';
 const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
   const [open, setOpen] = React.useState(false);
   const [priceCategoryId, setPriceCategoryId] = React.useState('');
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   // Delete Price Category

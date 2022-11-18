@@ -5,14 +5,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PreviewIcon from '@mui/icons-material/Preview';
 import { useDeleteProgramMutation } from 'src/services/ProgramApi';
-import { id } from 'date-fns/locale';
 import DeleteItem from '../shared/DeleteItem';
 import React from 'react';
 
 const ProgramByStationComponent = ({ programData }: any) => {
   const [open, setOpen] = React.useState(false);
   const [programId, setProgramId] = React.useState('');
-  const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   // Delete Program

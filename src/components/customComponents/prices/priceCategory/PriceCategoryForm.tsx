@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import { useStationsQuery } from 'src/services/StationApi';
 import ErrorComponent from '../../shared/ErrorComponent';
 import LoadingComponent from '../../shared/LoadingComponent';
-import { useProgramByStationQuery, useProgramsQuery } from 'src/services/ProgramApi';
+import { useProgramByStationQuery } from 'src/services/ProgramApi';
 
 const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
   let stationsData: any = [];
@@ -28,7 +28,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
     defaultValues,
   });
 
-  let stationId: any = '';
+  let stationId: any = defaultValues.stationId;
   stationId = watch('stationId');
 
   // Fetch Stations
@@ -43,9 +43,8 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
   const {
     data: programData,
     isLoading: programLoading,
-    error: programError,
-  }: any = 
-  useProgramByStationQuery(stationId);
+    // error: programError,
+  }: any = useProgramByStationQuery(stationId);
   // useProgramByStationQuery(programId)
 
   if (stationLoading || programLoading) return <LoadingComponent />;

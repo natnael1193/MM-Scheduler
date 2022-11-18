@@ -10,7 +10,7 @@ import DeleteItem from '../../shared/DeleteItem';
 const PriceConfigListComponent = ({ priceConfigData }: any) => {
   const [open, setOpen] = React.useState(false);
   const [priceConfigId, setPriceConfigId] = React.useState('');
-  const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
   // Delete Price config
   const [deletePriceConfig] = useDeletePriceConfigMutation();
