@@ -161,7 +161,7 @@ const ScheduleForm = () => {
                   fullWidth
                   displayEmpty
                   defaultValue=""
-                  {...register('programId')}
+                  {...register('programId', { required: true })}
                   onChange={() => {
                     setMondayPrice([]);
                     setTuesdayPrice([]);

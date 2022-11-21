@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import MultiplePriceConfigForm from 'src/components/customComponents/prices/priceConfig/MultiplePriceConfigForm';
-import { useAddPriceConfigMutation } from 'src/services/PriceConfigApi';
+import { useAddMultiplePriceConfigMutation } from 'src/services/PriceConfigApi';
 import BreadCrumb from '../../breadCrumb/BreadCrumb';
 
 const AddMultiplePriceConfig = () => {
@@ -17,10 +17,12 @@ const AddMultiplePriceConfig = () => {
     rate: '',
     unit: '',
     priceCategoryId: '',
+    programId: '',
+    stationId: '',
   };
 
   //Add New Data
-  const [addPriceConfig, result] = useAddPriceConfigMutation();
+  const [addPriceConfig, result] = useAddMultiplePriceConfigMutation();
 
   //Check the status
   const response: any = result;
@@ -40,11 +42,12 @@ const AddMultiplePriceConfig = () => {
     const newData: any = {
       name: data.name,
       key: data.key,
-      rate: Number(data.rate),
-      unit: Number(data.unit),
+      rate: data.rate,
+      unit: data.unit,
       startDate: data.startDate + 'Z',
       endDate: data.endDate + 'Z',
       priceCategoryId: data.priceCategoryId,
+      priceConfigs: data.priceConfigs,
       // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
       // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
     };

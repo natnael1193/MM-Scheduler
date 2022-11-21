@@ -21,12 +21,13 @@ const EditSchedule = () => {
 
   //Check the status
   const response: any = result;
+  console.log(response);
   useEffect(() => {
     if (response.isSuccess) {
-      toast.success(response.data.status);
+      toast.success('Schedule Updated');
     }
     if (response.isError) {
-      toast.error(response.error.data.error);
+      toast.error('Something Wrong');
     }
   }, [response]);
 
@@ -60,12 +61,19 @@ const EditSchedule = () => {
 
   const onSubmit = (data: any) => {
     console.log(data);
+
+    const startDate = moment.utc(data.startTime).format('YYYY-MM-DD');
+    const starthour = moment.utc(data.startTime).format('hh:mm:ss');
+
+    const endDate = moment.utc(data.endTime).format('YYYY-MM-DD');
+    const endhour = moment.utc(data.endTime).format('hh:mm:ss');
+
     const newData: any = {
       id: data.id,
       // startTime: startDate.concat(' ', data.startTime),
       // endTime: endDate.concat(' ', data.endTime),
-      startTime: data.startTime,
-      endTime: data.endTime,
+      startTime: startDate.concat('T').concat(starthour).concat('Z'),
+      endTime: endDate.concat('T').concat(endhour).concat('Z'),
       // priceClasifcationId: data.priceClassificationId,
       priceConfigId: data.priceConfigId,
       programId: defaultValues.data.program.id,
@@ -83,8 +91,9 @@ const EditSchedule = () => {
       return toast.error("Dates can't be different");
     }
 
+
     updateSchedule(newData);
-    return toast.success('Schedule Updated');
+    // return toast.success('Schedule Updated');
   };
 
   return (

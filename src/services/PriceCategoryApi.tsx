@@ -38,6 +38,14 @@ export const priceCategoryApi = createApi({
             }),
             invalidatesTags: ["PriceCategory"]
         }),
+        addMultiplePriceCategory: builder.mutation<void, PriceCategory>({
+            query: (priceCategory) => ({
+                url: '/PriceCategory/multiple',
+                method: "POST",
+                body: priceCategory
+            }),
+            invalidatesTags: ["PriceCategory"]
+        }),
         updatePriceCategory: builder.mutation<void, PriceCategory>({
             query: ({ ...rest }) => ({
                 url: `PriceCategory/${rest.id}`,
@@ -60,6 +68,7 @@ export const {
     usePriceCategoriesQuery,
     usePriceCategoryQuery,
     useAddPriceCategoryMutation,
+    useAddMultiplePriceCategoryMutation,
     useUpdatePriceCategoryMutation,
     useDeletePriceCategoryMutation
 

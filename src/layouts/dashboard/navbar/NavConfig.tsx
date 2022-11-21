@@ -49,7 +49,7 @@ const navConfig = [
       {
         title: 'organization',
         path: '/dashboard/organization',
-        icon: <DomainIcon/>,
+        icon: <DomainIcon />,
         children: [
           { title: 'Organizations List', path: '/dashboard/organization/list' },
           { title: 'Add Organization', path: '/dashboard/organization/add' },
@@ -59,7 +59,7 @@ const navConfig = [
       {
         title: 'organizationType',
         path: '/dashboard/organizationType',
-        icon: <DomainAddIcon/>,
+        icon: <DomainAddIcon />,
         children: [
           { title: 'Organization Types List', path: '/dashboard/organization-type/list' },
           { title: 'Add OrganizationType', path: '/dashboard/organization-type/add' },
@@ -69,7 +69,7 @@ const navConfig = [
       {
         title: 'station',
         path: '/dashboard/station',
-        icon: <LiveTvIcon/>,
+        icon: <LiveTvIcon />,
         children: [
           { title: 'Stations List', path: '/dashboard/station/list' },
           { title: 'Add Station', path: '/dashboard/station/add' },
@@ -79,7 +79,7 @@ const navConfig = [
       {
         title: 'program',
         path: '/dashboard/program',
-        icon: <MovieIcon/>,
+        icon: <MovieIcon />,
         children: [
           { title: 'Programs List', path: '/dashboard/program/list' },
           { title: 'Add program', path: '/dashboard/program/add' },
@@ -89,7 +89,7 @@ const navConfig = [
       {
         title: 'schedule',
         path: '/dashboard/schedule',
-        icon: <ScheduleIcon/>,
+        icon: <ScheduleIcon />,
         children: [
           // { title: 'schedules List', path: '/dashboard/schedule/list' },
           { title: 'Schedule Timeline', path: '/dashboard/schedule/timeline' },
@@ -97,25 +97,26 @@ const navConfig = [
           { title: 'Add Single schedule', path: '/dashboard/schedule/add-single' },
         ],
       },
-    ]
-    },
-    {
-      subheader: 'Prices',
-      items: [
+    ],
+  },
+  {
+    subheader: 'Prices',
+    items: [
       {
         title: 'price category',
         path: '/dashboard/price-category',
-        icon: <AttachMoneyIcon/>,
+        icon: <AttachMoneyIcon />,
         children: [
           { title: 'Price Category List', path: '/dashboard/price-category/list' },
           { title: 'Add Price Category', path: '/dashboard/price-category/add' },
+          { title: 'Add Price Category multiple', path: '/dashboard/price-category/add-multiple' },
           // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },
       {
         title: 'price config',
         path: '/dashboard/price-config',
-        icon: <AttachMoneyIcon/>,
+        icon: <AttachMoneyIcon />,
         children: [
           { title: 'Price config List', path: '/dashboard/price-config/list' },
           { title: 'Add Price config', path: '/dashboard/price-config/add' },
