@@ -29,6 +29,8 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         endTime: moment.utc(schedule.endTime).format('LT'),
         date: moment.utc(schedule.startTime).unix(),
         station: schedule.station,
+        priceConfig: schedule?.priceConfig?.name,
+        priceCategory: schedule?.priceConfig?.priceCategory?.name,
       };
     });
 
@@ -52,6 +54,8 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         startTime: moment.utc(schedule.startTime).format('LT'),
         endTime: moment.utc(schedule.endTime).format('LT'),
         station: schedule.station,
+        priceConfig: schedule?.priceConfig?.name,
+        priceCategory: schedule?.priceConfig?.priceCategory?.name,
       };
     });
 
@@ -72,11 +76,16 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
       headerName: 'End Time',
       width: 200,
     },
-    // {
-    //   field: 'station',
-    //   headerName: 'Station',
-    //   width: 200,
-    // },
+    {
+      field: 'priceCategory',
+      headerName: 'Price Category',
+      width: 300,
+    },
+    {
+      field: 'priceConfig',
+      headerName: 'Price Config',
+      width: 300,
+    },
     {
       field: '',
       // headerName: '',
@@ -109,7 +118,7 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
     },
   ];
 
-  console.log(newScheduleData)
+  console.log(newScheduleData);
 
   return (
     <div style={{ height: '400px', width: '100%' }}>
