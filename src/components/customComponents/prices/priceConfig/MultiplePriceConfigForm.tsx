@@ -34,8 +34,8 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
       endDate: '',
       stationId: '',
       programId: '',
-      priceCategoryId: '',
-      priceConfigs: [{ name: '', rate: '', unit: '', key: '' }],
+
+      priceConfigs: [{ name: '', rate: '', unit: '', key: '', priceCategoryId: '' }],
     },
   });
 
@@ -113,7 +113,7 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
                 </Typography>
               </Grid>
 
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Station</InputLabel>
                   <Select
@@ -135,7 +135,7 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
                   </Typography>
                 </FormControl>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Programs</InputLabel>
                   <Select
@@ -156,104 +156,93 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
                     ))}
                   </Select>
                   <Typography variant="inherit" color="error">
-                    {errors.priceCategoryId && 'This is required'}
-                  </Typography>
-                </FormControl>
-              </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Price Category</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Price Category"
-                    defaultValue={defaultValues?.priceCategoryId}
-                    {...register(
-                      'priceCategoryId'
-                      //  { required: true }
-                    )}
-                    displayEmpty
-                  >
-                    {filteredPriceCategoryData?.map((priceCategories: any) => (
-                      <MenuItem value={priceCategories.id} key={priceCategories.id}>
-                        {priceCategories.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  <Typography variant="inherit" color="error">
-                    {errors.priceCategoryId && 'This is required'}
+                    {/* {errors.priceCategoryId && 'This is required'} */}
                   </Typography>
                 </FormControl>
               </Grid>
             </Grid>
 
             {fields.map((item, index) => (
-              <Grid container key={item.id}>
-                <Grid item lg={10} md={12} sm={12} xs={12} sx={{ p: 1 }}>
-                  <Grid container>
-                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 1 }}>
-                      <TextField
-                        {...register(`priceConfigs.${index}.key`)}
-                        fullWidth
-                        label="Alias"
-                      />
-                      <Typography variant="inherit" color="error">
-                        {/* {errors.key && 'This is required'} */}
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 1 }}>
-                      <TextField
-                        {...register(`priceConfigs.${index}.name`)}
-                        fullWidth
-                        label="Price Config Name"
-                      />
-                      <Typography variant="inherit" color="error">
-                        {/* {errors.name && 'This is required'} */}
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 1 }}>
-                      <TextField
-                        {...register(`priceConfigs.${index}.rate`)}
-                        type="number"
-                        InputProps={{
-                          startAdornment: <InputAdornment position="start">Birr</InputAdornment>,
-                        }}
-                        inputProps={{
-                          step: 'any',
-                        }}
-                        fullWidth
-                        label="Rate"
-                      />
-                      <Typography variant="inherit" color="error">
-                        {/* {errors.rate && 'This is required'} */}
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 1 }}>
-                      <TextField
-                        {...register(`priceConfigs.${index}.unit`)}
-                        type="number"
-                        InputProps={{
-                          startAdornment: <InputAdornment position="start">Sec</InputAdornment>,
-                        }}
-                        inputProps={{
-                          step: 'any',
-                        }}
-                        fullWidth
-                        label="Unit"
-                      />
-                      <Typography variant="inherit" color="error">
-                        {/* {errors.unit && 'This is required'} */}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+              <Grid container key={item.id} sx={{ mt: 3 }}>
+                <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
+                  <TextField {...register(`priceConfigs.${index}.key`)} fullWidth label="Alias" />
+                  <Typography variant="inherit" color="error">
+                    {/* {errors.key && 'This is required'} */}
+                  </Typography>
                 </Grid>
-                <Grid item lg={2} md={2} sm={12} xs={12} sx={{ p: 3 }}>
+                <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
+                  <TextField
+                    {...register(`priceConfigs.${index}.name`)}
+                    fullWidth
+                    label="Price Config Name"
+                  />
+                  <Typography variant="inherit" color="error">
+                    {/* {errors.name && 'This is required'} */}
+                  </Typography>
+                </Grid>
+                <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Price Category</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Price Category"
+                      defaultValue={defaultValues?.priceCategoryId}
+                      {...register(`priceConfigs.${index}.rate`)}
+                      displayEmpty
+                    >
+                      {filteredPriceCategoryData?.map((priceCategories: any) => (
+                        <MenuItem value={priceCategories.id} key={priceCategories.id}>
+                          {priceCategories.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <Typography variant="inherit" color="error">
+                      {/* {errors.priceCategoryId && 'This is required'} */}
+                    </Typography>
+                  </FormControl>
+                </Grid>
+                <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
+                  <TextField
+                    {...register(`priceConfigs.${index}.rate`)}
+                    type="number"
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start">Birr</InputAdornment>,
+                    }}
+                    inputProps={{
+                      step: 'any',
+                    }}
+                    fullWidth
+                    label="Rate"
+                  />
+                  <Typography variant="inherit" color="error">
+                    {/* {errors.rate && 'This is required'} */}
+                  </Typography>
+                </Grid>
+                <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
+                  <TextField
+                    {...register(`priceConfigs.${index}.unit`)}
+                    type="number"
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start">Sec</InputAdornment>,
+                    }}
+                    inputProps={{
+                      step: 'any',
+                    }}
+                    fullWidth
+                    label="Unit"
+                  />
+                  <Typography variant="inherit" color="error">
+                    {/* {errors.unit && 'This is required'} */}
+                  </Typography>
+                </Grid>
+                <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
                   <Button
                     color="error"
                     variant="contained"
-                    sx={{ mt: 4 }}
+                    // sx={{ mt: 4 }}
                     onClick={() => remove(index)}
-                    disabled={watch('priceConfigs').length < 2 ? true : false}
+                    disabled={watch(`priceConfigs`).length < 2 ? true : false}
                   >
                     Delete
                   </Button>
@@ -266,7 +255,9 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
                   variant="contained"
                   color="success"
                   sx={{ color: 'white' }}
-                  onClick={() => append({ key: '', name: '', rate: '', unit: '' })}
+                  onClick={() =>
+                    append({ key: '', name: '', rate: '', unit: '', priceCategoryId: '' })
+                  }
                 >
                   Append
                 </Button>
