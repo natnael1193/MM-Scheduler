@@ -8,6 +8,7 @@ import DeleteItem from '../../shared/DeleteItem';
 import React from 'react';
 
 const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
+  let newPriceCategoryData: any = [];
   const [open, setOpen] = React.useState(false);
   const [priceCategoryId, setPriceCategoryId] = React.useState('');
   // const handleOpen = () => setOpen(true);
@@ -15,6 +16,18 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
 
   // Delete Price Category
   const [deletePriceCategory] = useDeletePriceCategoryMutation();
+
+  newPriceCategoryData =priceCategoryData?.map(function(priceCategory: any){
+    return {
+        id: priceCategory.id,
+        key: priceCategory.key,
+        name: priceCategory.name,
+        program: priceCategory?.program?.name,
+        
+      }
+  })
+  
+
 
   //Data Grid Header
   const columns: GridColumns = [
@@ -26,6 +39,11 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
     {
       field: 'name',
       headerName: 'Name',
+      width: 300,
+    },
+    {
+      field: 'program',
+      headerName: 'Program',
       width: 300,
     },
     {
@@ -60,7 +78,7 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
   return (
     <div style={{ height: '400px', width: '100%' }}>
       <DataGrid
-        rows={priceCategoryData}
+        rows={newPriceCategoryData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,

@@ -8,12 +8,24 @@ import React from 'react';
 import DeleteItem from '../../shared/DeleteItem';
 
 const PriceConfigListComponent = ({ priceConfigData }: any) => {
+  let newPriceConfigData: any = [];
   const [open, setOpen] = React.useState(false);
   const [priceConfigId, setPriceConfigId] = React.useState('');
 
   const handleClose = () => setOpen(false);
   // Delete Price config
   const [deletePriceConfig] = useDeletePriceConfigMutation();
+
+  newPriceConfigData = priceConfigData?.map(function (priceConfigs: any) {
+    return {
+      id: priceConfigs.id,
+      key: priceConfigs.key,
+      name: priceConfigs.name,
+      rate: priceConfigs.rate,
+      unit: priceConfigs.unit,
+      program: priceConfigs?.priceCategory?.program?.name,
+    };
+  });
 
   //Data Grid Header
   const columns: GridColumns = [
@@ -26,6 +38,11 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
       field: 'name',
       headerName: 'Name',
       width: 400,
+    },
+    {
+      field: 'program',
+      headerName: 'Program',
+      width: 300,
     },
     {
       field: 'rate',
@@ -70,7 +87,7 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
   return (
     <div>
       <DataGrid
-        rows={priceConfigData}
+        rows={newPriceConfigData}
         columns={columns}
         components={{
           Toolbar: GridToolbar,
