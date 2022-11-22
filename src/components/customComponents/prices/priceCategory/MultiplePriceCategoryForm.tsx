@@ -29,8 +29,8 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
     defaultValues: {
       stationId: '',
       programId: '',
-      priceType: '',
-      priceCategories: [{ name: '', key: '' }],
+
+      priceCategories: [{ name: '', key: '', priceType: '' }],
     },
   });
 
@@ -63,7 +63,7 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
           </Typography>
           <form onSubmit={handleSubmit(onFormSubmit)}>
             <Grid container>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Station</InputLabel>
                   <Select
@@ -90,7 +90,7 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
                 </FormControl>
               </Grid>
 
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 2 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Program</InputLabel>
                   <Select
@@ -116,32 +116,13 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
                   </Typography>
                 </FormControl>
               </Grid>
-              <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 2 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Price Type</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Price Type"
-                    defaultValue={''}
-                    displayEmpty
-                    {...register('priceType', { required: true })}
-                  >
-                    <MenuItem value="Spot">Spot</MenuItem>
-                    <MenuItem value="Sponsorship">Sponsorship</MenuItem>
-                  </Select>
-                  <Typography variant="inherit" color="error">
-                    {errors.priceType && 'This is required'}
-                  </Typography>
-                </FormControl>
-              </Grid>
             </Grid>
 
             {fields.map((item, index) => (
               <Grid container key={item.id}>
                 <Grid item lg={10} md={12} sm={12} xs={12} sx={{ p: 1 }}>
                   <Grid container>
-                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 1 }}>
+                    <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
                       <TextField
                         {...register(`priceCategories.${index}.key`)}
                         fullWidth
@@ -151,7 +132,7 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
                         {/* {errors.key && 'This is required'} */}
                       </Typography>
                     </Grid>
-                    <Grid item lg={6} md={6} sm={12} xs={12} sx={{ p: 1 }}>
+                    <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
                       <TextField
                         {...register(`priceCategories.${index}.name`)}
                         fullWidth
@@ -160,6 +141,25 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
                       <Typography variant="inherit" color="error">
                         {/* {errors.name && 'This is required'} */}
                       </Typography>
+                    </Grid>
+                    <Grid item lg={4} md={4} sm={12} xs={12} sx={{ p: 1 }}>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Price Type</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          label="Price Type"
+                          defaultValue={''}
+                          displayEmpty
+                          {...register(`priceCategories.${index}.priceType`, { required: true })}
+                        >
+                          <MenuItem value="Spot">Spot</MenuItem>
+                          <MenuItem value="Sponsorship">Sponsorship</MenuItem>
+                        </Select>
+                        {/* <Typography variant="inherit" color="error">
+                          {errors.priceCategories.${index}.priceType && 'This is required'}
+                        </Typography> */}
+                      </FormControl>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -182,7 +182,7 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
                   variant="contained"
                   color="success"
                   sx={{ color: 'white' }}
-                  onClick={() => append({ name: '', key: '' })}
+                  onClick={() => append({ name: '', key: '', priceType: '' })}
                 >
                   Append
                 </Button>
