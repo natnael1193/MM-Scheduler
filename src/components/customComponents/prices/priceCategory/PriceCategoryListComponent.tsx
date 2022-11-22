@@ -17,17 +17,14 @@ const PriceCategoryListComponent = ({ priceCategoryData }: any) => {
   // Delete Price Category
   const [deletePriceCategory] = useDeletePriceCategoryMutation();
 
-  newPriceCategoryData =priceCategoryData?.map(function(priceCategory: any){
+  newPriceCategoryData = priceCategoryData?.map(function (priceCategory: any) {
     return {
-        id: priceCategory.id,
-        key: priceCategory.key,
-        name: priceCategory.name,
-        program: priceCategory?.program?.name,
-        
-      }
-  })
-  
-
+      id: priceCategory.id,
+      key: priceCategory?.program?.name.concat(' ' + priceCategory.key),
+      name: priceCategory?.program?.name.concat(' ' + priceCategory.name),
+      program: priceCategory?.program?.name,
+    };
+  });
 
   //Data Grid Header
   const columns: GridColumns = [

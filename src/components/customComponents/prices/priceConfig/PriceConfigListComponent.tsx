@@ -19,8 +19,10 @@ const PriceConfigListComponent = ({ priceConfigData }: any) => {
   newPriceConfigData = priceConfigData?.map(function (priceConfigs: any) {
     return {
       id: priceConfigs.id,
-      key: priceConfigs.key,
-      name: priceConfigs.name,
+      key: priceConfigs?.priceCategory?.program?.name.concat(' ' + priceConfigs.key),
+      name: priceConfigs?.priceCategory?.program?.name.concat(' ' + priceConfigs.name),
+      // key: priceConfigs.key,
+      // name: priceConfigs.name,
       rate: priceConfigs.rate,
       unit: priceConfigs.unit,
       program: priceConfigs?.priceCategory?.program?.name,

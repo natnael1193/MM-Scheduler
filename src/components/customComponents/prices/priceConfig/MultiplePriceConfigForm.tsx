@@ -188,7 +188,7 @@ const MultiplePriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any
                       id="demo-simple-select"
                       label="Price Category"
                       defaultValue={defaultValues?.priceCategoryId}
-                      {...register(`priceConfigs.${index}.rate`)}
+                      {...register(`priceConfigs.${index}.priceCategoryId`)}
                       displayEmpty
                     >
                       {filteredPriceCategoryData?.map((priceCategories: any) => (

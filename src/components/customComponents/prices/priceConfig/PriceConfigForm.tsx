@@ -139,7 +139,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     id="demo-simple-select"
                     label="Price Category"
                     defaultValue={defaultValues?.priceCategoryId}
-                    {...register('priceCategoryId', { required: true })}
+                     {...register('rate', { required: true })}
                     displayEmpty
                   >
                     {filteredPriceCategoryData?.map((priceCategories: any) => (
