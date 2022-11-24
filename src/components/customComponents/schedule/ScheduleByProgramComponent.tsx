@@ -31,6 +31,8 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         station: schedule.station,
         priceConfig: schedule?.priceConfig?.name,
         priceCategory: schedule?.priceConfig?.priceCategory?.name,
+        rate: schedule?.priceConfig?.rate,
+        unit: schedule?.priceConfig?.unit + ' sec',
       };
     });
 
@@ -56,6 +58,8 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
         station: schedule.station,
         priceConfig: schedule?.priceConfig?.name,
         priceCategory: schedule?.priceConfig?.priceCategory?.name,
+        rate: schedule?.priceConfig?.rate,
+        unit: schedule?.priceConfig?.unit+ ' sec',
       };
     });
 
@@ -84,6 +88,16 @@ const ScheduleByProgramComponent = ({ scheduleData, futureSchedule }: any) => {
     {
       field: 'priceConfig',
       headerName: 'Price Config',
+      width: 300,
+    },
+    {
+      field: 'rate',
+      headerName: 'Rate',
+      width: 300,
+    },
+    {
+      field: 'unit',
+      headerName: 'Unit',
       width: 300,
     },
     {
