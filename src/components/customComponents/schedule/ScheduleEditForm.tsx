@@ -16,10 +16,11 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { usePriceCategoriesQuery, usePriceCategoryQuery } from 'src/services/PriceCategoryApi';
 
-
 const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, endDate }: any) => {
-  // var priceClassificationData: any = [];
-  const [priceCategoryId, setPriceCategoryId] = React.useState(defaultValues?.priceConfig?.priceCategoryId);
+  let filteredPriceCategory: any = [];
+  const [priceCategoryId, setPriceCategoryId] = React.useState(
+    defaultValues?.priceConfig?.priceCategoryId
+  );
   //Get All Price Classifications
   const {
     data: priceCategoryData,
@@ -49,7 +50,11 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
         <Typography variant="h3">Something Went Wrong</Typography>
       </Grid>
     );
-  console.log(defaultValues?.priceConfig?.priceCategoryId);
+
+  filteredPriceCategory = priceCategoryData?.data?.filter((priceCat: any) => {
+    return priceCat.programId === defaultValues?.priceConfig.priceCategory.programId
+  })
+  console.log(filteredPriceCategory);
   return (
     <div>
       <Box>
@@ -105,7 +110,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                     }}
                     fullWidth
                   >
-                    {priceCategoryData?.data?.map((priceCategory: any) => (
+                    {filteredPriceCategory.map((priceCategory: any) => (
                       <MenuItem value={priceCategory.id} key={priceCategory.id}>
                         {priceCategory.name}
                       </MenuItem>

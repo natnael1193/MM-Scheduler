@@ -80,9 +80,9 @@ const EditSchedule = () => {
       key: data.key,
     };
 
-    if (newData.startTime > newData.endTime) {
-      return toast.error('Start Date should be less than End Date');
-    }
+    // if (newData.startTime > newData.endTime) {
+    //   return toast.error('Start Date should be less than End Date');
+    // }
 
     if (
       moment(newData.startTime).format('YYYY-MM-DD') !==
