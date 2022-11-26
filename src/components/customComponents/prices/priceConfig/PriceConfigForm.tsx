@@ -55,10 +55,10 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
   filteredProgramData = filteredProgramData?.[0]?.programs;
 
   filteredPriceCategoryData = priceCategoriesData?.data?.filter(
-    (priceCategory: any) => priceCategory.stationId === stationId
+    (priceCategory: any) => priceCategory.id === defaultValues.priceCategoryId
   );
 
-  console.log(filteredProgramData);
+  console.log(defaultValues);
   console.log('filteredPriceCategoryData', filteredPriceCategoryData);
   return (
     <div>
