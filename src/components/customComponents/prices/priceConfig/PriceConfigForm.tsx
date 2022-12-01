@@ -55,9 +55,10 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
   filteredProgramData = filteredProgramData?.[0]?.programs;
 
   filteredPriceCategoryData = priceCategoriesData?.data?.filter(
-    (priceCategory: any) => priceCategory.id === defaultValues.priceCategoryId
+    (priceCategory: any) => priceCategory.programId === defaultValues.programId
   );
 
+  console.log(priceCategoriesData);
   console.log(defaultValues);
   console.log('filteredPriceCategoryData', filteredPriceCategoryData);
   return (
@@ -139,7 +140,7 @@ const PriceConfigForm = ({ defaultValues, onFormSubmit, formTitle }: any) => {
                     id="demo-simple-select"
                     label="Price Category"
                     defaultValue={defaultValues?.priceCategoryId}
-                     {...register('rate', { required: true })}
+                    {...register('priceCategoryId', { required: true })}
                     displayEmpty
                   >
                     {filteredPriceCategoryData?.map((priceCategories: any) => (

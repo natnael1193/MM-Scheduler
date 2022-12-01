@@ -6,13 +6,10 @@ import BreadCrumb from '../../breadCrumb/BreadCrumb';
 import { usePriceConfigQuery, useUpdatePriceConfigMutation } from 'src/services/PriceConfigApi';
 import PriceConfigForm from 'src/components/customComponents/prices/priceConfig/PriceConfigForm';
 
-
 const EditPriceConfig = () => {
   const params = useParams();
   const paramsId: any = params.priceConfigId;
   var defaultValues: any = {};
-
-  
 
   //Get Price Category by id
   const { data: priceConfigData, error, isLoading }: any = usePriceConfigQuery(paramsId);
@@ -24,10 +21,10 @@ const EditPriceConfig = () => {
   const response: any = result;
   useEffect(() => {
     if (response.isSuccess) {
-      toast.success("Price config updated successfully");
+      toast.success('Price config updated successfully');
     }
     if (response.isError) {
-      toast.error("Error updating price config: " + response.error.data.error);
+      toast.error('Error updating price config: ' + response.error.data.error);
     }
   }, [response]);
 
@@ -51,7 +48,8 @@ const EditPriceConfig = () => {
     unit: priceConfigData.data.unit,
     startDate: priceConfigData.data.startDate.replace(/Z/g, ''),
     endDate: priceConfigData.data.endDate.replace(/Z/g, ''),
-    priceCategoryId: priceConfigData.data.priceCategoryId,
+    priceCategoryId: priceConfigData.data.priceCategory?.id,
+    programId: priceConfigData.data.priceCategory?.programId,
   };
 
   //Submit the new data
@@ -63,7 +61,7 @@ const EditPriceConfig = () => {
       rate: Number(data.rate),
       unit: Number(data.unit),
       startDate: data.startDate + 'Z',
-      endDate:  data.endDate + 'Z',
+      endDate: data.endDate + 'Z',
       priceCategoryId: data.priceCategoryId,
       // startDate: data.startDate ? data.startDate.replace(/T/g, ' ') : data.startDate,
       // endDate: data.endDate ? data.endDate.replace(/T/g, ' ') : data.endDate,
@@ -71,8 +69,6 @@ const EditPriceConfig = () => {
     console.log(newData);
     updatePriceConfig(newData);
   };
-
-
 
   return (
     <div>
