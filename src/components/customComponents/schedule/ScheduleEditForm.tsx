@@ -87,7 +87,7 @@ const ScheduleEditForm = ({ defaultValues, onFormSubmit, formTitle, startDate, e
                   label="End Time"
                   type="datetime-local"
                   InputLabelProps={{ shrink: true }}
-                  inputProps={{ step: 1 }}
+                  // inputProps={{ step: 1 }}
                   fullWidth
                 />
               </Grid>

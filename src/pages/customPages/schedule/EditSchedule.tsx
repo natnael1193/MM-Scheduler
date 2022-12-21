@@ -63,10 +63,12 @@ const EditSchedule = () => {
     console.log(data);
 
     const startDate = moment.utc(data.startTime).format('YYYY-MM-DD');
-    const starthour = moment.utc(data.startTime).format('hh:mm:ss');
+    const starthour = moment.utc(data.startTime).format('HH:mm:ss');
 
     const endDate = moment.utc(data.endTime).format('YYYY-MM-DD');
-    const endhour = moment.utc(data.endTime).format('hh:mm:ss');
+    const endhour = moment.utc(data.endTime).format('HH:mm:ss');
+
+    console.log(endhour)
 
     const newData: any = {
       id: data.id,
@@ -84,12 +86,12 @@ const EditSchedule = () => {
     //   return toast.error('Start Date should be less than End Date');
     // }
 
-    if (
-      moment(newData.startTime).format('YYYY-MM-DD') !==
-      moment(newData.endTime).format('YYYY-MM-DD')
-    ) {
-      return toast.error("Dates can't be different");
-    }
+    // if (
+    //   moment(newData.startTime).format('YYYY-MM-DD') !==
+    //   moment(newData.endTime).format('YYYY-MM-DD')
+    // ) {
+    //   return toast.error("Dates can't be different");
+    // }
 
 
     updateSchedule(newData);

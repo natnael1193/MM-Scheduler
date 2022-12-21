@@ -42,12 +42,13 @@ export default function App() {
     if (token === null) {
       navigate('/login');
     }
+
     setTimeout(() => {
       localStorage.clear();
       navigate('/signin');
       window.location.reload();
-    }, 3600000);
-  }, [navigate]);
+    }, 21600000);
+  }, []);
 
   return (
     <Provider store={store}>
