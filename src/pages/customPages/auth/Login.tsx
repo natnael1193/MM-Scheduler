@@ -77,7 +77,7 @@ const Login = () => {
                 </Grid>
                 <Grid item>
                   <Button type="submit" variant="contained">
-                    Submit
+                  {result.isLoading ? 'Loading...' : 'Submit'}
                   </Button>
                 </Grid>
               </Grid>
