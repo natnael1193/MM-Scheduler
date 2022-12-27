@@ -43,8 +43,8 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
   const {
     data: programData,
     isLoading: programLoading,
-    // error: programError,
-  }: any = useProgramByStationQuery(stationId);
+  }: // error: programError,
+  any = useProgramByStationQuery(stationId);
   // useProgramByStationQuery(programId)
 
   if (stationLoading || programLoading) return <LoadingComponent />;
@@ -137,6 +137,7 @@ const PriceCategoryForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
                   >
                     <MenuItem value="Spot">Spot</MenuItem>
                     <MenuItem value="Sponsorship">Sponsorship</MenuItem>
+                    <MenuItem value="Holiday">Holiday</MenuItem>
                   </Select>
                   <Typography variant="inherit" color="error">
                     {errors.priceType && 'This is required'}

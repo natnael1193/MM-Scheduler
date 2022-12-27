@@ -155,6 +155,7 @@ const MultiplePriceCategoryForm = ({ onFormSubmit, formTitle }: any) => {
                         >
                           <MenuItem value="Spot">Spot</MenuItem>
                           <MenuItem value="Sponsorship">Sponsorship</MenuItem>
+                          <MenuItem value="Holiday">Holiday</MenuItem>
                         </Select>
                         {/* <Typography variant="inherit" color="error">
                           {errors.priceCategories.${index}.priceType && 'This is required'}
