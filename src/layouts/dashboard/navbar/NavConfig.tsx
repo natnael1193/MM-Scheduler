@@ -108,8 +108,8 @@ const navConfig = [
         icon: <AttachMoneyIcon />,
         children: [
           { title: 'Price Category List', path: '/dashboard/price-category/list' },
-          { title: 'Add Price Category', path: '/dashboard/price-category/add' },
-          { title: 'Add Price Category multiple', path: '/dashboard/price-category/add-multiple' },
+          // { title: 'Add Price Category', path: '/dashboard/price-category/add' },
+          { title: 'Add Price Category', path: '/dashboard/price-category/add-multiple' },
           // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },
@@ -119,8 +119,8 @@ const navConfig = [
         icon: <AttachMoneyIcon />,
         children: [
           { title: 'Price config List', path: '/dashboard/price-config/list' },
-          { title: 'Add Price config', path: '/dashboard/price-config/add' },
-          { title: 'Add Price config multiple', path: '/dashboard/price-config/add-multiple' },
+          // { title: 'Add Price config', path: '/dashboard/price-config/add' },
+          { title: 'Add Price config', path: '/dashboard/price-config/add-multiple' },
           // { title: 'Six', path: '/dashboard/station/six' },
         ],
       },
