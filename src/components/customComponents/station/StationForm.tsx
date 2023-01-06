@@ -114,14 +114,14 @@ const StationForm = ({ formTitle, defaultValues, onFormSubmit }: any) => {
               </Grid>
               <Grid item lg={4} md={4} sm={12} xs={12}>
                 <TextField
-                  {...register('streamUrl', { required: true })}
+                  {...register('streamingLinks', { required: true })}
                   id="outlined-basic"
                   label="Stream URL"
                   variant="outlined"
                   fullWidth
                 />
                 <Typography variant="inherit" color="error">
-                  {errors.streamUrl && 'This is required'}
+                  {errors.streamingLinks && 'This is required'}
                 </Typography>
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12} sx={{ mt: 3, mb: 3 }}>

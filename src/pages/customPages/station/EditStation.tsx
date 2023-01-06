@@ -22,7 +22,7 @@ const EditStation = () => {
   useEffect(() => {
     if (response.isSuccess) {
       console.log(response);
-      toast.success(response.data.status);
+      toast.success("Updated Successfully");
     }
   }, [response]);
 
